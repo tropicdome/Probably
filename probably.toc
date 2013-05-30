@@ -1,4 +1,4 @@
-## Interface: 50200
+## Interface: 50300
 ## Title: Probably
 ## Notes: Probably
 ## Author: Ben Phelps
@@ -9,11 +9,19 @@ probably.lua
 system\core\debug.lua
 system\core\module.lua
 system\core\listener.lua
+system\core\slash.lua
+system\core\spellcache.lua
 
 # Modules
 system\modules\player.lua
+system\modules\target.lua
 
 # Listeners
 system\listeners\unit_health_frequent.lua
 system\listeners\player_entering_world.lua
 system\listeners\player_specialization_changed.lua
+system\listeners\unit_spellcast_channel_start.lua
+system\listeners\unit_spellcast_start.lua
+system\listeners\unit_spellcast_stop.lua
+system\listeners\unit_spellcast_succeeded.lua
+system\listeners\playet_target_changed.lua

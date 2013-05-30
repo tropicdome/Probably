@@ -6,4 +6,3 @@ ProbablyEngine.listener.register("PLAYER_ENTERING_WORLD", function(...)
   ProbablyEngine.module.player.power = UnitPower("player")
   ProbablyEngine.listener.eventActions["PLAYER_SPECIALIZATION_CHANGED"]("player")
 end)
-
