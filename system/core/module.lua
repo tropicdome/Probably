@@ -6,3 +6,7 @@ ProbablyEngine.module = {}
 ProbablyEngine.module.register = function (module, struct)
   ProbablyEngine.module[module] = struct
 end
+
+ProbablyEngine.module.unregister = function (module)
+  ProbablyEngine.module[module] = nil
+end
