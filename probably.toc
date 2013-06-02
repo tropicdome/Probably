@@ -10,11 +10,16 @@ system\core\debug.lua
 system\core\module.lua
 system\core\listener.lua
 system\core\slash.lua
+system\core\timer.lua
 system\core\spellcache.lua
 
 # Modules
 system\modules\player.lua
 system\modules\target.lua
+
+# Timers
+system\timers\control.lua
+system\timers\profile.lua
 
 # Listeners
 system\listeners\unit_health_frequent.lua
@@ -25,3 +30,7 @@ system\listeners\unit_spellcast_start.lua
 system\listeners\unit_spellcast_stop.lua
 system\listeners\unit_spellcast_succeeded.lua
 system\listeners\playet_target_changed.lua
+system\listeners\addon_action_blocked.lua
+system\listeners\addon_action_forbidden.lua
+system\listeners\player_regen_enabled.lua
+system\listeners\player_regen_disabled.lua

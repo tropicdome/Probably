@@ -4,6 +4,6 @@
 ProbablyEngine.slash = {}
 
 ProbablyEngine.slash.register = function (slash, handler)
-  ProbablyEngine.slash[slash] = struct
+  ProbablyEngine.slash[slash] = handler
   -- todo
 end

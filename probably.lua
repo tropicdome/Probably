@@ -7,4 +7,6 @@
 
 
 -- Lets fire this bitch up
-ProbablyEngine = { }
+ProbablyEngine = {
+  hardcore_debug = false
+}
