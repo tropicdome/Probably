@@ -43,9 +43,9 @@ ProbablyEngine.parser.table = function(spellTable)
 
     if evaluationType == "string" then
       -- canned conditions
-    else if evaluationType == "function"
+    elseif evaluationType == "function" then
       evaluation = evaluation()
-    else if evaluationType == "nil"
+    elseif evaluationType == "nil" then
       evaluation = true
     else
       -- evaluation was probably not passed via a deferred function.
