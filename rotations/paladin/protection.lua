@@ -1,17 +1,17 @@
-ProbablyEngine.rotation.register("paladin", "protection", function()
-  return ProbablyEngine.parser.table({
+ProbablyEngine.rotation.register("paladin", "protection", {
     { "Sacred Shield",
-      not pec.player.buff("Sacred shield")
+      (function() return not pec.player.buff("Sacred shield") end)
     },
     { "Hammer of the Righteous",
-      pec.target.debuff_duration("Weakened Blows") <= 4.5
+      (function() return pec.target.debuff_duration("Weakened Blows") <= 4.5 end)
     },
     { "Shield of the Righteous",
-      pec.player.holypower() == 3 },
+      (function() return pec.player.holypower() == 3 end)
+    },
     { "Avenger's Shield" },
     { "Consecration" },
     { "Holy Wrath" },
     { "Crusader Strike" },
     { "Judgment" }
-  })
-end )
+  }
+)

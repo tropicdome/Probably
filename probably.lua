@@ -13,6 +13,6 @@ ProbablyEngine = {
   plua = false,
   debug = true,
   debugLevel = 0,
-  hardcore_debug = true,
+  hardcore_debug = false,
   rotations = { }
 }

@@ -4,7 +4,19 @@
 ProbablyEngine.parser = { }
 
 local function castable(spell, unit)
-
+  if spell == nil then return false end
+  local spell = spell:lower()
+  if unit == nil then unit = "target" end
+  local _, spellID = GetSpellBookItemInfo(spell)
+  local usable, nomana = IsUsableSpell(spell)
+  if not UnitExists(unit) then return false end
+  if UnitIsDead(unit) then return false end
+  if UnitIsDeadOrGhost(unit) then return false end
+  if not usable then return false end
+  if select(2, GetSpellCooldown(spellID)) ~= 0 then return false end
+  if nomana then return false end
+  if not UnitIsVisible(unit) then return false end
+  if SpellHasRange(spell) == 1 and IsSpellInRange(spell, unit) == 0 then return false end
   return true
 end
 
@@ -23,6 +35,8 @@ ProbablyEngine.parser.table = function(spellTable)
 
     if evaluation == nil then
       evaluation = true
+    else
+      evaluation = evaluation()
     end
 
     if target == nil then
