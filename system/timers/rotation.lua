@@ -3,7 +3,7 @@
 
 ProbablyEngine.timer.register("rotation", function()
   if ProbablyEngine.module.player.combat then
-    local spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation["paladin"]["protection"])
+    local spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation["mage"]["arcane"])
     if spell then
       CastSpellByName(spell, target)
     end

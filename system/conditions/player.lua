@@ -18,19 +18,37 @@ ProbablyEngine.condition.register("player", "debuff", function(debuff)
 end)
 
 ProbablyEngine.condition.register("player", "buff_duration", function(buff)
-  buff = UnitBuff("player", buff)
+  local buff,_,_,_,_,_,time = UnitBuff("player", buff
+  )
   if buff == nil then
-    return false
+    return 0
   end
-  return (select(7, buff) - GetTime())
+  return (time - GetTime())
 end)
 
 ProbablyEngine.condition.register("player", "debuff_duration", function(debuff)
-  debuff = UnitDebuff("player", debuff)
+  local debuff,_,_,_,_,_,time = UnitDebuff("player", debuff)
   if debuff == nil then
-    return false
+    return 0
   end
-  return (select(7, debuff) - GetTime())
+  return (time - GetTime())
+end)
+
+
+ProbablyEngine.condition.register("player", "buff_count", function(buff)
+  local buff,_,_,count = UnitBuff("player", buff)
+  if buff == nil then
+    return 0
+  end
+  return count
+end)
+
+ProbablyEngine.condition.register("player", "debuff_count", function(debuff)
+  local debuff,_,_,count = UnitDebuff("player", debuff)
+  if debuff == nil then
+    return 0
+  end
+  return count
 end)
 
 -- health

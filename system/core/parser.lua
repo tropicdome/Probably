@@ -1,22 +1,29 @@
 -- ProbablyEngine v0.0.1
 -- Ben Phelps (c) 2013
 
-ProbablyEngine.parser = { }
+-- Credits to iLulz (JPS) for the idea
+-- of a spell table.  It works great.
+
+ProbablyEngine.parser = {
+  lastCast = ''
+}
 
 local function castable(spell, unit)
+  -- Credits to iLulz (JPS) for this function
   if spell == nil then return false end
-  local spell = spell:lower()
   if unit == nil then unit = "target" end
-  local _, spellID = GetSpellBookItemInfo(spell)
-  local usable, nomana = IsUsableSpell(spell)
+  local skillType, spellId = GetSpellBookItemInfo(spell)
+  local isUsable, notEnoughMana = IsUsableSpell(spell)
+  local name, rank, icon, cost, isFunnel, powerType, castTime, minRange, maxRange = GetSpellInfo(spellId)
+  if not isUsable then return false end
+  if notEnoughMana then return false end
   if not UnitExists(unit) then return false end
-  if UnitIsDead(unit) then return false end
-  if UnitIsDeadOrGhost(unit) then return false end
-  if not usable then return false end
-  if select(2, GetSpellCooldown(spellID)) ~= 0 then return false end
-  if nomana then return false end
   if not UnitIsVisible(unit) then return false end
+  if UnitIsDeadOrGhost(unit) then return false end
   if SpellHasRange(spell) == 1 and IsSpellInRange(spell, unit) == 0 then return false end
+  if select(2, GetSpellCooldown(spell)) ~= 0 then return false end
+  if ProbablyEngine.module.player.casting == true then return false end
+  if select(1, UnitChannelInfo("player")) == ProbablyEngine.parser.lastCast then return false end
   return true
 end
 
@@ -45,6 +52,7 @@ ProbablyEngine.parser.table = function(spellTable)
 
     if castable(spell, target) and evaluation then
       ProbablyEngine.debug("Table Parse: Cast Spell - " .. spell)
+      ProbablyEngine.parser.lastCast = spell
       return spell, target
     end
 

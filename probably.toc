@@ -50,5 +50,6 @@ system\listeners\player_regen_enabled.lua
 system\listeners\player_regen_disabled.lua
 
 # Rotations
+rotations\mage\arcane.lua
 rotations\warrior\arms.lua
 rotations\paladin\protection.lua

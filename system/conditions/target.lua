@@ -18,7 +18,7 @@ ProbablyEngine.condition.register("target", "debuff", function(debuff)
 end)
 
 ProbablyEngine.condition.register("target", "buff_duration", function(buff)
-  local debuff,_,_,_,_,_,time = UnitDebuff("target", debuff)
+  local buff,_,_,_,_,_,time = UnitBuff("target", debuff)
   if buff == nil then
     return 0
   end
@@ -31,4 +31,20 @@ ProbablyEngine.condition.register("target", "debuff_duration", function(debuff)
     return 0
   end
   return (time - GetTime())
+end)
+
+ProbablyEngine.condition.register("target", "buff_count", function(buff)
+  local buff,_,_,count = UnitDebuff("target", debuff)
+  if buff == nil then
+    return false
+  end
+  return count
+end)
+
+ProbablyEngine.condition.register("target", "debuff_count", function(debuff)
+  local debuff,_,_,count = UnitDebuff("target", debuff)
+  if debuff == nil then
+    return false
+  end
+  return count
 end)
