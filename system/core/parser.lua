@@ -42,7 +42,7 @@ ProbablyEngine.parser.table = function(spellTable)
     end
 
     if evaluationType == "string" then
-      -- canned conditions
+      evaluation = ProbablyEngine.canned.parse(evaluation, event)
     elseif evaluationType == "function" then
       evaluation = evaluation()
     elseif evaluationType == "nil" then

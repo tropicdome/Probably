@@ -16,6 +16,7 @@ system\core\spellcache.lua
 system\core\parser.lua
 system\core\rotation.lua
 system\core\condition.lua
+system\core\canned.lua
 
 # Conditions
 system\conditions\player.lua
@@ -24,6 +25,9 @@ system\conditions\focus.lua
 system\conditions\spell.lua
 system\conditions\item.lua
 system\conditions\inventory.lua
+
+# Canned Conditions
+system\canned\default.lua
 
 # Modules
 system\modules\player.lua
@@ -51,5 +55,6 @@ system\listeners\player_regen_disabled.lua
 
 # Rotations
 rotations\mage\arcane.lua
+rotations\mage\frost.lua
 rotations\warrior\arms.lua
 rotations\paladin\protection.lua

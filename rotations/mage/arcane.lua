@@ -1,16 +1,8 @@
 ProbablyEngine.rotation.register("mage", "arcane", {
-    { "Nether Tempest",
-      (function() return not pec.target.debuff("Nether Tempest") end)
-    },
-    { "Ice Lance",
-      (function() return pem.player.moving end)
-    },
-    { "Arcane Missiles",
-      (function() return pec.player.buff_count("Arcane Missiles!") > 1 end)
-    },
-    { "Arcane Barrage",
-      (function() return pec.player.debuff_count("Arcane Charge") >= 4 end)
-    },
+    { "Nether Tempest",  "without_target_debuff" },
+    { "Ice Lance", "when_moving" },
+    { "Arcane Missiles", "with_buff_count(2):Arcane Missiles!" },
+    { "Arcane Barrage", "with_debuff_count(4):Arcane Charge" },
     { "Arcane Blast" }
   }
 )
