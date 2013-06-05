@@ -32,28 +32,34 @@ ProbablyEngine.parser.table = function(spellTable)
   for _, arguments in pairs(spellTable) do
 
     local eventType = type(arguments[1])
-    local spell = arguments[1]
+    local event = arguments[1]
+    local evaluationType = type(arguments[2])
     local evaluation = arguments[2]
     local target = arguments[3]
 
     if eventType == "table" then
-      ProbablyEngine.debug("Table Parse: Table")
+      ProbablyEngine.parser.table(event)
     end
 
-    if evaluation == nil then
+    if evaluationType == "string" then
+      -- canned conditions
+    else if evaluationType == "function"
+      evaluation = evaluation()
+    else if evaluationType == "nil"
       evaluation = true
     else
-      evaluation = evaluation()
+      -- evaluation was probably not passed via a deferred function.
+      -- not really sure how to handle this tbh
     end
 
     if target == nil then
       target = "target"
     end
 
-    if castable(spell, target) and evaluation then
-      ProbablyEngine.debug("Table Parse: Cast Spell - " .. spell)
-      ProbablyEngine.parser.lastCast = spell
-      return spell, target
+    if castable(event, target) and evaluation then
+      ProbablyEngine.debug("Table Parse: Cast Spell - " .. event)
+      ProbablyEngine.parser.lastCast = event
+      return event, target
     end
 
   end
