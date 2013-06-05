@@ -5,4 +5,7 @@ ProbablyEngine.listener.register("PLAYER_ENTERING_WORLD", function(...)
   ProbablyEngine.module.player.health = UnitHealth("player")
   ProbablyEngine.module.player.power = UnitPower("player")
   ProbablyEngine.listener.eventActions["PLAYER_SPECIALIZATION_CHANGED"]("player")
+  if not ProbablyEngine.plua then
+    ProbablyEngine.plua_check()
+  end
 end)

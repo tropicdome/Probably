@@ -3,6 +3,7 @@
 ## Notes: Probably
 ## Author: Ben Phelps
 
+# shebang
 probably.lua
 
 # Core System
@@ -12,6 +13,17 @@ system\core\listener.lua
 system\core\slash.lua
 system\core\timer.lua
 system\core\spellcache.lua
+system\core\parser.lua
+system\core\rotation.lua
+system\core\condition.lua
+
+# Conditions
+system\conditions\player.lua
+system\conditions\target.lua
+system\conditions\focus.lua
+system\conditions\spell.lua
+system\conditions\item.lua
+system\conditions\inventory.lua
 
 # Modules
 system\modules\player.lua
@@ -19,7 +31,9 @@ system\modules\target.lua
 
 # Timers
 system\timers\control.lua
+system\timers\moving.lua
 system\timers\profile.lua
+system\timers\rotation.lua
 
 # Listeners
 system\listeners\unit_health_frequent.lua
@@ -34,3 +48,7 @@ system\listeners\addon_action_blocked.lua
 system\listeners\addon_action_forbidden.lua
 system\listeners\player_regen_enabled.lua
 system\listeners\player_regen_disabled.lua
+
+# Rotations
+rotations\warrior\arms.lua
+rotations\paladin\protection.lua

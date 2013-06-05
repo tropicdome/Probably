@@ -8,5 +8,11 @@
 
 -- Lets fire this bitch up
 ProbablyEngine = {
-  hardcore_debug = false
+  addonName = "Probably",
+  addonColor = "2384C4",
+  plua = false,
+  debug = true,
+  debugLevel = 0,
+  hardcore_debug = true,
+  rotations = { }
 }

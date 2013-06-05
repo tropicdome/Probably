@@ -9,11 +9,11 @@ ProbablyEngine.timer = {
 -- create the frame to register timers
 ProbablyEngine.timer.timerFrame = CreateFrame("FRAME")
 
-ProbablyEngine.timer.register = function (module, event, period)
+ProbablyEngine.timer.register = function (module, _event, _period)
   ProbablyEngine.timer.timers[module] = {
-    e = event,
-    p = (period / 1000),
-    l = 0
+    event = _event,
+    period = (_period / 1000),
+    last = 0
   }
 end
 
@@ -24,14 +24,15 @@ end
 -- listen and fire events
 ProbablyEngine.timer.handle = function (self, elapsed)
   for timer, struct in pairs(ProbablyEngine.timer.timers) do
-    struct.l = struct.l + elapsed;
-    if (struct.l > struct.p) then
-      struct.e()
-      struct.l = 0
+    struct.last = struct.last + elapsed
+    if (struct.last > struct.period) then
+      ProbablyEngine.debug("Timer Fire: " .. timer , 4)
+      struct.event()
+      struct.last = 0
     end
   end
 end
 
--- register our listener
+-- register our handler
 ProbablyEngine.timer.timerFrame:SetScript("OnUpdate", ProbablyEngine.timer.handle)
 

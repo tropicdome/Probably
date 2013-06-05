@@ -10,21 +10,21 @@ ProbablyEngine.listener.eventActions = { }
 
 -- abstract method to register listeners
 ProbablyEngine.listener.register = function(event, action)
-  ProbablyEngine.debug("Event Registered: " .. event)
+  ProbablyEngine.debug("Event Registered: " .. event, 3)
   ProbablyEngine.listener.listenerFrame:RegisterEvent(event)
   ProbablyEngine.listener.eventActions[event] = action
 end
 
 -- abstract method to unregister listeners
 ProbablyEngine.listener.unregister = function(event)
-  ProbablyEngine.debug("Event Unregistered: " .. event)
+  ProbablyEngine.debug("Event Unregistered: " .. event, 3)
   ProbablyEngine.listener.listenerFrame:UnregisterEvent(event)
   ProbablyEngine.listener.eventActions[event] = nil
 end
 
 -- listen and fire events
 ProbablyEngine.listener.handle = function (self, event, ...)
-  ProbablyEngine.debug("Event Fire: " .. event)
+  ProbablyEngine.debug("Event Fire: " .. event, 3)
   if ProbablyEngine.listener.eventActions[event] ~= nil then
     local action = ProbablyEngine.listener.eventActions[event]
     action(...)

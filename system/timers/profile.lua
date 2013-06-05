@@ -12,5 +12,7 @@ if ProbablyEngine.hardcore_debug == true then
     UpdateAddOnMemoryUsage()
     ProbablyEngine.cpu = GetAddOnCPUUsage("Probably")
     ProbablyEngine.mem = GetAddOnMemoryUsage("Probably")
+    print(ProbablyEngine.cpu)
+    print(ProbablyEngine.mem)
   end, 1000)
 end

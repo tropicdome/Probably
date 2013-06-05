@@ -21,3 +21,6 @@ end
 ProbablyEngine.set.contains = function (key)
     return ProbablyEngine.set.set[key] ~= nil
 end
+
+
+ProbablyEngine.rotations = ProbablyEngine.set.new()
