@@ -1,0 +1,7 @@
+-- ProbablyEngine v0.0.1
+-- Ben Phelps (c) 2013
+
+ProbablyEngine.module.register("config", {
+  cooldowns = false,
+  multitarget = false
+})

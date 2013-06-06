@@ -28,10 +28,15 @@ system\conditions\inventory.lua
 
 # Canned Conditions
 system\canned\default.lua
+system\canned\buff.lua
+system\canned\debuff.lua
+system\canned\player.lua
+system\canned\target.lua
 
 # Modules
 system\modules\player.lua
 system\modules\target.lua
+system\modules\config.lua
 
 # Timers
 system\timers\profile.lua

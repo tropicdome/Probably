@@ -53,7 +53,7 @@ end)
 -- health
 
 ProbablyEngine.condition.register("target", "health", function()
-  return (UnitHealth("target") / UnitHealthMax("target"))
+  return (UnitHealth("target") / UnitHealthMax("target")) * 100
 end)
 
 ProbablyEngine.condition.register("target", "abs_health", function()
