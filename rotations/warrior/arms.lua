@@ -1,56 +1,54 @@
 ProbablyEngine.rotation.register(71, {
 
-  -- TODO: Flag for cooldown use.
-  -- TODO: Check the cooldown for a spell.
-  { "Recklessness", (function()
-      return ProbablyEngine.condition.target.health() < .2 and ProbablyEngine.condition.player.debuff_duration("Colossus Smash") >= 5
-    end) },
+  { "Recklessness", {
+      "with_cooldowns",
+      "target_health:20",
+      "with_target_debuff_duration(5):Colossus Smash"
+  }},
 
-  -- TODO: Flag for cooldown use.
-  { "Berserker Rage" },
+  { "Berserker Rage", "with_cooldowns" },
 
-  -- TODO: Flag for cooldown use.
-  { "Deadly Calm", (function() return ProbablyEngine.condition.player.rage() >= 40 end) },
+  { "Deadly Calm", {
+      "with_cooldowns",
+      "rage:40"
+  }},
 
-  -- TODO: Flag for cooldown use.
-  { "Lifeblood" },
+  { "Lifeblood", "with_cooldowns" },
 
-  { "Impending Victory", (function() return ProbablyEngine.condition.player.health() < .9 end) },
-  
-  -- { "Heroic Strike" ,
-  -- jps.hp("target") >= .2 and jps.debuff("Colossus Smash") and ( ( ( jps.buff("taste for blood") and jps.buffDuration("taste for blood") <= 2 ) or jps.buffStacks("taste for blood") == 5 or ( jps.buff("Taste for Blood") and jps.debuffDuration("Colossus Smash") <= 2 and jps.cooldown("Colossus Smash") > 0 ) or jps.buff("Deadly Calm") or rage >= 110 ) ) },
+  { "Impending Victory", "player_health:90" },
+
+  { "Heroic Strike", {
+      "target_debuff:Colossus Smash",
+      "rage:70"
+  }},
 
   { "Dragon Roar" },
 
   { "Mortal Strike" },
 
-  -- TODO: Flag for multi target
-  -- { "Sweeping Strikes", jps.MultiTarget },
+  { "Sweeping Strikes", "with_multitarget"},
 
-  { "Colossus Smash", (function() return ProbablyEngine.condition.player.debuff_duration("Colossus Smash") <= 1.5 end) },
+  { "Colossus Smash", "with_target_debuff_duration(1.5):Colossus Smash" },
 
   { "Execute" },
 
-  { "Overpower", (function() return ProbablyEngine.condition.player.buff("Overpower") end) },
+  { "Overpower", "with_buff:Overpower" },
 
-  { "Slam", (function()
-    return
-      ( ProbablyEngine.condition.player.rage() >= 70 or 
-        ProbablyEngine.condition.player.debuff("Colossus Smash") ) and
-      ProbablyEngine.condition.target.health() >= .2
-    end) },
+  { "Slam", (function() return ((
+      pec.player.rage() >= 70 or
+      pec.player.debuff("Colossus Smash") ) and
+      pec.target.health() >= 20
+  )end)},
 
   { "Heroic Throw" },
 
-  { "Battle Shout", (function()
-      return ProbablyEngine.condition.player.rage() <= 70 and
-        not ProbablyEngine.condition.player.debuff("Colossus Smash")
-    end) },
+  { "Battle Shout", (function() return (
+      pec.player.rage() <= 70
+      and not pec.player.debuff("Colossus Smash")
+  )end)},
 
-  { "Slam", (function() return ProbablyEngine.condition.target.health() >= .2 end) },
+  { "Slam", "target_health:20" },
 
-  { "Battle Shout", (function() return ProbablyEngine.condition.player.rage() <= 70 end) }
+  { "Battle Shout", "rage:30" }
 
 })
-
-
