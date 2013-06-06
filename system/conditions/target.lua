@@ -48,3 +48,14 @@ ProbablyEngine.condition.register("target", "debuff_count", function(debuff)
   end
   return count
 end)
+
+
+-- health
+
+ProbablyEngine.condition.register("target", "health", function()
+  return (UnitHealth("target") / UnitHealthMax("target"))
+end)
+
+ProbablyEngine.condition.register("target", "abs_health", function()
+  return UnitHealth("target")
+end)
