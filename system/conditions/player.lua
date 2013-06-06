@@ -61,10 +61,6 @@ ProbablyEngine.condition.register("player", "abs_health", function()
   return UnitHealth("player")
 end)
 
-ProbablyEngine.condition.register("player", "health", function()
-  return (UnitHealth("player") / UnitHealthMax("player"))
-end)
-
 -- Resources
 
 ProbablyEngine.condition.register("player", "mana", function()
