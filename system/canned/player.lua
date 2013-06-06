@@ -8,8 +8,6 @@ ProbablyEngine.canned.register("player_health", function(health)
   return ProbablyEngine.condition.player.health() >= tonumber(health)
 end)
 
-
-
 ---- player powers
 
 ProbablyEngine.canned.register("mana", function(count)
@@ -17,6 +15,7 @@ ProbablyEngine.canned.register("mana", function(count)
 end)
 
 ProbablyEngine.canned.register("rage", function(count)
+  print(count)
   return UnitPower("player", 1) >= tonumber(count)
 end)
 

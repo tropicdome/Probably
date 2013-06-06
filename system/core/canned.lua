@@ -2,7 +2,7 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.canned = {
-  withCount = "([%a_]+)%((%d%.?%d?)%)?:(.*)",
+  withCount = "([%a_]+)%((%d+%.?%d?)%)?:?(.*)",
   withoutCount = "([%a_]+):(.*)"
 }
 

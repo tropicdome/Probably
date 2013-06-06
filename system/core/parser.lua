@@ -28,6 +28,16 @@ local function castable(spell, unit)
   return true
 end
 
+ProbablyEngine.parser.nested = function(evaluationTable, event)
+  for _, evaluation in pairs(evaluationTable) do
+    local eval = ProbablyEngine.canned.parse(evaluation, event)
+    if not eval then
+      return false
+    end
+  end
+  return true
+end
+
 ProbablyEngine.parser.table = function(spellTable)
 
   for _, arguments in pairs(spellTable) do
@@ -44,6 +54,8 @@ ProbablyEngine.parser.table = function(spellTable)
 
     if evaluationType == "string" then
       evaluation = ProbablyEngine.canned.parse(evaluation, event)
+    elseif evaluationType == "table" then
+      evaluation = ProbablyEngine.parser.nested(evaluation, event)
     elseif evaluationType == "function" then
       evaluation = evaluation()
     elseif evaluationType == "nil" then
