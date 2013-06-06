@@ -1,13 +1,7 @@
-ProbablyEngine.rotation.register("paladin", "protection", {
-    { "Sacred Shield",
-      (function() return not pec.player.buff("Sacred shield") end)
-    },
-    { "Hammer of the Righteous",
-      (function() return pec.target.debuff_duration("Weakened Blows") <= 4.5 end)
-    },
-    { "Shield of the Righteous",
-      (function() return pec.player.holypower() == 3 end)
-    },
+ProbablyEngine.rotation.register(66, {
+    { "Sacred Shield", "without_buff:Sacred shield" },
+    { "Hammer of the Righteous", "without_target_debuff:Weakened Blows" },
+    { "Shield of the Righteous", "holypower:3" },
     { "Avenger's Shield" },
     { "Consecration" },
     { "Holy Wrath" },

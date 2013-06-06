@@ -8,11 +8,12 @@
 
 -- Lets fire this bitch up
 ProbablyEngine = {
-  addonName = "Probably",
-  addonColor = "2384C4",
+  addonName = "ShadowGoblin",
+  addonColor = "e6cc80",
   plua = false,
   debug = true,
   debugLevel = 0,
   hardcore_debug = false,
-  rotations = { }
+  rotations = { },
+  cycleTime = 250
 }

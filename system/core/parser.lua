@@ -11,6 +11,7 @@ ProbablyEngine.parser = {
 local function castable(spell, unit)
   -- Credits to iLulz (JPS) for this function
   if spell == nil then return false end
+  if unit == "ground" then unit = nil end
   if unit == nil then unit = "target" end
   local skillType, spellId = GetSpellBookItemInfo(spell)
   local isUsable, notEnoughMana = IsUsableSpell(spell)
@@ -57,7 +58,14 @@ ProbablyEngine.parser.table = function(spellTable)
     end
 
     if castable(event, target) and evaluation then
-      ProbablyEngine.debug("Table Parse: Cast Spell - " .. event)
+      local name, _, icon, _, _, _, _, _, _ = GetSpellInfo(event)
+
+      if target ~= "ground" then
+        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on <" .. UnitName(target) .. ">")
+      else
+        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!")
+      end
+
       ProbablyEngine.parser.lastCast = event
       return event, target
     end

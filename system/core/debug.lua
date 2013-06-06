@@ -4,12 +4,18 @@
 ProbablyEngine.debug = function(message, level)
   if level == nil then level = 0 end
   if ProbablyEngine.debugLevel >= level then
-    print("[Debug] " .. message)
+    print("|cFFff8000[Debug]|r " .. message)
   end
 end
 
 ProbablyEngine.print = function(message)
-  print("|TInterface\\Addons\\Probably\\system\\media\\swords.tga:10:10|t|cFF"..ProbablyEngine.addonColor.."["..ProbablyEngine.addonName.."] " .. message .. "|r")
+  local icon = "swords.tga"
+  if IsMacClient() then
+    icon = "pg.tga"
+  else
+    icon = "sb.tga"
+  end
+  print("|TInterface\\Addons\\Probably\\system\\media\\"..icon..":16:16|t|cFF"..ProbablyEngine.addonColor.."["..ProbablyEngine.addonName.."] " .. message .. "|r")
 end
 
 ProbablyEngine.dump = function(object) -- protected

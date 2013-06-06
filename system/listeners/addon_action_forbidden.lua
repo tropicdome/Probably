@@ -4,7 +4,7 @@
 ProbablyEngine.listener.register("ADDON_ACTION_FORBIDDEN", function(...)
   -- We can attempt to hide these without totally raping the UI
   local addon, event = ...
-  if addon == ProbablyEngine.addonName then
+  if addon == "Probably" then
     StaticPopup1:Hide()
     ProbablyEngine.plua = false
     ProbablyEngine.debug("Protected Lua Event Forbidden: " .. event, 1)

@@ -34,27 +34,28 @@ system\modules\player.lua
 system\modules\target.lua
 
 # Timers
-system\timers\control.lua
-system\timers\moving.lua
 system\timers\profile.lua
 system\timers\rotation.lua
+system\timers\lag.lua
 
 # Listeners
-system\listeners\unit_health_frequent.lua
-system\listeners\player_entering_world.lua
 system\listeners\player_specialization_changed.lua
+system\listeners\player_login.lua
+
+system\listeners\unit_health_frequent.lua
 system\listeners\unit_spellcast_channel_start.lua
 system\listeners\unit_spellcast_start.lua
 system\listeners\unit_spellcast_stop.lua
 system\listeners\unit_spellcast_succeeded.lua
-system\listeners\playet_target_changed.lua
 system\listeners\addon_action_blocked.lua
 system\listeners\addon_action_forbidden.lua
 system\listeners\player_regen_enabled.lua
 system\listeners\player_regen_disabled.lua
+system\listeners\player_target_changed.lua
 
 # Rotations
 rotations\mage\arcane.lua
 rotations\mage\frost.lua
+rotations\mage\fire.lua
 rotations\warrior\arms.lua
 rotations\paladin\protection.lua
