@@ -30,7 +30,7 @@ end
 
 ProbablyEngine.parser.nested = function(evaluationTable, event)
   for _, evaluation in pairs(evaluationTable) do
-    local eval = ProbablyEngine.canned.parse(evaluation, event)
+    local eval = ProbablyEngine.dsl.parse(evaluation, event)
     if not eval then
       return false
     end
@@ -53,7 +53,7 @@ ProbablyEngine.parser.table = function(spellTable)
     end
 
     if evaluationType == "string" then
-      evaluation = ProbablyEngine.canned.parse(evaluation, event)
+      evaluation = ProbablyEngine.dsl.parse(evaluation, event)
     elseif evaluationType == "table" then
       evaluation = ProbablyEngine.parser.nested(evaluation, event)
     elseif evaluationType == "function" then
