@@ -1,29 +1,29 @@
 ProbablyEngine.rotation.register(71, {
   { "Battle Shout" },
   { "Recklessness", {
-      "with_cooldowns",
-      "target_health:20",
-      "with_target_debuff_duration(5):Colossus Smash"
+      "cooldowns",
+      "target.health:20",
+      "target.debuff.duration(5):Colossus Smash"
   }},
-  { "Berserker Rage", "with_cooldowns" },
+  { "Berserker Rage", "cooldowns" },
   { "Deadly Calm", {
-      "with_cooldowns",
-      "rage:40"
+      "cooldowns",
+      "player.rage:40"
   }},
-  { "Lifeblood", "with_cooldowns" },
-  { "Impending Victory", "player_health:90" },
+  { "Lifeblood", "cooldowns" },
+  { "Impending Victory", "player.health:90" },
   { "Heroic Strike", {
-      "target_debuff:Colossus Smash",
-      "rage:70"
+      "target.debuff:Colossus Smash",
+      "player.rage:70"
   }},
   { "Dragon Roar" },
   { "Mortal Strike" },
-  { "Sweeping Strikes", "with_multitarget"},
-  { "Colossus Smash", "with_target_debuff_duration(1.5):Colossus Smash" },
+  { "Sweeping Strikes", "multitarget"},
+  { "Colossus Smash", "target.debuff.duration(1.5):Colossus Smash" },
   { "Execute" },
   { "Overpower" },
   { "Slam", {
-      "rage:40",
-      "target_health:20"
+      "player.rage:40",
+      "target.health:20"
   }}
 })
