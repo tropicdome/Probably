@@ -8,10 +8,18 @@ ProbablyEngine.dsl.register("player.health", function(health)
   return ProbablyEngine.condition.player.health() >= tonumber(health)
 end)
 
+ProbablyEngine.dsl.register("!player.health", function(health)
+  return ProbablyEngine.condition.player.health() <= tonumber(health)
+end)
+
 -- buffs
 
 ProbablyEngine.dsl.register("player.buff", function(spell)
   return ProbablyEngine.condition.player.buff(spell)
+end)
+
+ProbablyEngine.dsl.register("!player.buff", function(spell)
+  return not ProbablyEngine.condition.player.buff(spell)
 end)
 
 ProbablyEngine.dsl.register("player.buff.count", function(spell, count)
