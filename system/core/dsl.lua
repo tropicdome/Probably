@@ -2,7 +2,7 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.dsl = {
-  withCount = "([%a%._]+)%((%d+%.?%d?)%)?:?(.*)",
+  withCount = "([%a%!%._]+)%((%d+%.?%d?)%)?:?(.*)",
   withoutCount = "([%a_]+):(.*)"
 }
 
