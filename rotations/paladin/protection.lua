@@ -1,18 +1,21 @@
 ProbablyEngine.rotation.register(66, {
-    { "Sacred Shield", "without_buff:Sacred shield" },
-    { "Hammer of the Righteous", "without_target_debuff:Weakened Blows" },
+    { "Blessing of Kings", "!player.buff:Blessing of Kings" },
+    { "Avenging Wrath", "cooldowns" },
+    { "Sacred Shield", "!player.buff:Sacred shield" },
+    { "Hammer of the Righteous", "!target.debuff:Weakened Blows" },
     { "Shield of the Righteous", {
-        "holypower:3",
-        "player_health_gt:90"
+        "player.holypower:3",
+        "player.health:90"
     }},
     { "Word of Glory", {
-        "holypower:3",
-        "player_health_lt:90"
+        "player.holypower:3",
+        "!player.health:90"
     }},
     { "Avenger's Shield" },
     { "Consecration" },
     { "Holy Wrath" },
     { "Hammer of Wrath" },
+    { "Hammer of the Righteous", "multitarget" },
     { "Judgment" },
     { "Crusader Strike" }
   }
