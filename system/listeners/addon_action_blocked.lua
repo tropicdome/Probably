@@ -6,7 +6,7 @@ ProbablyEngine.listener.register("ADDON_ACTION_BLOCKED", function(...)
   local addon, event = ...
   if addon == ProbablyEngine.addonName then
     StaticPopup1:Hide()
-    ProbablyEngine.plua = false
-    ProbablyEngine.debug("Protected Lua Event Blocked: " .. event, 1)
+    ProbablyEngine.full = false
+    ProbablyEngine.debug("Event Blocked: " .. event, 1)
   end
 end)

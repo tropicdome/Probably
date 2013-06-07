@@ -10,7 +10,7 @@
 ProbablyEngine = {
   addonName = "ShadowGoblin",
   addonColor = "e6cc80",
-  plua = false,
+  full = false,
   debug = true,
   debugLevel = 0,
   hardcore_debug = false,

@@ -20,15 +20,15 @@ end
 
 ProbablyEngine.dump = function(object) -- protected
   print(object)
-  ProbablyEngine.have_plua = true
+  ProbablyEngine.have_full = true
 end
 
-ProbablyEngine.plua_check = function() -- protected
-  if ProbablyEngine.plua == true then return end
-  RunMacroText("/run ProbablyEngine_plua_check_bool = true")
-  if ProbablyEngine_plua_check_bool == true then
-    ProbablyEngine.plua = true
-    ProbablyEngine_plua_check_bool = nil
-    ProbablyEngine.print("Plua functionality enabled, we are good to go.")
+ProbablyEngine.full_check = function() -- protected
+  if ProbablyEngine.full == true then return end
+  RunMacroText("/run ProbablyEngine_full_check_bool = true")
+  if ProbablyEngine_full_check_bool == true then
+    ProbablyEngine.full = true
+    ProbablyEngine_full_check_bool = nil
+    ProbablyEngine.print("full functionality enabled, we are good to go.")
   end
 end

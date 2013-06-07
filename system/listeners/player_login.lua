@@ -3,7 +3,7 @@
 
 ProbablyEngine.listener.register("PLAYER_LOGIN", function(...)
   ProbablyEngine.listener.eventActions["PLAYER_SPECIALIZATION_CHANGED"]("player")
-  if not ProbablyEngine.plua then
-    ProbablyEngine.plua_check()
+  if not ProbablyEngine.full then
+    ProbablyEngine.full_check()
   end
 end)
