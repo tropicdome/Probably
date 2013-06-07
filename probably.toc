@@ -16,7 +16,7 @@ system\core\spellcache.lua
 system\core\parser.lua
 system\core\rotation.lua
 system\core\condition.lua
-system\core\canned.lua
+system\core\dsl.lua
 
 # Conditions
 system\conditions\player.lua
@@ -26,12 +26,12 @@ system\conditions\spell.lua
 system\conditions\item.lua
 system\conditions\inventory.lua
 
-# Canned Conditions
-system\canned\default.lua
-system\canned\buff.lua
-system\canned\debuff.lua
-system\canned\player.lua
-system\canned\target.lua
+# DSL
+system\dsl\default.lua
+system\dsl\buff.lua
+system\dsl\debuff.lua
+system\dsl\player.lua
+system\dsl\target.lua
 
 # Modules
 system\modules\player.lua
