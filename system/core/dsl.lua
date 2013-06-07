@@ -3,7 +3,7 @@
 
 ProbablyEngine.dsl = {
   withCount = "([%a%!%._]+)%((%d+%.?%d?)%)?:?(.*)",
-  withoutCount = "([%a_]+):(.*)"
+  withoutCount = "([%a%!%._]+):(.*)"
 }
 
 -- Why can't Lua just use regex... fuck off with this pattern shit.
