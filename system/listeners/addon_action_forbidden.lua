@@ -7,6 +7,6 @@ ProbablyEngine.listener.register("ADDON_ACTION_FORBIDDEN", function(...)
   if addon == "Probably" then
     StaticPopup1:Hide()
     ProbablyEngine.full = false
-    ProbablyEngine.debug("Event Forbidden: " .. event, 1)
+    ProbablyEngine.debug("Event Forbidden: " .. event, 3)
   end
 end)

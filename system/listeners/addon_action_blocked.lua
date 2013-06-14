@@ -7,6 +7,6 @@ ProbablyEngine.listener.register("ADDON_ACTION_BLOCKED", function(...)
   if addon == ProbablyEngine.addonName then
     StaticPopup1:Hide()
     ProbablyEngine.full = false
-    ProbablyEngine.debug("Event Blocked: " .. event, 1)
+    ProbablyEngine.debug("Event Blocked: " .. event, 3)
   end
 end)
