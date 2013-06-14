@@ -8,7 +8,7 @@ ProbablyEngine.parser = {
   lastCast = ''
 }
 
-local function castable(spell, unit)
+ProbablyEngine.parser.can_cast =  function(spell, unit)
   -- Credits to iLulz (JPS) for this function
   if spell == nil then return false end
   if unit == "ground" then unit = nil end
@@ -69,13 +69,13 @@ ProbablyEngine.parser.table = function(spellTable)
       target = "target"
     end
 
-    if castable(event, target) and evaluation then
+    if ProbablyEngine.parser.can_cast(event, target) and evaluation then
       local name, _, icon, _, _, _, _, _, _ = GetSpellInfo(event)
 
       if target ~= "ground" then
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on <" .. UnitName(target) .. ">")
+        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName(target) .. " )", 2)
       else
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!")
+        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
       end
 
       ProbablyEngine.parser.lastCast = event
