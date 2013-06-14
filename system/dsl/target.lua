@@ -11,7 +11,7 @@ ProbablyEngine.dsl.register("target.buff", function(spell)
 end)
 
 ProbablyEngine.dsl.register("target.buff.duration", function(spell, duration)
-  return ProbablyEngine.condition.target.buff.duration(spell) <= duration
+  return ProbablyEngine.condition.target.buff_duration(spell) <= duration
 end)
 
 ProbablyEngine.dsl.register("target.buff", function(spell)
@@ -25,7 +25,7 @@ ProbablyEngine.dsl.register("target.debuff", function(spell)
 end)
 
 ProbablyEngine.dsl.register("target.debuff.duration", function(spell, duration)
-  return ProbablyEngine.condition.target.debuff.duration(spell) <= duration
+  return ProbablyEngine.condition.target.debuff_duration(spell) <= duration
 end)
 
 ProbablyEngine.dsl.register("!target.debuff", function(spell)

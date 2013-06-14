@@ -23,7 +23,7 @@ ProbablyEngine.dsl.register("!player.buff", function(spell)
 end)
 
 ProbablyEngine.dsl.register("player.buff.count", function(spell, count)
-  return ProbablyEngine.condition.player.buff.count(spell) >= tonumber(count)
+  return ProbablyEngine.condition.player.buff_count(spell) >= tonumber(count)
 end)
 
 -- debuffs
@@ -33,7 +33,7 @@ ProbablyEngine.dsl.register("player.debuff", function(spell)
 end)
 
 ProbablyEngine.dsl.register("player.debuff.count", function(spell, count)
-  return ProbablyEngine.condition.player.debuff.count(spell) >= tonumber(count)
+  return ProbablyEngine.condition.player.debuff_count(spell) >= tonumber(count)
 end)
 
 ProbablyEngine.dsl.register("!player.debuff", function(spell)
