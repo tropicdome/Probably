@@ -36,17 +36,21 @@ system\dsl\target.lua
 # Modules
 system\modules\player.lua
 system\modules\target.lua
+system\modules\world.lua
+system\modules\queue.lua
 system\modules\config.lua
 
 # Timers
 system\timers\profile.lua
 system\timers\rotation.lua
 system\timers\lag.lua
+system\timers\combatable.lua
 
 # Listeners
 system\listeners\player_specialization_changed.lua
 system\listeners\player_login.lua
-
+system\listeners\combat_log_event_unfiltered.lua
+system\listeners\group_roster_update.lua
 system\listeners\unit_health_frequent.lua
 system\listeners\unit_spellcast_channel_start.lua
 system\listeners\unit_spellcast_start.lua
