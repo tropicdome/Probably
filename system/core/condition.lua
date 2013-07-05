@@ -5,20 +5,10 @@ ProbablyEngine.condition = {
 
 }
 
-ProbablyEngine.condition.register = function(group, name, evaluation)
-  ProbablyEngine.condition[group][name] = evaluation
+ProbablyEngine.condition.register = function(name, evaluation)
+  ProbablyEngine.condition[name] = evaluation
 end
 
-ProbablyEngine.condition.unregister = function(group, name)
-  ProbablyEngine.condition[group][name] = nil
+ProbablyEngine.condition.unregister = function(name)
+  ProbablyEngine.condition[name] = nil
 end
-
-ProbablyEngine.condition.register_group = function(group)
-  ProbablyEngine.condition[group] = { }
-end
-
-ProbablyEngine.condition.unregister_group = function(group)
-  ProbablyEngine.condition[group] = nil
-end
-
-pec = ProbablyEngine.condition
