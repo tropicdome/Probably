@@ -19,19 +19,7 @@ system\core\condition.lua
 system\core\dsl.lua
 
 # Conditions
-system\conditions\player.lua
-system\conditions\target.lua
-system\conditions\focus.lua
-system\conditions\spell.lua
-system\conditions\item.lua
-system\conditions\inventory.lua
-
-# DSL
-system\dsl\default.lua
-system\dsl\buff.lua
-system\dsl\debuff.lua
-system\dsl\player.lua
-system\dsl\target.lua
+system\conditions\core.lua
 
 # Modules
 system\modules\player.lua
@@ -68,3 +56,4 @@ rotations\mage\frost.lua
 rotations\mage\fire.lua
 rotations\warrior\arms.lua
 rotations\paladin\protection.lua
+rotations\hunter\survival.lua

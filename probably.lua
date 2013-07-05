@@ -8,7 +8,7 @@
 
 -- Lets fire this bitch up
 ProbablyEngine = {
-  addonName = "ShadowGoblin",
+  addonName = "Probably",
   addonColor = "e6cc80",
   full = false,
   debug = true,
