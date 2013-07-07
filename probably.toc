@@ -57,3 +57,4 @@ rotations\mage\fire.lua
 rotations\warrior\arms.lua
 rotations\paladin\protection.lua
 rotations\hunter\survival.lua
+rotations\hunter\beastmastery.lua
