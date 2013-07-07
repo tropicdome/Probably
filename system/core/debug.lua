@@ -19,7 +19,7 @@ end
 
 ProbablyEngine.full_check = function() -- protected
   if ProbablyEngine.full == true then return end
-  RunMacroText("/run ProbablyEngine_full_check_bool = true")
+  --RunMacroText("/run ProbablyEngine_full_check_bool = true")
   if ProbablyEngine_full_check_bool == true then
     ProbablyEngine.full = true
     ProbablyEngine_full_check_bool = nil
