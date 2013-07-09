@@ -1,3 +1,4 @@
+-- SPEC ID 62
 ProbablyEngine.rotation.register(62, {
     { "Frost Armor", "!player.buff" },
     { "Arcane Brilliance", "!player.buff" },

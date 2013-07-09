@@ -1,3 +1,4 @@
+-- SPEC ID 64
 ProbablyEngine.rotation.register(64, {
     { "Flamestrike", "modifier.shiftkey", "ground" },
     { "Nether Tempest",  "target.debuff" },

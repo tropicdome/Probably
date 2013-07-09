@@ -1,3 +1,4 @@
+-- SPEC ID 70
 ProbablyEngine.rotation.register(66, {
     { "Blessing of Kings", "!player.buff:Blessing of Kings" },
     { "Avenging Wrath", "cooldowns" },

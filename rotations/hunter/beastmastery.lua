@@ -1,3 +1,4 @@
+-- SPEC ID 253
 ProbablyEngine.rotation.register(253, {
     -- { "Hunter's Mark" , "!target.debuff(Hunter's Mark)" },
     { "Serpent Sting", "!target.debuff(Serpent Sting)" },
