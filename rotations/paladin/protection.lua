@@ -6,11 +6,11 @@ ProbablyEngine.rotation.register(66, {
     { "Hammer of the Righteous", "!target.debuff(Weakened Blows)" },
     { "Shield of the Righteous", {
         "player.holypower = 3",
-        "player.health < 90"
+        "player.health >= 90"
     }},
     { "Word of Glory", {
         "player.holypower = 3",
-        "!player.health < 90"
+        "player.health < 90"
     }},
     { "Avenger's Shield" },
     { "Consecration" },
