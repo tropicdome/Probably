@@ -2,13 +2,13 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.module.register("queue", {
-  queue = { }
+  queue = nil
 })
 
 ProbablyEngine.module.queue.add_spell = function(spell_name)
-  if ProbablyEngine.module.queue.queue[#ProbablyEngine.module.queue.queue] ~= name then
-    table.insert(ProbablyEngine.module.queue.queue, name)
-    ProbablyEngine.debug(name, " was queued for casting.", 3)
+  if ProbablyEngine.module.queue.queue ~= spell_name then
+    ProbablyEngine.module.queue.queue = spell_name
+    ProbablyEngine.debug(spell_name .. " was queued for casting.")
   end
 end
 

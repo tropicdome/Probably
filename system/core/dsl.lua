@@ -15,29 +15,45 @@ local function getConditionalSpell(dsl, spell)
 end
 
 local function comparator(condition, target, condition_spell)
+
+  local modify_not = false
+
+  if string.sub(target, 1, 1) == '!' then
+    target = string.sub(target, 2)
+    modify_not = true
+  end
+
   local conditions = {strsplit(' ', condition)}
+  local evaluation = false
   if #conditions == 3 then
     local value = tonumber(ProbablyEngine.dsl.get(conditions[1])(target, condition_spell))
     local compare_value = tonumber(conditions[3])
     if conditions[2] == '>=' then
-      return value >= compare_value
+      evaluation = value >= compare_value
     elseif conditions[2] == '<=' then
-      return value <= compare_value
+      evaluation = value <= compare_value
     elseif conditions[2] == '>' then
-      return value > compare_value
+      evaluation = value > compare_value
     elseif conditions[2] == '<' then
-      return value < compare_value
+      evaluation = value < compare_value
     elseif conditions[2] == '=' or conditions[2] == '==' then
-      return value == compare_value
+      evaluation = value == compare_value
     elseif conditions[2] == '!=' or conditions[2] == '!' then
-      return value ~= compare_value
+      evaluation = value ~= compare_value
     else
       ProbablyEngine.debug("Calling non-existant comparator: [" .. conditions .. "]")
-      return false
+      evaluation = false
     end
   else
-    return ProbablyEngine.dsl.get(condition)(target, condition_spell)
+    evaluation = ProbablyEngine.dsl.get(condition)(target, condition_spell)
   end
+
+  if modify_not then
+    return not evaluation
+  end
+
+  return evaluation
+
 end
 
 ProbablyEngine.dsl.parse = function(dsl, spell)
@@ -53,8 +69,8 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
     return comparator(condition, target, condition_spell)
   elseif size == 3 then
     local target = split[1]
-    local condition, condition_spell = getConditionalSpell(split[2], spell)
-    return comparator(condition..'.'..subcondition, target, condition_spell)
+    local condition, condition_spell, subcondition = getConditionalSpell(split[2], spell)
+    return comparator(condition..'.'..split[3], target, condition_spell)
   end
   return ProbablyEngine.dsl.get(dsl)('target', spell)
 end
