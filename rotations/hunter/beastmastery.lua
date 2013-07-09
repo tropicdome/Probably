@@ -1,9 +1,10 @@
-ProbablyEngine.rotation.register(255, {
-    { "Arcane Shot", "player.buff(Thrill of the Hunt)"},
-    { "Arcane Shot", "player.focus >= 60"},
-    { "Black Arrow"},
-    { "Explosive Shot" },
+ProbablyEngine.rotation.register(253, {
+    -- { "Hunter's Mark" , "!target.debuff(Hunter's Mark)" },
+    { "Serpent Sting", "!target.debuff(Serpent Sting)" },
+    { "Focus Fire", "player.buff(Frenzy).count = 5" },
+    { "Kill Command" },
     { "Glaive Toss" },
+    { "Arcane Shot", "player.focus >= 60"},
     { "Cobra Shot" }
   }
 )
