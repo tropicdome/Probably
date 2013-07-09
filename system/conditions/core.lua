@@ -26,3 +26,19 @@ end)
 ProbablyEngine.condition.register("focus", function(target, spell)
   return UnitPower(target, SPELL_POWER_FOCUS)
 end)
+
+ProbablyEngine.condition.register("holypower", function(target, spell)
+  return UnitPower(target, SPELL_POWER_HOLY_POWER)
+end)
+
+ProbablyEngine.condition.register("health", function(target, spell)
+  return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
+end)
+
+ProbablyEngine.condition.register("multitarget", function()
+  return false
+end)
+
+ProbablyEngine.condition.register("cooldowns", function()
+  return false
+end)
