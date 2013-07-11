@@ -12,7 +12,7 @@ ProbablyEngine.condition.register("buff.count", function(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return count
   end
-  return false
+  return 0
 end)
 
 ProbablyEngine.condition.register("debuff", function(target, spell)
@@ -23,6 +23,14 @@ ProbablyEngine.condition.register("debuff", function(target, spell)
   return false
 end)
 
+ProbablyEngine.condition.register("debuff.duration", function(target, spell)
+  local debuff,_,_,_,_,_,expires,caster = UnitDebuff(target, spell)
+  if debuff ~= nil and (caster == 'player' or caster == 'pet') then
+    return (expires - (GetTime()-ProbablyEngine.lag))
+  end
+  return 0
+end)
+
 ProbablyEngine.condition.register("focus", function(target, spell)
   return UnitPower(target, SPELL_POWER_FOCUS)
 end)
@@ -30,6 +38,56 @@ end)
 ProbablyEngine.condition.register("holypower", function(target, spell)
   return UnitPower(target, SPELL_POWER_HOLY_POWER)
 end)
+
+ProbablyEngine.condition.register("shadoworbs", function(target, spell)
+  return UnitPower(target, SPELL_POWER_SHADOW_ORBS)
+end)
+
+-- DK Power
+
+ProbablyEngine.condition.register("runicpower", function(target, spell)
+  return UnitPower(target, SPELL_POWER_RUNIC_POWER)
+end)
+
+ProbablyEngine.condition.register("runes", function(target, rune)
+  if rune == 'frost' or rune == 'Frost' then
+    local r1 = select(3, GetRuneCooldown(5))
+    local r2 = select(3, GetRuneCooldown(6))
+    if r1 and r2 then
+      return 2
+    elseif r1 or r2 then
+      return 1
+    else
+      return 0
+    end
+  elseif rune == 'death' or rune == 'Death' or rune == 'Blood' or rune == 'blood' then
+    local r1 = select(3, GetRuneCooldown(1))
+    local r2 = select(3, GetRuneCooldown(2))
+    if r1 and r2 then
+      return 2
+    elseif r1 or r2 then
+      return 1
+    else
+      return 0
+    end
+  elseif rune == 'unholy' or rune == 'Unholy' then
+    local r1 = select(3, GetRuneCooldown(3))
+    local r2 = select(3, GetRuneCooldown(4))
+    if r1 and r2 then
+      return 2
+    elseif r1 or r2 then
+      return 1
+    else
+      return 0
+    end
+  end
+
+end)
+
+ProbablyEngine.condition.register("unholy", function(target, spell)
+  return select(3, GetRuneCooldown(3)) or select(3, GetRuneCooldown(4))
+end)
+
 
 ProbablyEngine.condition.register("health", function(target, spell)
   return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
