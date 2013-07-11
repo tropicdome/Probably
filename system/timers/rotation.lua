@@ -36,4 +36,4 @@ ProbablyEngine.timer.register("rotation", function()
       end
     end
   end
-end, 250)
+end, ProbablyEngine.cycleTime)
