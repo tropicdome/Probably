@@ -24,7 +24,7 @@ ProbablyEngine.parser.can_cast =  function(spell, unit)
   if SpellHasRange(spell) == 1 and IsSpellInRange(spell, unit) == 0 then return false end
   if select(2, GetSpellCooldown(spell)) ~= 0 then return false end
   if ProbablyEngine.module.player.casting == true then return false end
-  if select(1, UnitChannelInfo("player")) == ProbablyEngine.parser.lastCast then return false end
+  if UnitChannelInfo("player") == nil then return true else return false end
   return true
 end
 
@@ -70,14 +70,6 @@ ProbablyEngine.parser.table = function(spellTable)
     end
 
     if ProbablyEngine.parser.can_cast(event, target) and evaluation then
-      local name, _, icon, _, _, _, _, _, _ = GetSpellInfo(event)
-
-      if target ~= "ground" then
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName(target) .. " )", 2)
-      else
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
-      end
-
       ProbablyEngine.parser.lastCast = event
       return event, target
     end
