@@ -15,5 +15,6 @@ ProbablyEngine = {
   debugLevel = 2,
   hardcore_debug = false,
   rotations = { },
-  cycleTime = 250
+  cycleTime = 250,
+  lag = 0
 }
