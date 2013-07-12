@@ -7,6 +7,13 @@ ProbablyEngine.rotation.register(258, {
     { "Inner Fire", "!player.buff(Inner Fire)" },
     { "Shadow Form", "!player.buff(Shadowform)" },
     
+    -- Blow Our Cooldowns
+    { "Power Infusion", "modifier.cooldowns" },
+    { "Shadowfiend",    "modifier.cooldowns" },
+    
+    -- Key Click Checking
+    { "Mind Sear", 		"modifier.shift" },
+    
     -- We are moving
     { "Shadow Word: Pain", "player.moving" },
     { "Cascade", "player.moving" },
@@ -30,8 +37,7 @@ ProbablyEngine.rotation.register(258, {
     { "Shadow Word: Death" },
     
     
-   
-    
+  
     
     
   }
