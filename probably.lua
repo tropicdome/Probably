@@ -12,9 +12,9 @@ ProbablyEngine = {
   addonColor = "e6cc80",
   full = false,
   debug = true,
-  debugLevel = 2,
+  debugLevel = 1,
   hardcore_debug = false,
   rotations = { },
-  cycleTime = 250,
+  cycleTime = 333,
   lag = 0
 }
