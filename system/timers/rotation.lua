@@ -25,6 +25,8 @@ ProbablyEngine.timer.register("rotation", function()
         ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
       end
 
+      ProbablyEngine.buttons.icon('SpellIcon', icon)
+
       if target == "ground" then
         SetCVar("deselectOnClick", "0")
         CameraOrSelectOrMoveStart(1) -- this is unlocked
