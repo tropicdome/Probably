@@ -35,23 +35,43 @@ ProbablyEngine.buttons.frame:SetScript("OnHide", function(self)
 end)
 
 ProbablyEngine.buttons.create = function(name, icon, callback, tooltip)
+
   ProbablyEngine.buttons.buttons[name] = CreateFrame("CheckButton", "PE_Buttons_"..name, UIParent, "ActionButtonTemplate")
+
   local button = ProbablyEngine.buttons.buttons[name]
-  --button:SetScale(ProbablyEngine.buttons.scale)
-  button:SetPoint("TOPLEFT", ProbablyEngine.buttons.frame, "TOPLEFT", ((ProbablyEngine.buttons.size*ProbablyEngine.buttons.count)+(ProbablyEngine.buttons.count*ProbablyEngine.buttons.padding)), 0)
-  --button:SetWidth(ProbablyEngine.buttons.size)
-  --button:SetHeight(ProbablyEngine.buttons.size)
-  if icon == nil then icon = 'Interface\\ICONS\\INV_Misc_QuestionMark' end
-  _G[button:GetName().."Icon"]:SetTexture(icon)
+  button:SetPoint("TOPLEFT", ProbablyEngine.buttons.frame, "TOPLEFT",
+    (
+      (ProbablyEngine.buttons.size*ProbablyEngine.buttons.count)
+      +
+      (ProbablyEngine.buttons.count*ProbablyEngine.buttons.padding)
+    )
+  , 0)
+  button:SetScale(ProbablyEngine.buttons.scale)
+  button:SetWidth(ProbablyEngine.buttons.size)
+  button:SetHeight(ProbablyEngine.buttons.size)
+
+  if icon == nil then
+    _G[button:GetName().."Icon"]:SetTexture('Interface\\ICONS\\INV_Misc_QuestionMark')
+  else
+    _G[button:GetName().."Icon"]:SetTexture(icon)
+  end
+
   button:SetScript("OnClick", callback)
-  ProbablyEngine.buttons.count = ProbablyEngine.buttons.count + 1
+
+  if tooltip ~= nil then
+    button:SetScript("OnEnter", function(self)
+      GameTooltip:SetOwner(self, "ANCHOR_TOP")
+      GameTooltip:SetText(tooltip)
+      GameTooltip:Show()
+    end)
+    button:SetScript("OnLeave", function(self)
+      GameTooltip:Hide()
+    end)
+  end
+
   button.checked = false
 
-  button:SetScript("OnEnter", function(self)
-    GameTooltip:SetOwner(self, "ANCHOR_TOP")
-    GameTooltip:SetText(tooltip)
-    GameTooltip:Show()
-  end)
+  ProbablyEngine.buttons.count = ProbablyEngine.buttons.count + 1
 
 end
 
@@ -62,6 +82,7 @@ ProbablyEngine.buttons.text = function(name, text)
 end
 
 ProbablyEngine.buttons.setActive = function(name)
+  _G['PE_Buttons_'.. name].checked = true
   _G['PE_Buttons_'.. name]:SetChecked(1)
 end
 
