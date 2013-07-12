@@ -2,7 +2,7 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.timer.register("rotation", function()
-  if ProbablyEngine.module.player.combat then
+  if ProbablyEngine.module.player.combat and ProbablyEngine.active then
 
     local spell, target = ''
 
@@ -25,7 +25,7 @@ ProbablyEngine.timer.register("rotation", function()
         ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
       end
 
-      ProbablyEngine.buttons.icon('SpellIcon', icon)
+      ProbablyEngine.buttons.icon('MasterToggle', icon)
 
       if target == "ground" then
         SetCVar("deselectOnClick", "0")

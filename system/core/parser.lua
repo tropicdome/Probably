@@ -49,7 +49,7 @@ ProbablyEngine.parser.table = function(spellTable)
     local target = arguments[3]
 
     if eventType == "table" then
-      ProbablyEngine.parser.table(event)
+      --ProbablyEngine.parser.table(event)
     end
 
     if evaluationType == "string" then

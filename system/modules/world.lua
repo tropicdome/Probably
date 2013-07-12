@@ -78,3 +78,7 @@ ProbablyEngine.module.world.clean_tables = function(source, dest)
   end
 end
 
+ProbablyEngine.module.world.flush_table = function()
+  ProbablyEngine.module.world.enemy = { }
+  ProbablyEngine.module.world.current = 0
+end

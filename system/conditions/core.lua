@@ -135,10 +135,15 @@ ProbablyEngine.condition.register("health", function(target, spell)
   return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
 end)
 
-ProbablyEngine.condition.register("multitarget", function()
-  return false
+ProbablyEngine.condition.register("modifier.multitarget", function()
+  return ProbablyEngine.module.config.multitarget
 end)
 
-ProbablyEngine.condition.register("cooldowns", function()
-  return false
+ProbablyEngine.condition.register("modifier.cooldowns", function()
+  return ProbablyEngine.module.config.cooldowns
 end)
+
+ProbablyEngine.condition.register("modifier.enemies", function()
+  return ProbablyEngine.module.world.count
+end)
+

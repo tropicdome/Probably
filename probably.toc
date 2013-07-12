@@ -35,6 +35,9 @@ system\timers\rotation.lua
 system\timers\lag.lua
 system\timers\combatable.lua
 
+# Buttons
+system\buttons\core.lua
+
 # Listeners
 system\listeners\player_specialization_changed.lua
 system\listeners\player_login.lua
