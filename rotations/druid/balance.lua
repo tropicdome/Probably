@@ -7,11 +7,11 @@ ProbablyEngine.rotation.register(102, {
 
     -- Walking
     { "Moonfire", {
-        "player.balance = moon",
+        "player.balance.moon",
         "player.moving"
     }},
     { "Sunfire", {
-        "player.balance = sun",
+        "player.balance.sun",
         "player.moving"
     }},
     { "Starsurge", {
