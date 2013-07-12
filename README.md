@@ -3,6 +3,12 @@ ProbablyEngine is an event, module and timer based rotation optimization addon f
 
 ProbablyEngine is licensed under a modified BSD license.
 
-## RED PONY
-
 ## Notes
+**State Modifiers**
+
+    modifier.cooldowns
+    modifier.multitarget
+    modifier.enemies > 3
+    modifier.shift
+    modifier.control
+    modifier.alt
