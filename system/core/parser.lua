@@ -48,34 +48,43 @@ ProbablyEngine.parser.table = function(spellTable)
     local evaluation = arguments[2]
     local target = arguments[3]
 
-    if eventType == "table" then
-      --ProbablyEngine.parser.table(event)
-    end
-
-    if evaluationType == "string" then
-      evaluation = ProbablyEngine.dsl.parse(evaluation, event)
-    elseif evaluationType == "table" then
-      evaluation = ProbablyEngine.parser.nested(evaluation, event)
-    elseif evaluationType == "function" then
-      evaluation = evaluation()
-    elseif evaluationType == "nil" then
-      evaluation = true
-    else
-      -- evaluation was probably not passed via a deferred function.
-      -- not really sure how to handle this tbh
+    if eventType == "string" then
+      if evaluationType == "string"  then
+        evaluation = ProbablyEngine.dsl.parse(evaluation, event)
+      elseif evaluationType == "table" then
+        evaluation = ProbablyEngine.parser.nested(evaluation, event)
+      elseif evaluationType == "function" then
+        evaluation = evaluation()
+      elseif evaluationType == "nil" then
+        evaluation = true
+      end
+    elseif eventType == "table" then
+      if evaluationType == "string"  then
+        evaluation = ProbablyEngine.dsl.parse(evaluation, '')
+      elseif evaluationType == "table" then
+        evaluation = ProbablyEngine.parser.nested(evaluation, '')
+      elseif evaluationType == "function" then
+        evaluation = evaluation()
+      elseif evaluationType == "nil" then
+        evaluation = true
+      end
     end
 
     if target == nil then
       target = "target"
     end
 
-    if ProbablyEngine.parser.can_cast(event, target) and evaluation then
-      ProbablyEngine.parser.lastCast = event
-      return event, target
+    if evaluation then
+      if eventType == "table" then
+        return ProbablyEngine.parser.table(event)
+      else
+        if ProbablyEngine.parser.can_cast(event, target) then
+          ProbablyEngine.parser.lastCast = event
+          return event, target
+        end
+      end
     end
 
   end
-
   spellTable = nil
-
 end
