@@ -1,4 +1,5 @@
 -- SPEC ID 258
+-- 7/11/2013 - Changed by j
 ProbablyEngine.rotation.register(258, {
 
 	-- Maintain these buffs
