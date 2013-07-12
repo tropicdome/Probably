@@ -8,7 +8,7 @@ ProbablyEngine.dsl = {
 local comparator_table = { }
 local parse_table = { }
 
-local function getConditionalSpell(dsl, spell)
+ProbablyEngine.dsl.getConditionalSpell = function(dsl, spell)
   -- check if we are passing a spell with the conditional
   if string.match(dsl, '(.+)%((.+)%)') then
     return string.match(dsl, '(.+)%((.+)%)')
@@ -17,52 +17,48 @@ local function getConditionalSpell(dsl, spell)
   end
 end
 
-local function comparator(condition, target, condition_spell)
-
+ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
   local modify_not = false
-
   if string.sub(target, 1, 1) == '!' then
     target = string.sub(target, 2)
     modify_not = true
   end
-
   comparator_table = { strsplit(' ', condition) }
   local evaluation = false
   if #comparator_table == 3 then
-    local value = tonumber(ProbablyEngine.dsl.get(comparator_table[1])(target, condition_spell))
+    local condition_call = ProbablyEngine.dsl.get(comparator_table[1])(target, condition_spell)
 
-    if value == nil then value = 0 end
+    local value = tonumber(condition_call)
     local compare_value = tonumber(comparator_table[3])
 
-    if compare_value == nil then compare_value = 0 end
-    if comparator_table[2] == '>=' then
-      evaluation = value >= compare_value
-    elseif comparator_table[2] == '<=' then
-      evaluation = value <= compare_value
-    elseif comparator_table[2] == '>' then
-      evaluation = value > compare_value
-    elseif comparator_table[2] == '<' then
-      evaluation = value < compare_value
-    elseif comparator_table[2] == '=' or comparator_table[2] == '==' then
-      evaluation = value == compare_value
-    elseif comparator_table[2] == '!=' or comparator_table[2] == '!' then
-      evaluation = value ~= compare_value
+    if compare_value == nil then
+      evaluation = comparator_table[3]  == condition_call
     else
-      ProbablyEngine.debug("Calling non-existant comparator: [" .. comparator_table .. "]")
-      evaluation = false
+      if comparator_table[2] == '>=' then
+        evaluation = value >= compare_value
+      elseif comparator_table[2] == '<=' then
+        evaluation = value <= compare_value
+      elseif comparator_table[2] == '>' then
+        evaluation = value > compare_value
+      elseif comparator_table[2] == '<' then
+        evaluation = value < compare_value
+      elseif comparator_table[2] == '=' or comparator_table[2] == '==' then
+        evaluation = value == compare_value
+      elseif comparator_table[2] == '!=' or comparator_table[2] == '!' then
+        evaluation = value ~= compare_value
+      else
+        ProbablyEngine.debug("Calling non-existant comparator: [" .. comparator_table .. "]")
+        evaluation = false
+      end
     end
   else
     evaluation = ProbablyEngine.dsl.get(condition)(target, condition_spell)
   end
-
   if modify_not then
     return not evaluation
   end
-
   ProbablyEngine.debug(condition ..'-'.. target ..'-'.. condition_spell ..'-'.. tostring(evaluation), 5)
-
   return evaluation
-
 end
 
 ProbablyEngine.dsl.parse = function(dsl, spell)
@@ -71,15 +67,21 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
   if size == 1 then
     local condition = parse_table[1]
     local target = 'target'
-    return comparator(condition, target, condition)
+    return ProbablyEngine.dsl.comparator(condition, target, condition)
   elseif size == 2 then
     local target = parse_table[1]
-    local condition, condition_spell = getConditionalSpell(parse_table[2], spell)
-    return comparator(condition, target, condition_spell)
+    local condition, condition_spell = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
+    if target == 'modifier' then
+      condition = 'modifier.'..condition
+    end
+    return ProbablyEngine.dsl.comparator(condition, target, condition_spell)
   elseif size == 3 then
     local target = parse_table[1]
-    local condition, condition_spell, subcondition = getConditionalSpell(parse_table[2], spell)
-    return comparator(condition..'.'..parse_table[3], target, condition_spell)
+    if target == 'modifier' then
+      condition = 'modifier.'..condition
+    end
+    local condition, condition_spell, subcondition = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
+    return ProbablyEngine.dsl.comparator(condition..'.'..parse_table[3], target, condition_spell)
   end
   return ProbablyEngine.dsl.get(dsl)('target', spell)
 end
