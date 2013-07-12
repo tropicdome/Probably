@@ -42,7 +42,7 @@ ProbablyEngine.rotation.specId[270] = 'Mistweaver Monk'
 
 ProbablyEngine.rotation.register = function(specId, spellTable)
   ProbablyEngine.rotation[specId] = spellTable
-  ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 1)
+  ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 2)
 end
 
 ProbablyEngine.rotation.unregister = function(specId)
