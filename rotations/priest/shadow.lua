@@ -1,6 +1,5 @@
 -- SPEC ID 258
 ProbablyEngine.rotation.register(258, {
-
     { "Power Word: Fortitude", "!player.buff(Power Word: Fortitude)" },
     { "Inner Fire", "!player.buff(Inner Fire)" },
     { "Shadow Form", "!player.buff(Shadowform)" },
