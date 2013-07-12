@@ -7,6 +7,13 @@ ProbablyEngine.rotation.register(258, {
     { "Inner Fire", "!player.buff(Inner Fire)" },
     { "Shadow Form", "!player.buff(Shadowform)" },
     
+    -- Blow Our Cooldowns
+    { "Power Infusion", "modifier.cooldowns" },
+    { "Shadowfiend",    "modifier.cooldowns" },
+    
+    -- Key Click Checking
+    { "Mind Sear", 		"modifier.shift" },
+    
     -- We are moving
     { "Shadow Word: Pain", "player.moving" },
     { "Cascade", "player.moving" },
@@ -30,8 +37,9 @@ ProbablyEngine.rotation.register(258, {
     { "Shadow Word: Death" },
     
     
-   
-    
+   --[7/12/13 1:55:13 PM] Ben Phelps: modifier.cooldowns
+--[7/12/13 1:55:17 PM] Ben Phelps: modifier.multitarget
+    -- modifier.enemies > 3
     
     
   }
