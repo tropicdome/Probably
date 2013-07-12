@@ -31,6 +31,14 @@ ProbablyEngine.condition.register("debuff.duration", function(target, spell)
   return 0
 end)
 
+ProbablyEngine.condition.register("buff.duration", function(target, spell)
+  local buff,_,_,_,_,_,expires,caster = UnitBuff(target, spell)
+  if buff ~= nil and (caster == 'player' or caster == 'pet') then
+    return (expires - (GetTime()-ProbablyEngine.lag))
+  end
+  return 0
+end)
+
 ProbablyEngine.condition.register("focus", function(target, spell)
   return UnitPower(target, SPELL_POWER_FOCUS)
 end)
@@ -41,6 +49,40 @@ end)
 
 ProbablyEngine.condition.register("shadoworbs", function(target, spell)
   return UnitPower(target, SPELL_POWER_SHADOW_ORBS)
+end)
+
+ProbablyEngine.condition.register("energy", function(target, spell)
+  return UnitPower(target, SPELL_POWER_ENERGY)
+end)
+
+ProbablyEngine.condition.register("combopoints", function()
+  return GetComboPoints('player', 'target')
+end)
+
+ProbablyEngine.condition.register("modifier.shift", function()
+  return IsShiftKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.control", function()
+  return IsControlKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.alt", function()
+  return IsAltKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("balance.sun", function()
+  local direction = GetEclipseDirection()
+  if direction == 'none' or direction == 'sun' then return true end
+end)
+
+ProbablyEngine.condition.register("balance.moon", function()
+  local direction = GetEclipseDirection()
+  if direction == 'moon' then return true end
+end)
+
+ProbablyEngine.condition.register("moving", function(target, spell)
+  return GetUnitSpeed(target) ~= 0
 end)
 
 -- DK Power
