@@ -3,10 +3,13 @@
 local warningSent = false
 
 ProbablyEngine.timer.register("lag", function()
-  bandwidthIn, bandwidthOut, latencyHome, latencyWorld = GetNetStats()
-  ProbablyEngine.lag = ((latencyWorld + latencyHome) / 2) / 1000
-  if ProbablyEngine.lag > (ProbablyEngine.cycleTime / 1000) and warningSent == false then
-    ProbablyEngine.print("Warning! World Latency of " .. latencyWorld .. "ms is greate than the update frequency")
-    warningSent = true
+  local bandwidthIn, bandwidthOut, latencyHome, latencyWorld = GetNetStats()
+  ProbablyEngine.lag = (((latencyWorld + latencyHome) / 2) * 2)
+  -- Dynamic rotation timing
+  if ProbablyEngine.dynamicCycle == true then
+    if ProbablyEngine.lag < 500 then
+      ProbablyEngine.cycleTime = ProbablyEngine.lag
+      ProbablyEngine.timer.updatePeriod("rotation", ProbablyEngine.cycleTime)
+    end
   end
 end, 2000)

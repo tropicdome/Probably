@@ -33,6 +33,10 @@ ProbablyEngine.timer.handle = function (self, elapsed)
   end
 end
 
+ProbablyEngine.timer.updatePeriod = function(module, peroid)
+  ProbablyEngine.timer.timers[module]['period'] = (peroid / 1000)
+end
+
 -- register our handler
 ProbablyEngine.timer.timerFrame:SetScript("OnUpdate", ProbablyEngine.timer.handle)
 
