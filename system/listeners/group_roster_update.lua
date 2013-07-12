@@ -3,5 +3,5 @@
 
 ProbablyEngine.listener.register("GROUP_ROSTER_UPDATE", function(...)
   ProbablyEngine.module.world.rebuild_friendly()
-  ProbablyEngine.module.world.addFriendly(UnitGUID("player"), UnitName("player"))
+  ProbablyEngine.module.world.add_friendly(UnitGUID("player"), UnitName("player"))
 end)
