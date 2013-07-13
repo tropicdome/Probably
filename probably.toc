@@ -11,6 +11,7 @@ system\core\debug.lua
 system\core\module.lua
 system\core\listener.lua
 system\core\buttons.lua
+system\core\toggle.lua
 system\core\slash.lua
 system\core\timer.lua
 system\core\spellcache.lua
