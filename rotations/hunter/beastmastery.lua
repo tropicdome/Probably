@@ -30,6 +30,10 @@ ProbablyEngine.rotation.register(253, {
     { "Dire Beast" },
     { "Fervor" },
     { "Arcane Shot", "player.focus >= 60"},
+    { "Arcane Shot", {
+        "player.buff(Thrill of the Hunt)",
+        "player.focus >= 40"
+    }},
     { "Cobra Shot" }
 
   }
