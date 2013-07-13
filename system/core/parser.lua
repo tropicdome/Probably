@@ -48,6 +48,12 @@ ProbablyEngine.parser.table = function(spellTable)
     local evaluation = arguments[2]
     local target = arguments[3]
 
+
+    if string.sub(event, 1, 1) == '!' then
+      eventType = "macro"
+    end
+
+
     if eventType == "string" then
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, event)
@@ -58,7 +64,7 @@ ProbablyEngine.parser.table = function(spellTable)
       elseif evaluationType == "nil" then
         evaluation = true
       end
-    elseif eventType == "table" then
+    elseif eventType == "table" or eventType == "macro" then
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, '')
       elseif evaluationType == "table" then
@@ -77,6 +83,9 @@ ProbablyEngine.parser.table = function(spellTable)
     if evaluation then
       if eventType == "table" then
         return ProbablyEngine.parser.table(event)
+      elseif eventType == "macro" then
+        RunMacroText(string.sub(event, 2))
+        return false
       else
         if ProbablyEngine.parser.can_cast(event, target) then
           ProbablyEngine.parser.lastCast = event
