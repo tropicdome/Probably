@@ -8,14 +8,5 @@ ProbablyEngine.buttons.create('MasterToggle', nil, function(self)
 end, 'Toggle')
 ProbablyEngine.buttons.setActive('MasterToggle')
 
-ProbablyEngine.buttons.create('CooldownToggle', 'Interface\\ICONS\\Achievement_BG_winAB_underXminutes', function(self)
-  ProbablyEngine.module.config.cooldowns = not ProbablyEngine.module.config.cooldowns
-  self.checked = not self.checked
-  self:SetChecked(self.checked)
-end, 'Cooldowns')
-
-ProbablyEngine.buttons.create('MultitargetToggle', 'Interface\\ICONS\\Ability_Druid_Starfall', function(self)
-  ProbablyEngine.module.config.multitarget = not ProbablyEngine.module.config.multitarget
-  self.checked = not self.checked
-  self:SetChecked(self.checked)
-end, 'MultiTarget')
+ProbablyEngine.toggle.create('cooldowns', 'Interface\\ICONS\\Achievement_BG_winAB_underXminutes', 'Toggle Cooldowns')
+ProbablyEngine.toggle.create('multitarget', 'Interface\\ICONS\\Ability_Druid_Starfall', 'Toggle MultiTarget')
