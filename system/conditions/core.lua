@@ -147,3 +147,17 @@ ProbablyEngine.condition.register("modifier.enemies", function()
   return ProbablyEngine.module.world.count
 end)
 
+
+ProbablyEngine.condition.register("casting", function(target, spell)
+  local castName,_,_,_,_,endTime,_,_,notInterruptibleCast = UnitCastingInfo(target)
+  local channelName,_,_,_,_,endTime,_,notInterruptibleChannel = UnitChannelInfo(target)
+  if spell ~= nil and spell ~= '' and (spell == castName or spell == channelName) then
+    return true
+  end
+  if notInterruptibleCast and notInterruptibleChannel then
+    return true
+  end
+  return false
+end)
+
+
