@@ -12,13 +12,10 @@ ProbablyEngine.rotation.register(253, {
     { "A Murder of Crows", "modifier.cooldowns" },
     { "Dire Beast", "modifier.cooldowns" },
     { "Rapid Fire", "modifier.cooldowns" },
-    { "Rabid", {
-        "modifier.cooldowns",
-        "player.buff(Rapid Fire)"
-    }},
 
     -- Rotation
     { "Serpent Sting", "!target.debuff(Serpent Sting)" },
+    { "Steady Shot", "target.debuff(Serpent Sting).duration < 4" },
     { "Focus Fire", {
         "player.buff(Frenzy).count = 5",
         "!player.buff(Bestial Wrath)"

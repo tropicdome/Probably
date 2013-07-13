@@ -27,9 +27,9 @@ ProbablyEngine.rotation.register(255, {
     }},
 
     -- Rotation
+    { "Explosive Shot", "player.buff(Lock and Load)" },
     { "Serpent Sting", "!target.debuff(Serpent Sting)" },
-    { "Arcane Shot", "player.buff(Thrill of the Hunt)"},
-    { "Arcane Shot", "player.focus >= 60"},
+    { "Steady Shot", "target.debuff(Serpent Sting).duration < 4" },
     { "Black Arrow"},
     { "Explosive Shot" },
     { "Glaive Toss" },
@@ -37,6 +37,8 @@ ProbablyEngine.rotation.register(255, {
     { "Barrage" },
     { "Dire Beast" },
     { "Fervor" },
+    { "Arcane Shot", "player.buff(Thrill of the Hunt)"},
+    { "Arcane Shot", "player.focus >= 60"},
     { "Cobra Shot" }
 
   }
