@@ -41,9 +41,11 @@ ProbablyEngine.rotation.register(254, {
     -- Standard Rotation ( 90% - HP )
     {{
       { "Serpent Sting", "!target.debuff(Serpent Sting)" },
-      { "Glaive Toss" },
       { "Chimera Shot" },
       { "Kill Shot" },
+      { "Glaive Toss" },
+      { "Powershot" },
+      { "Barrage" },
       { "Dire Beast" },
       { "Fervor" },
       { "Aimed Shot", "player.buff(Fire!)" },

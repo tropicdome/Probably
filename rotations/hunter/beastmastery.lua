@@ -1,16 +1,36 @@
 -- SPEC ID 253
 ProbablyEngine.rotation.register(253, {
-    -- { "Hunter's Mark" , "!target.debuff(Hunter's Mark)" },
 
+    -- Traps
     { "Snake Trap"    , "modifier.shift", "ground" },
     { "Explosive Trap", "modifier.alt", "ground" },
-    { "Freezing Trap" , "modifier.control", "ground" },
+    { "Freezing Trap" , "modifier.shift", "ground" },
 
+    -- Cooldowns
+    { "Bestial Wrath", "modifier.cooldowns" },
+    { "Stampede", "modifier.cooldowns" },
+    { "A Murder of Crows", "modifier.cooldowns" },
+    { "Dire Beast", "modifier.cooldowns" },
+    { "Rapid Fire", "modifier.cooldowns" },
+    { "Rabid", {
+        "modifier.cooldowns",
+        "player.buff(Rapid Fire)"
+    }},
+
+    -- Rotation
     { "Serpent Sting", "!target.debuff(Serpent Sting)" },
-    { "Focus Fire", "player.buff(Frenzy).count = 5" },
+    { "Focus Fire", {
+        "player.buff(Frenzy).count = 5",
+        "!player.buff(Bestial Wrath)"
+    } },
     { "Kill Command" },
     { "Glaive Toss" },
+    { "Powershot" },
+    { "Barrage" },
+    { "Dire Beast" },
+    { "Fervor" },
     { "Arcane Shot", "player.focus >= 60"},
     { "Cobra Shot" }
+
   }
 )

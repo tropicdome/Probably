@@ -33,7 +33,11 @@ ProbablyEngine.rotation.register(255, {
     { "Black Arrow"},
     { "Explosive Shot" },
     { "Glaive Toss" },
+    { "Powershot" },
+    { "Barrage" },
+    { "Dire Beast" },
+    { "Fervor" },
     { "Cobra Shot" }
-    
+
   }
 )
