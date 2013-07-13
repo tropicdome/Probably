@@ -174,3 +174,7 @@ end)
 ProbablyEngine.condition.register("spell.cooldown", function(spell)
   return GetSpellCooldown(spell) == 0
 end)
+
+ProbablyEngine.condition.register("spell.cd", function(spell)
+  return ProbablyEngine.condition["spell.cooldown"](spell)
+end)
