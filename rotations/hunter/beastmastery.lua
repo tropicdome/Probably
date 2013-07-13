@@ -4,7 +4,9 @@ ProbablyEngine.rotation.register(253, {
     -- Traps
     { "Snake Trap"    , "modifier.shift", "ground" },
     { "Explosive Trap", "modifier.alt", "ground" },
-    { "Freezing Trap" , "modifier.shift", "ground" },
+    { "Freezing Trap" , "modifier.control", "ground" },
+
+    { "Silencing Shot", "modifier.interrupts" },
 
     -- Cooldowns
     { "Bestial Wrath", "modifier.cooldowns" },
