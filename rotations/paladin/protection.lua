@@ -1,23 +1,31 @@
 -- SPEC ID 66
 ProbablyEngine.rotation.register(66, {
-    { "Blessing of Kings", "!player.buff(Blessing of Kings)" },
-    { "Avenging Wrath", "cooldowns" },
+	-- Buffs
+    { "Blessing of Might", "!player.buff(Blessing of Might)" },
+    { "Righteous Fury",    "!player.buff(Righteous Fury)" },
+	-- Damage Reduction & Healing
     { "Sacred Shield", "!player.buff(Sacred shield)" },
-    { "Hammer of the Righteous", "!target.debuff(Weakened Blows)" },
-    { "Shield of the Righteous", {
-        "player.holypower = 3",
-        "player.health >= 90"
-    }},
-    { "Word of Glory", {
-        "player.holypower = 3",
-        "player.health < 90"
-    }},
-    { "Avenger's Shield" },
+    { "Eternal Flame", "!player.buff(Eternal Flame)" },
+    { "Hand of Purity" },
+    { "Shield of the Righteous", "player.holypower = 5" },
+    { "Shield of the Righteous", "modifier.shift" },
+    { "Word of Glory", "modifier.alt" },
+    --Cooldowns
+    { "Holy Avenger", "modifier.cooldowns" },
+    -- Tier Talenmts
+    { "Holy Prism" },
+    { "Light's Hammer" , "modifier.shift", "ground" },
+    { "Execution Sentence"},
+    -- DPS Rotation
+    { "Hammer of the Righteous", "!target.debuff(Weakened Blows)" }, 
+    { "Avenger's Shield", "player.buff(Grand Crusader)" },
     { "Consecration" },
     { "Holy Wrath" },
     { "Hammer of Wrath" },
-    { "Hammer of the Righteous", "multitarget" },
+    { "Hammer of the Righteous", "modifier.multitarget" },
     { "Judgment" },
-    { "Crusader Strike" }
+    { "Crusader Strike" },
   }
 )
+
+ -- { "Avenging Wrath", "cooldowns" },
