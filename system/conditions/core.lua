@@ -147,6 +147,13 @@ ProbablyEngine.condition.register("modifier.cooldowns", function()
   return ProbablyEngine.condition["modifier.toggle"]('cooldowns')
 end)
 
+ProbablyEngine.condition.register("modifier.interrupts", function()
+  if ProbablyEngine.condition["modifier.toggle"]('cooldowns') then
+    return ProbablyEngine.condition["casting"]('target')
+  end
+  return false
+end)
+
 ProbablyEngine.condition.register("modifier.enemies", function()
   return ProbablyEngine.module.world.count
 end)
@@ -164,4 +171,6 @@ ProbablyEngine.condition.register("casting", function(target, spell)
   return false
 end)
 
-
+ProbablyEngine.condition.register("spell.cooldown", function(spell)
+  return GetSpellCooldown(spell) == 0
+end)
