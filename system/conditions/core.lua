@@ -71,6 +71,10 @@ ProbablyEngine.condition.register("modifier.alt", function()
   return IsAltKeyDown() == 1
 end)
 
+ProbablyEngine.condition.register("modifier.toggle", function(toggle)
+  return ProbablyEngine.toggle.states[toggle] or false;
+end)
+
 ProbablyEngine.condition.register("balance.sun", function()
   local direction = GetEclipseDirection()
   if direction == 'none' or direction == 'sun' then return true end
@@ -136,11 +140,11 @@ ProbablyEngine.condition.register("health", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("modifier.multitarget", function()
-  return ProbablyEngine.module.config.multitarget
+  return ProbablyEngine.condition["modifier.toggle"]('multitarget')
 end)
 
 ProbablyEngine.condition.register("modifier.cooldowns", function()
-  return ProbablyEngine.module.config.cooldowns
+  return ProbablyEngine.condition["modifier.toggle"]('cooldowns')
 end)
 
 ProbablyEngine.condition.register("modifier.enemies", function()
