@@ -55,6 +55,10 @@ ProbablyEngine.condition.register("energy", function(target, spell)
   return UnitPower(target, SPELL_POWER_ENERGY)
 end)
 
+ProbablyEngine.condition.register("rage", function(target, spell)
+  return UnitPower(target, SPELL_POWER_RAGE)
+end)
+
 ProbablyEngine.condition.register("combopoints", function()
   return GetComboPoints('player', 'target')
 end)
