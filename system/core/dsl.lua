@@ -71,13 +71,13 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
   elseif size == 2 then
     local target = parse_table[1]
     local condition, condition_spell = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
-    if target == 'modifier' or target == 'spell' then
+    if target == 'modifier' or target == '!modifier' or target == 'spell' or target == '!spell' then
       condition = target..'.'..condition
     end
     return ProbablyEngine.dsl.comparator(condition, target, condition_spell)
   elseif size == 3 then
     local target = parse_table[1]
-    if target == 'modifier' or target == 'spell' then
+    if target == 'modifier' or target == '!modifier' or target == 'spell' or target == '!spell' then
       condition = target..'.'..condition
     end
     local condition, condition_spell, subcondition = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
