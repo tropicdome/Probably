@@ -2,11 +2,13 @@
 ProbablyEngine.rotation.register(254, {
 
     -- Traps
-    { "Snake Trap"    , "modifier.shift", "ground" },
+    { "Snake Trap"    , "modifier.control", "ground" },
     { "Explosive Trap", "modifier.alt", "ground" },
-    { "Freezing Trap" , "modifier.control", "ground" },
+    { "Freezing Trap" , "modifier.shift", "ground" },
 
     { "Silencing Shot", "modifier.interrupts" },
+
+    { "Deterrence", "player.health < 40" },
 
     -- Cooldowns
     { "Stampede", "modifier.cooldowns" },
