@@ -24,8 +24,10 @@ ProbablyEngine.module.world.rebuild_friendly = function()
   if GetNumGroupMembers() ~= 0 then
     for i = 1, GetNumGroupMembers() do
       local name = GetRaidRosterInfo(i)
-      local guid = UnitGUID(name)
-      ProbablyEngine.module.world.add_friendly(guid, name)
+      if guid then
+        local guid = UnitGUID(name)
+        ProbablyEngine.module.world.add_friendly(guid, name)
+      end
     end
   end
 end
