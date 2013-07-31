@@ -5,7 +5,6 @@
 -- http://wowprogramming.com/
 -- The site is amazingly helpful.
 
-
 -- Lets fire this bitch up
 ProbablyEngine = {
   addonName = "Probably",
@@ -13,7 +12,7 @@ ProbablyEngine = {
   active = true,
   full = false,
   debug = true,
-  debugLevel = 1,
+  debugLevel = 4,
   hardcore_debug = false,
   rotations = { },
   dynamicCycle = true,
