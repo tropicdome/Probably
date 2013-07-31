@@ -13,3 +13,13 @@ ProbablyEngine.timer.register("lag", function()
     end
   end
 end, 2000)
+
+ProbablyEngine.timer.register("garbage", function()
+  local addonUsage = GetAddOnMemoryUsage(ProbablyEngine.addonName)
+  if addonUsage > 1000 then
+    collectgarbage('collect')
+    ProbablyEngine.debug("Garbage Collection Ran: " .. addonUsage .. "kb" , 4)
+  end
+end, 10000)
+
+
