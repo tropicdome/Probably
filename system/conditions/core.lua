@@ -1,3 +1,4 @@
+local ProbablyEngineTempTable1 = { }
 
 ProbablyEngine.condition.register("buff", function(target, spell)
   local buff,_,_,_,_,_,_,caster = UnitBuff(target, spell)
@@ -26,7 +27,7 @@ end)
 ProbablyEngine.condition.register("debuff.duration", function(target, spell)
   local debuff,_,_,_,_,_,expires,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
-    return (expires - (GetTime()-ProbablyEngine.lag))
+    return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
   end
   return 0
 end)
@@ -34,7 +35,7 @@ end)
 ProbablyEngine.condition.register("buff.duration", function(target, spell)
   local buff,_,_,_,_,_,expires,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
-    return (expires - (GetTime()-ProbablyEngine.lag))
+    return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
   end
   return 0
 end)
@@ -57,6 +58,10 @@ end)
 
 ProbablyEngine.condition.register("rage", function(target, spell)
   return UnitPower(target, SPELL_POWER_RAGE)
+end)
+
+ProbablyEngine.condition.register("demonicfury", function(target, spell)
+  return UnitPower(target, SPELL_POWER_DEMONIC_FURY)
 end)
 
 ProbablyEngine.condition.register("combopoints", function()
@@ -160,7 +165,17 @@ end)
 
 
 ProbablyEngine.condition.register("health", function(target, spell)
-  return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
+  if UnitExists(target) then
+    return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
+  end
+  return 0
+end)
+
+ProbablyEngine.condition.register("mana", function(target, spell)
+  if UnitExists(target) then
+    return math.floor((UnitMana(target) / UnitManaMax(target)) * 100)
+  end
+  return 0
 end)
 
 ProbablyEngine.condition.register("modifier.multitarget", function()
@@ -172,15 +187,48 @@ ProbablyEngine.condition.register("modifier.cooldowns", function()
 end)
 
 ProbablyEngine.condition.register("modifier.interrupts", function()
-  if ProbablyEngine.condition["modifier.toggle"]('cooldowns') then
+  if ProbablyEngine.condition["modifier.toggle"]('interrupts') then
     return ProbablyEngine.condition["casting"]('target')
   end
   return false
 end)
 
+ProbablyEngine.condition.register("modifier.last", function(target, spell)
+  return ProbablyEngine.parser.lastCast == spell
+end)
+
 ProbablyEngine.condition.register("modifier.enemies", function()
   return ProbablyEngine.module.world.count
 end)
+
+ProbablyEngine.condition.register("enchant.mainhand", function()
+  return (select(1, GetWeaponEnchantInfo()) == 1)
+end)
+
+ProbablyEngine.condition.register("enchant.offhand", function()
+  return (select(4, GetWeaponEnchantInfo()) == 1)
+end)
+
+ProbablyEngine.condition.register("totem", function(totem)
+  for index = 1, 4 do
+    local _, totemName, startTime, duration = GetTotemInfo(index)
+    if totemName == totem then
+      return true
+    end
+  end
+  return false
+end)
+
+ProbablyEngine.condition.register("totem.duration", function(blank, totem)
+  for index = 1, 4 do
+    local _, totemName, startTime, duration = GetTotemInfo(index)
+    if totemName == totem then
+      return floor(startTime + duration - GetTime())
+    end
+  end
+  return 0
+end)
+
 
 
 ProbablyEngine.condition.register("casting", function(target, spell)
@@ -197,6 +245,9 @@ end)
 
 ProbablyEngine.condition.register("spell.cooldown", function(spell)
   return GetSpellCooldown(spell) == 0
+end)
+ProbablyEngine.condition.register("spell.charges", function(spell)
+  return select(1, GetSpellCharges(spell))
 end)
 
 ProbablyEngine.condition.register("spell.cd", function(spell)
