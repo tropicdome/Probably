@@ -48,11 +48,11 @@ ProbablyEngine.parser.table = function(spellTable)
     local evaluation = arguments[2]
     local target = arguments[3]
 
-
-    if string.sub(event, 1, 1) == '!' then
-      eventType = "macro"
+    if eventType == "string" then
+      if string.sub(event, 1, 1) == '!' then
+        eventType = "macro"
+      end
     end
-
 
     if eventType == "string" then
       if evaluationType == "string"  then
