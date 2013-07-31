@@ -79,6 +79,26 @@ ProbablyEngine.condition.register("modifier.toggle", function(toggle)
   return ProbablyEngine.toggle.states[toggle] or false;
 end)
 
+ProbablyEngine.condition.register("modifier.taunt", function()
+  if ProbablyEngine.condition["modifier.toggle"]('taunt') then
+    if UnitThreatSituation("player", "target") then
+      local status = UnitThreatSituation("player", target)
+      return (status < 3)
+    end
+    return false
+  end
+  return false
+end)
+
+ProbablyEngine.condition.register("threat", function(target)
+  if UnitThreatSituation("player", target) then
+    local isTanking, status, scaledPercent, rawPercent, threatValue = UnitDetailedThreatSituation("player", target)
+    return scaledPercent
+  end
+  return 0
+end)
+
+
 ProbablyEngine.condition.register("balance.sun", function()
   local direction = GetEclipseDirection()
   if direction == 'none' or direction == 'sun' then return true end
