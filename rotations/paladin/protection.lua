@@ -1,23 +1,40 @@
 -- SPEC ID 66
 ProbablyEngine.rotation.register(66, {
+
 	-- Buffs
     { "Blessing of Might", "!player.buff(Blessing of Might)" },
     { "Righteous Fury",    "!player.buff(Righteous Fury)" },
+
+    -- Taunts
+    { "Reckoning", "modifier.taunt" },
+
+    -- Interrupts
+    { "Rubke", "modifier.interrupts" },
+    { "Avenger's Shield", "modifier.interrupts" },
+
 	-- Damage Reduction & Healing
-    { "Sacred Shield", "!player.buff(Sacred shield)" },
-    { "Eternal Flame", "!player.buff(Eternal Flame)" },
-    { "Hand of Purity" },
+    { "Sacred Shield", "!player.buff(Sacred shield)" }, -- T3 Tallent
+    { "Eternal Flame", "!player.buff(Eternal Flame)" }, -- T3 Tallent
+    { "Hand of Purity" },  -- T4 Tallent
     { "Shield of the Righteous", "player.holypower = 5" },
     { "Shield of the Righteous", "modifier.shift" },
     { "Word of Glory", "modifier.alt" },
+
+    -- Survival
+    { "Ardent Defender", "player.health < 15" },
+    { "Divine Protection", "player.health < 35" },
+    { "Guardian of Ancient Kings", "player.health < 50" },
+
     --Cooldowns
-    { "Holy Avenger", "modifier.cooldowns" },
-    -- Tier Talenmts
+    { "Holy Avenger", "modifier.cooldowns" },  -- T5 Tallent
+
+    -- T6 Tallents
     { "Holy Prism" },
     { "Light's Hammer" , "modifier.shift", "ground" },
-    { "Execution Sentence"},
+    { "Execution Sentence" },
+
     -- DPS Rotation
-    { "Hammer of the Righteous", "!target.debuff(Weakened Blows)" }, 
+    { "Hammer of the Righteous", "!target.debuff(Weakened Blows)" },
     { "Avenger's Shield", "player.buff(Grand Crusader)" },
     { "Consecration" },
     { "Holy Wrath" },
@@ -29,4 +46,3 @@ ProbablyEngine.rotation.register(66, {
 )
 
  -- { "Avenging Wrath", "cooldowns" }, Not a cd
- 
