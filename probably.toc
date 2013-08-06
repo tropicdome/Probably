@@ -1,7 +1,8 @@
-## Interface: 50300
+## Interface: 50400
 ## Title: Probably
 ## Notes: Probably
 ## Author: Ben Phelps
+## SavedVariablesPerCharacter: ProbablyEngine_Data
 
 # shebang
 probably.lua
