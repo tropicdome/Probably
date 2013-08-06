@@ -2,7 +2,7 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.buttons = {
-  frame = CreateFrame("Frame","PE_Buttons",UIParent),
+  frame = CreateFrame("Frame", "PE_Buttons", UIParent),
   buttons = { },
   size = 36,
   scale = 1,
@@ -84,6 +84,7 @@ end
 ProbablyEngine.buttons.setActive = function(name)
   _G['PE_Buttons_'.. name].checked = true
   _G['PE_Buttons_'.. name]:SetChecked(1)
+  ProbablyEngine_Data.button_states[name] = true
 end
 
 ProbablyEngine.buttons.icon = function(name, icon)
