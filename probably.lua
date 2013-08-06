@@ -12,10 +12,14 @@ ProbablyEngine = {
   active = true,
   full = false,
   debug = true,
-  debugLevel = 4,
+  debugLevel = 1,
   hardcore_debug = false,
   rotations = { },
   dynamicCycle = true,
   cycleTime = 500,
   lag = 0
+}
+
+ProbablyEngine_Data = {
+  button_states = { }
 }
