@@ -8,7 +8,13 @@ ProbablyEngine.rotation.register(253, {
 
     { "Silencing Shot", "modifier.interrupts" },
 
+    -- Survival
     { "Deterrence", "player.health < 40" },
+    { "Exhilaration", "player.health < 40" },
+    { "Mend Pet", {
+        "pet.health <= 75",
+        "!pet.buff(Mend Pet)"
+    }},
 
     -- Cooldowns
     { "Bestial Wrath", "modifier.cooldowns" },
