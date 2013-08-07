@@ -11,12 +11,20 @@ ProbablyEngine.buttons = {
 }
 
 ProbablyEngine.buttons.frame:SetPoint("CENTER", UIParent)
-ProbablyEngine.buttons.frame:SetWidth(5)
-ProbablyEngine.buttons.frame:SetHeight(5)
+ProbablyEngine.buttons.frame:SetWidth(165)
+ProbablyEngine.buttons.frame:SetHeight(18)
 ProbablyEngine.buttons.frame:SetMovable(true)
 
+ProbablyEngine.buttons.statusText = ProbablyEngine.buttons.frame:CreateFontString('PE_StatusText')
+ProbablyEngine.buttons.statusText:SetFont("Fonts\\ARIALN.TTF", 16)
+ProbablyEngine.buttons.statusText:SetShadowColor(0,0,0, 0.8)
+ProbablyEngine.buttons.statusText:SetShadowOffset(-1,-1)
+ProbablyEngine.buttons.statusText:SetText("|cff"..ProbablyEngine.addonColor.. ProbablyEngine.addonName ..":|r Ready")
+
+ProbablyEngine.buttons.statusText:SetPoint("TOPLEFT", 0, 0)
+
 ProbablyEngine.buttons.frame:SetScript("OnMouseDown", function(self, button)
-  if IsShiftKeyDown() and not self.isMoving then
+  if not self.isMoving then
    self:StartMoving()
    self.isMoving = true
   end
@@ -45,7 +53,7 @@ ProbablyEngine.buttons.create = function(name, icon, callback, tooltip)
       +
       (ProbablyEngine.buttons.count*ProbablyEngine.buttons.padding)
     )
-  , 0)
+  , -23)
   button:SetScale(ProbablyEngine.buttons.scale)
   button:SetWidth(ProbablyEngine.buttons.size)
   button:SetHeight(ProbablyEngine.buttons.size)
@@ -71,6 +79,8 @@ ProbablyEngine.buttons.create = function(name, icon, callback, tooltip)
 
   button.checked = false
 
+  button:SetPushedTexture(nil);
+
   ProbablyEngine.buttons.count = ProbablyEngine.buttons.count + 1
 
 end
@@ -85,6 +95,12 @@ ProbablyEngine.buttons.setActive = function(name)
   _G['PE_Buttons_'.. name].checked = true
   _G['PE_Buttons_'.. name]:SetChecked(1)
   ProbablyEngine_Data.button_states[name] = true
+end
+
+ProbablyEngine.buttons.setInactive = function(name)
+  _G['PE_Buttons_'.. name].checked = false
+  _G['PE_Buttons_'.. name]:SetChecked(0)
+  ProbablyEngine_Data.button_states[name] = false
 end
 
 ProbablyEngine.buttons.icon = function(name, icon)
