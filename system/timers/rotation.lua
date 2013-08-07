@@ -2,7 +2,7 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.timer.register("rotation", function()
-  if ProbablyEngine.module.player.combat and ProbablyEngine.active then
+  if ProbablyEngine.module.player.combat and ProbablyEngine.active and ProbablyEngine.module.player.specId then
 
     local spell, target = ''
 
