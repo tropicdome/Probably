@@ -1,11 +1,11 @@
 -- SPEC ID 62
 ProbablyEngine.rotation.register(62, {
-    { "Frost Armor", "!player.buff" },
-    { "Arcane Brilliance", "!player.buff" },
-    { "Nether Tempest",  "!target.debuff" },
+    { "Frost Armor", "!player.buff(Frost Armor)" },
+    { "Arcane Brilliance", "!player.buff(Arcane Brilliance)" },
+    { "Nether Tempest",  "!target.debuff(Nether Tempest)" },
     { "Ice Lance", "player.moving" },
-    { "Arcane Missiles", "player.buff.count(2):Arcane Missiles!" },
-    { "Arcane Barrage", "player.debuff.count(4):Arcane Charge" },
+    { "Arcane Missiles", "player.buff(Arcane Missiles!).count >= 2" },
+    { "Arcane Barrage", "player.debuff(Arcane Charge).count >= 4" },
     { "Arcane Blast" }
   }
 )
