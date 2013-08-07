@@ -41,6 +41,7 @@ system\timers\combatable.lua
 system\buttons\core.lua
 
 # Listeners
+system\listeners\addon_loaded.lua
 system\listeners\player_specialization_changed.lua
 system\listeners\player_login.lua
 system\listeners\combat_log_event_unfiltered.lua
