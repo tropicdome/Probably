@@ -245,7 +245,7 @@ ProbablyEngine.condition.register("casting", function(target, spell)
   if spell ~= nil and spell ~= '' and (spell == castName or spell == channelName) then
     return true
   end
-  if notInterruptibleCast and notInterruptibleChannel then
+  if notInterruptibleCast == false and notInterruptibleChannel == false then
     return true
   end
   return false
