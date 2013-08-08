@@ -24,6 +24,14 @@ ProbablyEngine.condition.register("debuff", function(target, spell)
   return false
 end)
 
+ProbablyEngine.condition.register("debuff.count", function(target, spell)
+  local debuff,_,_,count,_,_,_,caster = UnitDebuff(target, spell)
+  if debuff ~= nil and (caster == 'player' or caster == 'pet') then
+    return count
+  end
+  return 0
+end)
+
 ProbablyEngine.condition.register("debuff.duration", function(target, spell)
   local debuff,_,_,_,_,_,expires,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
