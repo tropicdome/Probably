@@ -12,3 +12,4 @@ ProbablyEngine is licensed under a modified BSD license.
     modifier.shift
     modifier.control
     modifier.alt
+    modifier.taunt
