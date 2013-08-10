@@ -136,7 +136,7 @@ ProbablyEngine.condition.register("runicpower", function(target, spell)
   return UnitPower(target, SPELL_POWER_RUNIC_POWER)
 end)
 
-ProbablyEngine.condition.register("runes", function(target, rune)
+ProbablyEngine.condition.register("runes.count", function(target, rune)
   rune = string.lower(rune)
   if rune == 'frost' then
     local r1 = select(3, GetRuneCooldown(5))
@@ -276,9 +276,6 @@ end)
 ProbablyEngine.condition.register("casting", function(target, spell)
   local castName,_,_,_,_,endTime,_,_,notInterruptibleCast = UnitCastingInfo(target)
   local channelName,_,_,_,_,endTime,_,notInterruptibleChannel = UnitChannelInfo(target)
-  if spell ~= nil and spell ~= '' and (spell == castName or spell == channelName) then
-    return true
-  end
   if notInterruptibleCast == false and notInterruptibleChannel == false then
     return true
   end
@@ -288,6 +285,10 @@ end)
 ProbablyEngine.condition.register("spell.cooldown", function(spell)
   return GetSpellCooldown(spell) == 0
 end)
+ProbablyEngine.condition.register("spell.usable", function(spell)
+  return IsUsableSpell(spell) ~= nil
+end)
+
 ProbablyEngine.condition.register("spell.charges", function(spell)
   return select(1, GetSpellCharges(spell))
 end)
