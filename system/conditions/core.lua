@@ -137,38 +137,68 @@ ProbablyEngine.condition.register("runicpower", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("runes", function(target, rune)
-  if rune == 'frost' or rune == 'Frost' then
+  rune = string.lower(rune)
+  if rune == 'frost' then
     local r1 = select(3, GetRuneCooldown(5))
     local r2 = select(3, GetRuneCooldown(6))
-    if r1 and r2 then
+    local f1 = GetRuneType(5)
+    local f2 = GetRuneType(6)
+    if (r1 and f1 == 3) and (r2 and f2 == 3) then
       return 2
-    elseif r1 or r2 then
+    elseif (r1 and f1 == 3) or (r2 and f2 == 3) then
       return 1
     else
       return 0
     end
-  elseif rune == 'death' or rune == 'Death' or rune == 'Blood' or rune == 'blood' then
+  elseif rune == 'blood' then
     local r1 = select(3, GetRuneCooldown(1))
     local r2 = select(3, GetRuneCooldown(2))
-    if r1 and r2 then
+    local b1 = GetRuneType(1)
+    local b2 = GetRuneType(2)
+    if (r1 and b1 == 1) and (r2 and b2 == 1) then
       return 2
-    elseif r1 or r2 then
+    elseif (r1 and b1 == 1) or (r2 and b2 == 1) then
       return 1
     else
       return 0
     end
-  elseif rune == 'unholy' or rune == 'Unholy' then
+  elseif rune == 'unholy' then
     local r1 = select(3, GetRuneCooldown(3))
     local r2 = select(3, GetRuneCooldown(4))
-    if r1 and r2 then
+    local u1 = GetRuneType(3)
+    local u2 = GetRuneType(4)
+    if (r1 and u1 == 2) and (r2 and u2 == 2) then
       return 2
-    elseif r1 or r2 then
+    elseif (r1 and u1 == 2) or (r2 and u2 == 2) then
       return 1
     else
       return 0
     end
+  elseif rune == 'death' then
+    local r1 = select(3, GetRuneCooldown(1))
+    local r2 = select(3, GetRuneCooldown(2))
+    local r3 = select(3, GetRuneCooldown(3))
+    local r4 = select(3, GetRuneCooldown(4))
+    local d1 = GetRuneType(1)
+    local d2 = GetRuneType(2)
+    local d3 = GetRuneType(3)
+    local d4 = GetRuneType(4)
+    local total = 0
+    if (r1 and d1 == 4) then
+      total = total + 1
+    end
+    if (r2 and d2 == 4) then
+      total = total + 1
+    end
+    if (r3 and d3 == 4) then
+      total = total + 1
+    end
+    if (r4 and d4 == 4) then
+      total = total + 1
+    end
+    return total
   end
-
+  return 0
 end)
 
 ProbablyEngine.condition.register("unholy", function(target, spell)
