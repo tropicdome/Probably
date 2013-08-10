@@ -27,7 +27,16 @@ ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
     condition = string.sub(condition, 2)
     modify_not = true
   end
-  comparator_table = { strsplit(' ', condition) }
+
+  -- fuck lua you are a dirty basterd
+  -- we do this so we can keep the same table
+  -- and save some memory
+  for i,_ in ipairs(comparator_table) do comparator_table[i] = nil end
+  local arg1, arg2, arg3 = strsplit(' ', condition, 3)
+  if arg1 then table.insert(comparator_table, arg1) end
+  if arg2 then table.insert(comparator_table, arg2) end
+  if arg3 then table.insert(comparator_table, arg3) end
+
   local evaluation = false
   if #comparator_table == 3 then
     local condition_call = ProbablyEngine.dsl.get(comparator_table[1])(target, condition_spell)
@@ -83,7 +92,14 @@ ProbablyEngine.dsl.conditionize = function(target, condition)
 end
 
 ProbablyEngine.dsl.parse = function(dsl, spell)
-  parse_table = {strsplit('.', dsl, 3)}
+
+  -- same as above, saving ram
+  for i,_ in ipairs(parse_table) do parse_table[i] = nil end
+  local arg1, arg2, arg3 = strsplit('.', dsl, 3)
+  if arg1 then table.insert(parse_table, arg1) end
+  if arg2 then table.insert(parse_table, arg2) end
+  if arg3 then table.insert(parse_table, arg3) end
+
   local size = #parse_table
   if size == 1 then
     local condition, spell = string.match(dsl, '(.+)%((.+)%)')
@@ -118,27 +134,3 @@ end
 ProbablyEngine.dsl.unregister = function (condition)
   ProbablyEngine.dsl[condition] = nil
 end
-
-
---[[
-
-ProbablyEngine.dsl = {
-  old_withCount = "([%a%!%._]+)%((%d+%.?%d?)%)?:?(.*)",
-  old_withoutCount = "([%a%!%._]+):(.*)"
-}
-
-ProbablyEngine.dsl.parse_old = function(str, spell)
-  if string.match(str, ProbablyEngine.dsl.withCount) then
-    local condition, count, spell = string.match(str, ProbablyEngine.dsl.withCount)
-    if tonumber(count) then count = tonumber(count) end
-    return ProbablyEngine.dsl.get(condition)(spell, count)
-  elseif string.match(str, ProbablyEngine.dsl.withoutCount) then
-    local condition, spell = string.match(str, ProbablyEngine.dsl.withoutCount)
-    if tonumber(spell) then spell = tonumber(spell) end
-    return ProbablyEngine.dsl.get(condition)(spell)
-  else
-    return ProbablyEngine.dsl.get(str)(spell)
-  end
-end
-
-]]--

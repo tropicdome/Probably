@@ -12,7 +12,7 @@ ProbablyEngine.timer.register("rotation", function()
       target = 'target'
       ProbablyEngine.module.queue.queue = nil
     else
-      local rotation = ProbablyEngine.rotation[ProbablyEngine.module.player.specId]
+      local rotation = ProbablyEngine.rotation.rotations[ProbablyEngine.module.player.specId]
       spell, target = ProbablyEngine.parser.table(rotation)
     end
 
