@@ -68,6 +68,10 @@ ProbablyEngine.condition.register("rage", function(target, spell)
   return UnitPower(target, SPELL_POWER_RAGE)
 end)
 
+ProbablyEngine.condition.register("chi", function(target, spell)
+  return UnitPower(target, SPELL_POWER_CHI)
+end)
+
 ProbablyEngine.condition.register("demonicfury", function(target, spell)
   return UnitPower(target, SPELL_POWER_DEMONIC_FURY)
 end)
