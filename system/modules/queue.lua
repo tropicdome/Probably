@@ -8,7 +8,7 @@ ProbablyEngine.module.register("queue", {
 ProbablyEngine.module.queue.add_spell = function(spell_name)
   if ProbablyEngine.module.queue.queue ~= spell_name then
     ProbablyEngine.module.queue.queue = spell_name
-    ProbablyEngine.debug(spell_name .. " was queued for casting.")
+    ProbablyEngine.debug(spell_name .. " was queued for casting.", 2)
   end
 end
 
