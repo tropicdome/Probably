@@ -23,6 +23,8 @@ ProbablyEngine.rotation.register(250, {
   -- Death Pact Macro
   { "!/cast Raise Dead\n/cast Death Pact", {
     "player.health < 35",
+    "spell.cooldown(Death Pact)",
+    "spell.cooldown(Raise Dead)",
     "spell.usable(Death Pact)"
   }},
 
