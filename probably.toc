@@ -37,8 +37,9 @@ system\timers\rotation.lua
 system\timers\lag.lua
 system\timers\combatable.lua
 
-# Buttons
-system\buttons\core.lua
+# Interface
+interface\buttons.lua
+interface\buttons\core.lua
 
 # Listeners
 system\listeners\addon_loaded.lua
