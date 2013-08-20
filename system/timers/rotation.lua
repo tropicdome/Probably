@@ -7,10 +7,15 @@ ProbablyEngine.timer.register("rotation", function()
     local spell, target = ''
 
     local queue = ProbablyEngine.module.queue.queue
+    local macro_queue = ProbablyEngine.module.queue.macro_queue
     if queue ~= nil and ProbablyEngine.parser.can_cast(queue) then
       spell = queue
       target = 'target'
       ProbablyEngine.module.queue.queue = nil
+    elseif macro_queue ~= nil then
+      RunMacro(macro_queue)
+      ProbablyEngine.module.queue.macro_queue = nil
+      return
     else
       local rotation = ProbablyEngine.rotation.rotations[ProbablyEngine.module.player.specId]
       spell, target = ProbablyEngine.parser.table(rotation)
