@@ -44,6 +44,8 @@ system\timers\lag.lua
 system\timers\combatable.lua
 
 # Interface
+interface\interface.xml
+interface\interface.lua
 interface\buttons.lua
 interface\buttons\core.lua
 
