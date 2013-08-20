@@ -80,6 +80,17 @@ ProbablyEngine.condition.register("combopoints", function()
   return GetComboPoints('player', 'target')
 end)
 
+ProbablyEngine.condition.register("alive", function(target)
+  if UnitExists(target) and UnitHealth(target) > 0 then
+    return true
+  end
+  return false
+end)
+
+ProbablyEngine.condition.register("exists", function(target)
+  return UnitExists(target)
+end)
+
 ProbablyEngine.condition.register("modifier.shift", function()
   return IsShiftKeyDown() == 1
 end)
@@ -90,6 +101,10 @@ end)
 
 ProbablyEngine.condition.register("modifier.alt", function()
   return IsAltKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.player", function()
+  return UnitIsPlayer("target") == 1
 end)
 
 ProbablyEngine.condition.register("modifier.toggle", function(toggle)
@@ -201,11 +216,6 @@ ProbablyEngine.condition.register("runes.count", function(target, rune)
   return 0
 end)
 
-ProbablyEngine.condition.register("unholy", function(target, spell)
-  return select(3, GetRuneCooldown(3)) or select(3, GetRuneCooldown(4))
-end)
-
-
 ProbablyEngine.condition.register("health", function(target, spell)
   if UnitExists(target) then
     return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
@@ -296,3 +306,15 @@ end)
 ProbablyEngine.condition.register("spell.cd", function(spell)
   return ProbablyEngine.condition["spell.cooldown"](spell)
 end)
+
+ProbablyEngine.condition.register("spell.range", function(spell)
+  return IsSpellInRange(spell) == 1
+end)
+
+
+
+ProbablyEngine.condition.register("range", function(target, range)
+  local minRange, maxRange = rc:GetRange('target')
+  return maxRange
+end)
+
