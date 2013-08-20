@@ -1,4 +1,5 @@
 local ProbablyEngineTempTable1 = { }
+local rangeCheck = LibStub("LibRangeCheck-2.0")
 
 ProbablyEngine.condition.register("buff", function(target, spell)
   local buff,_,_,_,_,_,_,caster = UnitBuff(target, spell)
