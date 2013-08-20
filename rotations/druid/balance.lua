@@ -21,7 +21,7 @@ ProbablyEngine.rotation.register(102, {
 
     -- Small CDs
     { "Starsurge" },
-    { "Starfall" },
+    { "Starfall", "player.balance.moon" },
 
     -- Balance
     { "Starfire", "player.balance.sun" },

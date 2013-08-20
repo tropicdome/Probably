@@ -20,7 +20,10 @@ ProbablyEngine.rotation.register(71, {
     "modifier.cooldowns"
   }},
 
-  { "Hamstring", "!target.debuff(Hamstring)" },
+  { "Hamstring", {
+    "!target.debuff(Hamstring)",
+    "modifier.player"
+  }},
 
   { "Impending Victory" },
   { "Victory Rush" },
@@ -41,6 +44,7 @@ ProbablyEngine.rotation.register(71, {
   { "Thunder Clap", "modifier.multitarget" },
   { "Whirlwind", "modifier.multitarget" },
   { "Dragon Roar", "modifier.multitarget" },
+  { "Dragon Roar", "modifier.cooldowns" },
 
   -- Rotation
   { "Overpower" },

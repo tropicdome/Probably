@@ -1,6 +1,10 @@
 -- SPEC ID 253
 ProbablyEngine.rotation.register(253, {
 
+    -- Pet
+    { "!/cast [@pet,dead] Revive Pet; Call Pet 1", "!pet.alive" },
+    { "!/cast [@pet,dead] Revive Pet; Call Pet 1", "!pet.exists" },
+
     -- Traps
     { "Snake Trap"    , "modifier.control", "ground" },
     { "Explosive Trap", "modifier.alt", "ground" },
@@ -13,6 +17,7 @@ ProbablyEngine.rotation.register(253, {
     { "Exhilaration", "player.health < 40" },
     { "Mend Pet", {
         "pet.health <= 75",
+        "pet.exists",
         "!pet.buff(Mend Pet)"
     }},
 
@@ -30,7 +35,10 @@ ProbablyEngine.rotation.register(253, {
         "player.buff(Frenzy).count = 5",
         "!player.buff(Bestial Wrath)"
     } },
-    { "Kill Command" },
+    { "Kill Command", {
+        "pet.exists",
+        "spell.rage(Bite)"
+    }},
     { "Glaive Toss" },
     { "Powershot" },
     { "Barrage" },
@@ -39,7 +47,7 @@ ProbablyEngine.rotation.register(253, {
     { "Arcane Shot", "player.focus >= 60"},
     { "Arcane Shot", {
         "player.buff(Thrill of the Hunt)",
-        "player.focus >= 40"
+        "player.focus >= 20"
     }},
     { "Cobra Shot" }
 

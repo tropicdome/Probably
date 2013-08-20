@@ -1,6 +1,17 @@
 -- SPEC ID 251
 ProbablyEngine.rotation.register(251, {
 
+
+    -- Survival
+    -- Death Pact Macro
+    { "!/cast Raise Dead\n/cast Death Pact", {
+      "player.health < 35",
+      "spell.cooldown(Death Pact)",
+      "spell.cooldown(Raise Dead)",
+      "spell.usable(Death Pact)"
+    }},
+
+
     -- Keep up dots
     { "Outbreak", "!target.debuff(Blood Plague)" },
     { "Outbreak", "!target.debuff(Frost Fever)" },

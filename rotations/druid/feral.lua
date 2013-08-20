@@ -13,7 +13,6 @@ ProbablyEngine.rotation.register(103, {
       "target.debuff(Rip).duration < 3",
       "player.combopoints = 5"
     }},
-    { "Mangle", "target.debuff(Infected Wounds).duration < 2" },
     { "Tiger's Fury", "player.energy < 35"},
     { "Ferocious Bite", {
       "target.health <= 25",
@@ -28,6 +27,10 @@ ProbablyEngine.rotation.register(103, {
       "player.combopoints = 5",
       "target.debuff(Rip).duration < 6",
       "player.buff(Savage Road).duration < 6",
+    }},
+    { "Mangle", {
+      "modifier.shift",
+      "player.combopoints < 5"
     }},
     { "Shred", "player.combopoints < 5" }
   }

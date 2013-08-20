@@ -1,6 +1,10 @@
 -- SPEC ID 254
 ProbablyEngine.rotation.register(254, {
 
+    -- Pet
+    { "!/cast [@pet,dead] Revive Pet; Call Pet 1", "!pet.alive" },
+    { "!/cast [@pet,dead] Revive Pet; Call Pet 1", "!pet.exists" },
+
     -- Traps
     { "Snake Trap"    , "modifier.control", "ground" },
     { "Explosive Trap", "modifier.alt", "ground" },
@@ -13,6 +17,7 @@ ProbablyEngine.rotation.register(254, {
     { "Exhilaration", "player.health < 40" },
     { "Mend Pet", {
         "pet.health <= 75",
+        "pet.exists",
         "!pet.buff(Mend Pet)"
     }},
 
