@@ -239,12 +239,26 @@ ProbablyEngine.condition.register("modifier.cooldowns", function()
   return ProbablyEngine.condition["modifier.toggle"]('cooldowns')
 end)
 
+ProbablyEngine.condition.register("modifier.cooldown", function()
+  return ProbablyEngine.condition["modifier.toggle"]('cooldowns')
+end)
+
 ProbablyEngine.condition.register("modifier.interrupts", function()
-  if ProbablyEngine.condition["modifier.toggle"]('interrupts') then
+  if ProbablyEngine.condition["modifier.toggle"]('interrupt') then
+    local stop = ProbablyEngine.condition["casting"]('target')
+    if stop then SpellStopCasting() end
+    return stop
+  end
+  return false
+end)
+
+ProbablyEngine.condition.register("modifier.interrupt", function()
+  if ProbablyEngine.condition["modifier.toggle"]('interrupt') then
     return ProbablyEngine.condition["casting"]('target')
   end
   return false
 end)
+
 
 ProbablyEngine.condition.register("modifier.last", function(target, spell)
   return ProbablyEngine.parser.lastCast == spell
@@ -287,7 +301,7 @@ end)
 ProbablyEngine.condition.register("casting", function(target, spell)
   local castName,_,_,_,_,endTime,_,_,notInterruptibleCast = UnitCastingInfo(target)
   local channelName,_,_,_,_,endTime,_,notInterruptibleChannel = UnitChannelInfo(target)
-  if notInterruptibleCast == false and notInterruptibleChannel == false then
+  if notInterruptibleCast == false or notInterruptibleChannel == false then
     return true
   end
   return false
