@@ -34,7 +34,7 @@ end
 
 ProbablyEngine.module.world.add_enemy = function(guid, name)
   if not ProbablyEngine.module.world.enemy[guid] and not ProbablyEngine.module.world.dead[guid] then
-    ProbablyEngine.debug("Added " .. guid .. " ( "..name.." ) to combat table.", 3)
+    --ProbablyEngine.debug("Added " .. guid .. " ( "..name.." ) to combat table.", 3)
     ProbablyEngine.module.world.enemy[guid] = name
     ProbablyEngine.module.world.current = ProbablyEngine.module.world.current + 1
   end
@@ -42,7 +42,7 @@ end
 
 ProbablyEngine.module.world.remove_enemy = function(guid, death)
   if ProbablyEngine.module.world.enemy[guid] then
-    ProbablyEngine.debug("Removed " .. guid .. " ( "..ProbablyEngine.module.world.enemy[guid].." ) from combat table.", 2)
+    --ProbablyEngine.debug("Removed " .. guid .. " ( "..ProbablyEngine.module.world.enemy[guid].." ) from combat table.", 2)
     ProbablyEngine.module.world.dead[guid] = death
     ProbablyEngine.module.world.current = ProbablyEngine.module.world.current - 1
     ProbablyEngine.module.world.enemy[guid] = nil
@@ -51,14 +51,14 @@ end
 
 ProbablyEngine.module.world.add_friendly = function(guid, name)
   if not ProbablyEngine.module.world.friendly[guid] and not ProbablyEngine.module.world.friendly[guid] then
-    ProbablyEngine.debug("Added " .. guid .. " ( "..name.." ) to party table.", 3)
+    --ProbablyEngine.debug("Added " .. guid .. " ( "..name.." ) to party table.", 3)
     ProbablyEngine.module.world.friendly[guid] = name
   end
 end
 
 ProbablyEngine.module.world.remove_friendly = function(guid)
   if ProbablyEngine.module.world.friendly[guid] then
-    ProbablyEngine.debug("Removed " .. guid .. " ( "..ProbablyEngine.module.world.friendly[guid].." ) from party table.", 2)
+    --ProbablyEngine.debug("Removed " .. guid .. " ( "..ProbablyEngine.module.world.friendly[guid].." ) from party table.", 2)
     ProbablyEngine.module.world.friendly[guid] = nil
   end
 end
@@ -74,7 +74,7 @@ ProbablyEngine.module.world.clean_tables = function(source, dest)
   local now = time()
   for guid, death in pairs(ProbablyEngine.module.world.dead) do
     if now >= (death + ProbablyEngine.module.world.expire) then
-      ProbablyEngine.debug("Removed " .. guid .. " from death table.", 3)
+      --ProbablyEngine.debug("Removed " .. guid .. " from death table.", 3)
       ProbablyEngine.module.world.dead[guid] = nil
     end
   end
