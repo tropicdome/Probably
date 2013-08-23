@@ -63,7 +63,6 @@ ProbablyEngine.buttons.create = function(name, icon, callback, tooltip)
       + 4
     )
   , -3)
-  button:SetScale(ProbablyEngine.buttons.scale)
   button:SetWidth(ProbablyEngine.buttons.size)
   button:SetHeight(ProbablyEngine.buttons.size)
 
