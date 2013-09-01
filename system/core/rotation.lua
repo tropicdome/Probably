@@ -3,6 +3,7 @@
 
 ProbablyEngine.rotation = {
   rotations = { },
+  buttons = { },
   specId = { },
   classSpecId = { }
 }
@@ -77,8 +78,11 @@ ProbablyEngine.rotation.classSpecId[268] = 10
 ProbablyEngine.rotation.classSpecId[269] = 10
 ProbablyEngine.rotation.classSpecId[270] = 10
 
-ProbablyEngine.rotation.register = function(specId, spellTable)
+ProbablyEngine.rotation.register = function(specId, spellTable, buttons)
   ProbablyEngine.rotation.rotations[specId] = spellTable
+  if buttons and type(buttons) == 'function' then
+    ProbablyEngine.rotation.buttons[specId] = buttons
+  end
   ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
 end
 
@@ -91,8 +95,15 @@ ProbablyEngine.rotation.auto_unregister = function()
       ProbablyEngine.rotation.classSpecId[specId] = nil
       ProbablyEngine.rotation.specId[specId] = nil
       ProbablyEngine.rotation.rotations[specId] = nil
+      ProbablyEngine.rotation.buttons[specId] = nil
     end
   end
   ProbablyEngine.rotation.classSpecId = nil
   collectgarbage('collect')
+end
+
+ProbablyEngine.rotation.add_buttons = function()
+  if ProbablyEngine.rotation.buttons[ProbablyEngine.module.player.specId] then
+    ProbablyEngine.rotation.buttons[ProbablyEngine.module.player.specId]()
+  end
 end
