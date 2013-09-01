@@ -2,7 +2,14 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.timer.register("rotation", function()
-  if ProbablyEngine.module.player.combat and ProbablyEngine.active and ProbablyEngine.module.player.specId then
+
+  local cycle =
+    IsMounted() ~= 1
+    and ProbablyEngine.module.player.combat
+    and ProbablyEngine.active
+    and ProbablyEngine.module.player.specId
+
+  if cycle then
 
     local spell, target = ''
 
