@@ -101,16 +101,20 @@ end
 
 ProbablyEngine.buttons.setActive = function(name)
   if name == 'MasterToggle' then ProbablyEngine.active = true end
-  _G['PE_Buttons_'.. name].checked = true
-  _G['PE_Buttons_'.. name]:SetChecked(1)
-  ProbablyEngine_Data.button_states[name] = true
+  if _G['PE_Buttons_'.. name] then
+    _G['PE_Buttons_'.. name].checked = true
+    _G['PE_Buttons_'.. name]:SetChecked(1)
+    ProbablyEngine_Data.button_states[name] = true
+  end
 end
 
 ProbablyEngine.buttons.setInactive = function(name)
   if name == 'MasterToggle' then ProbablyEngine.active = false end
-  _G['PE_Buttons_'.. name].checked = false
-  _G['PE_Buttons_'.. name]:SetChecked(0)
-  ProbablyEngine_Data.button_states[name] = false
+  if _G['PE_Buttons_'.. name] then
+    _G['PE_Buttons_'.. name].checked = false
+    _G['PE_Buttons_'.. name]:SetChecked(0)
+    ProbablyEngine_Data.button_states[name] = false
+  end
 end
 
 ProbablyEngine.buttons.icon = function(name, icon)
