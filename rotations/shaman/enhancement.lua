@@ -20,8 +20,6 @@ ProbablyEngine.rotation.register(263, {
       "player.health < 80"
     }},
 
-
-
     -- Cooldowns
     { "Fire Elemental Totem", "modifier.cooldowns" },
     { "Earth Elemental Totem", "modifier.cooldowns" },
@@ -61,10 +59,12 @@ ProbablyEngine.rotation.register(263, {
     { "Lightning Bolt", "player.buff(Maelstrom Weapon).count = 5" },
     { "Stormstrike" },
     { "Stormblast" },
+    { "Flame Shock", "player.buff(Unleash Flame)" },
     { "Flame Shock", "target.debuff(Flame Shock).duration <= 3" },
     { "Lava Lash" },
     { "Unleash Elements" },
     { "Earth Shock" },
+    
 }, function()
   ProbablyEngine.toggle.create('totems', 'Interface\\ICONS\\ability_shaman_totemrelocation', 'Toggle Totems')
 end)
