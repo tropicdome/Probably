@@ -83,9 +83,15 @@ ProbablyEngine.dsl.conditionizers['!enchant'] = true
 ProbablyEngine.dsl.conditionizers['totem'] = true
 ProbablyEngine.dsl.conditionizers['!totem'] = true
 
+ProbablyEngine.dsl.conditionizers_single = {}
+ProbablyEngine.dsl.conditionizers_single['toggle'] = true
+ProbablyEngine.dsl.conditionizers_single['!toggle'] = true
+
 ProbablyEngine.dsl.conditionize = function(target, condition)
   if ProbablyEngine.dsl.conditionizers[target] then
     return target..'.'..condition
+  elseif ProbablyEngine.dsl.conditionizers_single[target] then
+    return target
   else
     return condition
   end
@@ -108,6 +114,9 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
     local target = parse_table[1]
     local condition, condition_spell = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
     condition = ProbablyEngine.dsl.conditionize(target, condition)
+    if ProbablyEngine.dsl.conditionizers_single[target] then
+      return ProbablyEngine.dsl.comparator(condition, parse_table[2], condition_spell)
+    end
     return ProbablyEngine.dsl.comparator(condition, target, condition_spell)
   elseif size == 3 then
     local target = parse_table[1]

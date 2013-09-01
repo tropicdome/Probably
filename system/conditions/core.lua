@@ -108,6 +108,10 @@ ProbablyEngine.condition.register("modifier.player", function()
   return UnitIsPlayer("target") == 1
 end)
 
+ProbablyEngine.condition.register("toggle", function(toggle, spell)
+  return ProbablyEngine.condition["modifier.toggle"](toggle)
+end)
+
 ProbablyEngine.condition.register("modifier.toggle", function(toggle)
   return ProbablyEngine.toggle.states[toggle] or false;
 end)
