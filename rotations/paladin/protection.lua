@@ -5,11 +5,32 @@ ProbablyEngine.rotation.register(66, {
     { "Blessing of Might", "!player.buff(Blessing of Might)" },
     { "Righteous Fury",    "!player.buff(Righteous Fury)" },
 
+
+    -- Seals
+    { "Seal of Righteousness", {
+        "modifier.multitarget",
+        "player.seal != 2"
+    }},
+
+    -- Dynamic Multitarget Seals
+    { "Seal of Righteousness", {
+            "target.debuff(Censure).count = 5",
+            "target.debuff(Censure).duration > 3",
+            "player.seal != 2",
+            "!modifier.multitarget"
+    }},
+    { "Seal of Truth", {
+            "target.debuff(Censure).count < 5",
+            "target.debuff(Censure).duration < 3",
+            "player.seal != 1",
+            "!modifier.multitarget"
+    }},
+
     -- Taunts
     { "Reckoning", "modifier.taunt" },
 
     -- Interrupts
-    { "Rubke", "modifier.interrupts" },
+    { "Rebuke", "modifier.interrupts" },
     { "Avenger's Shield", "modifier.interrupts" },
 
 	-- Damage Reduction & Healing

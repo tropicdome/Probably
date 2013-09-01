@@ -49,6 +49,18 @@ ProbablyEngine.condition.register("buff.duration", function(target, spell)
   return 0
 end)
 
+ProbablyEngine.condition.register("stance", function(target, spell)
+  return GetShapeshiftForm()
+end)
+
+ProbablyEngine.condition.register("form", function(target, spell)
+  return GetShapeshiftForm()
+end)
+
+ProbablyEngine.condition.register("seal", function(target, spell)
+  return GetShapeshiftForm()
+end)
+
 ProbablyEngine.condition.register("focus", function(target, spell)
   return UnitPower(target, SPELL_POWER_FOCUS)
 end)
