@@ -1,0 +1,34 @@
+62  -> Arcane Mage
+63  -> Fire Mage
+64  -> Frost Mage
+65  -> Holy Paladin
+66  -> Protection Paladin
+70  -> Retribution Paladin
+71  -> Arms Warrior
+72  -> Furry Warrior
+73  -> Protection Warrior
+102 -> Balance Druid
+103 -> Feral Combat Druid
+104 -> Guardian Druid
+105 -> Restoration Druid
+250 -> Blood Death Knight
+251 -> Frost Death Knight
+252 -> Unholy Death Knight
+253 -> Beast Mastery Hunter
+254 -> Marksmanship Hunter
+255 -> Survival Hunter
+256 -> Discipline Priest
+257 -> Holy Priest
+258 -> Shadow Priest
+259 -> Assassination Rogue
+260 -> Combat Rogue
+261 -> Subtlety Rogue
+262 -> Elemental Shaman
+263 -> Enhancement Shaman
+264 -> Restoration Shaman
+265 -> Affliction Warlock
+266 -> Demonology Warlock
+267 -> Destruction Warlock
+268 -> Brewmaster Monk
+269 -> Windwalker Monk
+270 -> Mistweaver Monk
