@@ -2,7 +2,7 @@
 ProbablyEngine.rotation.register(262, {
 
     -- Buffs
-    { "Flametongue Weapon", "!enchant.mainhand" },
+    { "Flametongue Weapon", "!player.enchant.mainhand" },
     { "Lightning Shield", "!player.buff(Lightning Shield)" },
 
     -- Moving Rotation
@@ -22,8 +22,8 @@ ProbablyEngine.rotation.register(262, {
 
     -- Totems
     { "Searing Totem", {
-      "!totem(Fire Elemental Totem)",
-      "!totem(Searing Totem)"
+      "!player.totem(Fire Elemental Totem)",
+      "!player.totem(Searing Totem)"
     }},
     { "Healing Stream", "!totem(Healing Stream)" },
 

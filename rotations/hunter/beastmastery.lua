@@ -37,7 +37,7 @@ ProbablyEngine.rotation.register(253, {
     } },
     { "Kill Command", {
         "pet.exists",
-        "spell.rage(Bite)"
+        "player.spell.rage(Bite)"
     }},
     { "Glaive Toss" },
     { "Powershot" },

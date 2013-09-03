@@ -13,15 +13,22 @@ ProbablyEngine.rotation.register(66, {
     }},
 
     -- Dynamic Multitarget Seals
-    { "Seal of Righteousness", {
+    -- Heal after Censure
+    { "Seal of Insight", {
             "target.debuff(Censure).count = 5",
-            "target.debuff(Censure).duration > 3",
-            "player.seal != 2",
+            "target.debuff(Censure).duration > 5",
+            "player.seal != 3",
             "!modifier.multitarget"
     }},
+    -- Refresh Censure
+    { "Seal of Truth", {
+            "target.debuff(Censure).duration <= 5",
+            "player.seal != 1",
+            "!modifier.multitarget"
+    }},
+    -- Apply Censure
     { "Seal of Truth", {
             "target.debuff(Censure).count < 5",
-            "target.debuff(Censure).duration < 3",
             "player.seal != 1",
             "!modifier.multitarget"
     }},

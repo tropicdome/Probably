@@ -2,8 +2,8 @@
 ProbablyEngine.rotation.register(263, {
 
     -- Buffs
-    { "Windfury Weapon", "!enchant.mainhand" },
-    { "Flametongue Weapon", "!enchant.offhand" },
+    { "Windfury Weapon", "!player.enchant.mainhand" },
+    { "Flametongue Weapon", "!player.enchant.offhand" },
     { "Lightning Shield", "!player.buff(Lightning Shield)" },
 
     -- Kick
@@ -33,15 +33,15 @@ ProbablyEngine.rotation.register(263, {
     -- Totems
     { "Searing Totem", {
       "toggle.totems",
-      "!totem(Fire Elemental Totem)",
-      "!totem(Searing Totem)",
+      "!player.totem(Fire Elemental Totem)",
+      "!player.totem(Searing Totem)",
       "!modifier.multitarget",
     }},
 
     { "Magma Totem", {
       "toggle.totems",
-      "!totem(Fire Elemental Totem)",
-      "!totem(Magma Totem)",
+      "!player.totem(Fire Elemental Totem)",
+      "!player.totem(Magma Totem)",
       "modifier.multitarget"
     }},
 
@@ -56,14 +56,15 @@ ProbablyEngine.rotation.register(263, {
     }},
 
     -- Rotation
+    { "Unleash Elements" },
     { "Lightning Bolt", "player.buff(Maelstrom Weapon).count = 5" },
     { "Stormstrike" },
     { "Stormblast" },
     { "Flame Shock", "player.buff(Unleash Flame)" },
     { "Flame Shock", "target.debuff(Flame Shock).duration <= 3" },
     { "Lava Lash" },
-    { "Unleash Elements" },
     { "Earth Shock" },
-    
+
 }, function()
+  ProbablyEngine.toggle.create('totems', 'Interface\\ICONS\\ability_shaman_totemrelocation', 'Totems', 'Toggle the placement of totems.')
 end)

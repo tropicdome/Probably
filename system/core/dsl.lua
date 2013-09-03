@@ -76,12 +76,6 @@ end
 ProbablyEngine.dsl.conditionizers = {}
 ProbablyEngine.dsl.conditionizers['modifier'] = true
 ProbablyEngine.dsl.conditionizers['!modifier'] = true
-ProbablyEngine.dsl.conditionizers['spell'] = true
-ProbablyEngine.dsl.conditionizers['!spell'] = true
-ProbablyEngine.dsl.conditionizers['enchant'] = true
-ProbablyEngine.dsl.conditionizers['!enchant'] = true
-ProbablyEngine.dsl.conditionizers['totem'] = true
-ProbablyEngine.dsl.conditionizers['!totem'] = true
 
 ProbablyEngine.dsl.conditionizers_single = {}
 ProbablyEngine.dsl.conditionizers_single['toggle'] = true

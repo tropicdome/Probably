@@ -93,7 +93,7 @@ ProbablyEngine.condition.register("combopoints", function()
   return GetComboPoints('player', 'target')
 end)
 
-ProbablyEngine.condition.register("alive", function(target)
+ProbablyEngine.condition.register("alive", function(target, spell)
   if UnitExists(target) and UnitHealth(target) > 0 then
     return true
   end
@@ -120,6 +120,10 @@ ProbablyEngine.condition.register("modifier.player", function()
   return UnitIsPlayer("target") == 1
 end)
 
+ProbablyEngine.condition.register("modifier.boss", function()
+  return UnitClassification("target") == "worldboss"
+end)
+
 ProbablyEngine.condition.register("toggle", function(toggle, spell)
   return ProbablyEngine.condition["modifier.toggle"](toggle)
 end)
@@ -139,7 +143,7 @@ ProbablyEngine.condition.register("modifier.taunt", function()
   return false
 end)
 
-ProbablyEngine.condition.register("threat", function(target)
+ProbablyEngine.condition.register("threat", function(target, spell)
   if UnitThreatSituation("player", target) then
     local isTanking, status, scaledPercent, rawPercent, threatValue = UnitDetailedThreatSituation("player", target)
     return scaledPercent
@@ -148,12 +152,12 @@ ProbablyEngine.condition.register("threat", function(target)
 end)
 
 
-ProbablyEngine.condition.register("balance.sun", function()
+ProbablyEngine.condition.register("balance.sun", function(target, spell)
   local direction = GetEclipseDirection()
   if direction == 'none' or direction == 'sun' then return true end
 end)
 
-ProbablyEngine.condition.register("balance.moon", function()
+ProbablyEngine.condition.register("balance.moon", function(target, spell)
   local direction = GetEclipseDirection()
   if direction == 'moon' then return true end
 end)
@@ -292,7 +296,7 @@ ProbablyEngine.condition.register("enchant.offhand", function()
   return (select(4, GetWeaponEnchantInfo()) == 1)
 end)
 
-ProbablyEngine.condition.register("totem", function(totem)
+ProbablyEngine.condition.register("totem", function(target, totem)
   for index = 1, 4 do
     local _, totemName, startTime, duration = GetTotemInfo(index)
     if totemName == totem then
@@ -302,7 +306,7 @@ ProbablyEngine.condition.register("totem", function(totem)
   return false
 end)
 
-ProbablyEngine.condition.register("totem.duration", function(blank, totem)
+ProbablyEngine.condition.register("totem.duration", function(target, totem)
   for index = 1, 4 do
     local _, totemName, startTime, duration = GetTotemInfo(index)
     if totemName == totem then
@@ -323,29 +327,29 @@ ProbablyEngine.condition.register("casting", function(target, spell)
   return false
 end)
 
-ProbablyEngine.condition.register("spell.cooldown", function(spell)
+ProbablyEngine.condition.register("spell.cooldown", function(target, spell)
   return GetSpellCooldown(spell) == 0
 end)
-ProbablyEngine.condition.register("spell.usable", function(spell)
+ProbablyEngine.condition.register("spell.usable", function(target, spell)
   return IsUsableSpell(spell) ~= nil
 end)
 
-ProbablyEngine.condition.register("spell.charges", function(spell)
+ProbablyEngine.condition.register("spell.charges", function(target, spell)
   return select(1, GetSpellCharges(spell))
 end)
 
-ProbablyEngine.condition.register("spell.cd", function(spell)
-  return ProbablyEngine.condition["spell.cooldown"](spell)
+ProbablyEngine.condition.register("spell.cd", function(target, spell)
+  return ProbablyEngine.condition["spell.cooldown"](target, spell)
 end)
 
-ProbablyEngine.condition.register("spell.range", function(spell)
+ProbablyEngine.condition.register("spell.range", function(target, spell)
   return IsSpellInRange(spell) == 1
 end)
 
 
 
 ProbablyEngine.condition.register("range", function(target, range)
-  local minRange, maxRange = rc:GetRange('target')
+  local minRange, maxRange = rc:GetRange(target)
   return maxRange
 end)
 
