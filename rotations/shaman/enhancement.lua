@@ -66,5 +66,4 @@ ProbablyEngine.rotation.register(263, {
     { "Earth Shock" },
     
 }, function()
-  ProbablyEngine.toggle.create('totems', 'Interface\\ICONS\\ability_shaman_totemrelocation', 'Toggle Totems')
 end)

@@ -5,7 +5,7 @@ ProbablyEngine.toggle = {
   states = { }
 }
 
-ProbablyEngine.toggle.create = function(toggle_name, icon, tooltip)
+ProbablyEngine.toggle.create = function(toggle_name, icon, tooltipl1, tooltipl2)
   ProbablyEngine.toggle.states[toggle_name] = false
   local toggleCallback = function(self)
     ProbablyEngine.toggle.states[toggle_name] = not ProbablyEngine.toggle.states[toggle_name]
@@ -13,5 +13,5 @@ ProbablyEngine.toggle.create = function(toggle_name, icon, tooltip)
     self:SetChecked(self.checked)
     ProbablyEngine_Data.button_states[toggle_name] = self.checked
   end
-  ProbablyEngine.buttons.create(toggle_name, icon, toggleCallback, tooltip)
+  ProbablyEngine.buttons.create(toggle_name, icon, toggleCallback, tooltipl1, tooltipl2)
 end

@@ -50,7 +50,7 @@ ProbablyEngine.buttons.frame:SetScript("OnHide", function(self)
   end
 end)
 
-ProbablyEngine.buttons.create = function(name, icon, callback, tooltip)
+ProbablyEngine.buttons.create = function(name, icon, callback, tooltipl1, tooltipl2)
 
   ProbablyEngine.buttons.buttons[name] = CreateFrame("CheckButton", "PE_Buttons_"..name, ProbablyEngine.buttons.buttonFrame, "ActionButtonTemplate")
 
@@ -74,10 +74,13 @@ ProbablyEngine.buttons.create = function(name, icon, callback, tooltip)
 
   button:SetScript("OnClick", callback)
 
-  if tooltip ~= nil then
+  if tooltipl1 ~= nil then
     button:SetScript("OnEnter", function(self)
       GameTooltip:SetOwner(self, "ANCHOR_TOP")
-      GameTooltip:SetText(tooltip)
+      GameTooltip:AddLine("|cffffffff" .. tooltipl1 .. "|r")
+      if tooltipl2 then
+        GameTooltip:AddLine(tooltipl2)
+      end
       GameTooltip:Show()
     end)
     button:SetScript("OnLeave", function(self)

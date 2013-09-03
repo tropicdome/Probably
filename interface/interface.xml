@@ -56,8 +56,10 @@
         self:UnlockHighlight()
         ProbablyEngine_Minimap_DraggingFrame:Hide()
       </OnDragStop>
+      <OnEnter> ProbablyEngine_Minimap_OnEnter(self) </OnEnter>
+      <OnLeave> ProbablyEngine_Minimap_OnLeave(self) </OnLeave>
       <OnClick>
-        ProbablyEngine_Minimap_OnClick() -- do your thing in here, arg1 is mouse button clicked
+        ProbablyEngine_Minimap_OnClick(button) -- do your thing in here, arg1 is mouse button clicked
       </OnClick>
     </Scripts>
   </Button>

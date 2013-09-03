@@ -1,5 +1,3 @@
-
-
 local AceGUI = LibStub("AceGUI-3.0")
 
 ProbablyEngine.interface = {
@@ -183,8 +181,34 @@ function ProbablyEngine_Minimap_DraggingFrame_OnUpdate()
   ProbablyEngine_Data.minimapPos = math.deg(math.atan2(ypos,xpos)) -- save the degrees we are relative to the minimap center
   ProbablyEngine_Minimap_Reposition() -- move the button
 end
-function ProbablyEngine_Minimap_OnClick()
-  if not ProbablyEngine.interface.shown then
-    ProbablyEngine.interface.config()
+
+
+
+function ProbablyEngine_Minimap_OnClick(button)
+  if button == 'RightButton' then
+    if not ProbablyEngine.interface.moving then
+      ProbablyEngine.buttons.frame:Show()
+      ProbablyEngine.interface.moving = true
+    else
+      ProbablyEngine.buttons.frame:Hide()
+      ProbablyEngine.interface.moving = false
+    end
+  else
+    if not ProbablyEngine.interface.shown then
+      ProbablyEngine.interface.config()
+    end
   end
+end
+
+function ProbablyEngine_Minimap_OnEnter(self)
+  GameTooltip:SetOwner( self, "ANCHOR_BOTTOMLEFT" )
+  GameTooltip:AddLine("|cff" .. ProbablyEngine.addonColor .. ProbablyEngine.addonName.. "|r v".. ProbablyEngine.version)
+  GameTooltip:AddLine("|cff" .. ProbablyEngine.addonColor .. "Left-Click|r to open configuration.")
+  GameTooltip:AddLine("|cff" .. ProbablyEngine.addonColor .. "Right-Click|r to unlock buttons.")
+  GameTooltip:AddLine("|cff" .. ProbablyEngine.addonColor .. "Drag|r to move minimap button.")
+  GameTooltip:Show()
+end
+
+function ProbablyEngine_Minimap_OnLeave(self)
+  GameTooltip:Hide()
 end
