@@ -29,15 +29,9 @@ ProbablyEngine.parser.can_cast =  function(spell, unit)
 end
 
 ProbablyEngine.parser.can_cast_queue =  function(spell)
-  local skillType, spellId = GetSpellBookItemInfo(spell)
   local isUsable, notEnoughMana = IsUsableSpell(spell)
-  local name, rank, icon, cost, isFunnel, powerType, castTime, minRange, maxRange = GetSpellInfo(spellId)
   if not isUsable then return false end
   if notEnoughMana then return false end
-  if not UnitExists(unit) then return false end
-  if not UnitIsVisible(unit) then return false end
-  if UnitIsDeadOrGhost(unit) then return false end
-  if SpellHasRange(spell) == 1 and IsSpellInRange(spell, unit) == 0 then return false end
   if select(2, GetSpellCooldown(spell)) ~= 0 then return false end
   return true
 end
