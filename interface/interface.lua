@@ -151,28 +151,13 @@ ProbablyEngine.interface.config = function()
 
   engine:AddChild(cycleGroup)
 
-
-  -- Garbage
-
-  garbageGroup = AceGUI:Create("SimpleGroup")
-
-  garbage = AceGUI:Create("CheckBox")
-  garbage:SetLabel("Garbage Collection")
-  garbageGroup:AddChild(garbage)
-
-  garbageDesc = AceGUI:Create("Label")
-  garbageDesc:SetText("Force garbage collection. Enable this if you notice the addon using a lot of memory.")
-  garbageDesc:SetFullWidth(true)
-  garbageGroup:AddChild(garbageDesc)
-
-  engine:AddChild(garbageGroup)
-
 end
 
 function ProbablyEngine_Minimap_Reposition()
   if not ProbablyEngine_Data.minimapPos then ProbablyEngine_Data.minimapPos = 45 end
   ProbablyEngine_Minimap:SetPoint("TOPLEFT","Minimap","TOPLEFT",52-(80*cos(ProbablyEngine_Data.minimapPos)),(80*sin(ProbablyEngine_Data.minimapPos))-52)
 end
+
 function ProbablyEngine_Minimap_DraggingFrame_OnUpdate()
   local xpos,ypos = GetCursorPosition()
   local xmin,ymin = Minimap:GetLeft(), Minimap:GetBottom()
@@ -181,8 +166,6 @@ function ProbablyEngine_Minimap_DraggingFrame_OnUpdate()
   ProbablyEngine_Data.minimapPos = math.deg(math.atan2(ypos,xpos)) -- save the degrees we are relative to the minimap center
   ProbablyEngine_Minimap_Reposition() -- move the button
 end
-
-
 
 function ProbablyEngine_Minimap_OnClick(button)
   if button == 'RightButton' then
