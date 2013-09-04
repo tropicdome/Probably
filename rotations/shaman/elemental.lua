@@ -11,6 +11,9 @@ ProbablyEngine.rotation.register(262, {
       "!player.buff(Spiritwalker's Grace)"
     }},
 
+    -- AoE
+    { "Earthquake", "modifier.shift", "ground" },
+
     -- Cooldowns
     { "Shamanistic Rage", "modifier.cooldowns" },
     { "Stormlash Totem", "modifier.cooldowns" },
