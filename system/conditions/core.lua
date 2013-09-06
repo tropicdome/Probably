@@ -328,8 +328,13 @@ ProbablyEngine.condition.register("casting", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("spell.cooldown", function(target, spell)
-  return GetSpellCooldown(spell) == 0
+  local start, duration, enabled = GetSpellCooldown(spell)
+  if start ~= 0 then
+    return (start + duration - GetTime())
+  end
+  return 0
 end)
+
 ProbablyEngine.condition.register("spell.usable", function(target, spell)
   return IsUsableSpell(spell) ~= nil
 end)
@@ -349,7 +354,7 @@ end)
 
 
 ProbablyEngine.condition.register("range", function(target, range)
-  local minRange, maxRange = rc:GetRange(target)
+  local minRange, maxRange = rangeCheck:GetRange(target)
   return maxRange
 end)
 
