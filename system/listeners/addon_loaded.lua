@@ -2,6 +2,7 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.listener.register("ADDON_LOADED", function(...)
+
   for button, state in pairs(ProbablyEngine_Data.button_states) do
     if state == true then
       ProbablyEngine.buttons.setActive(button)
@@ -42,6 +43,8 @@ ProbablyEngine.listener.register("ADDON_LOADED", function(...)
     ProbablyEngine_Data.cycle_time = ProbablyEngine.cycleTime
   end
 
-
+  if ProbablyEngine_Data.style == nil then
+    ProbablyEngine_Data.style = {size = 26,padding = 7,active = {0.2, 0.7, 0.1, 1}, inactive = {0, 0, 0, 1}}
+  end
 
 end)

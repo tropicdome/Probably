@@ -27,5 +27,11 @@ ProbablyEngine_Data = {
   dynamic_cycle = false,
   cycle_time = 100,
   button_states = { },
-  config = { }
+  config = { },
+  style = {
+    size = 26,
+    padding = 7,
+    active = {0.2, 0.7, 0.1, 1},
+    inactive = {0, 0, 0, 1}
+  }
 }

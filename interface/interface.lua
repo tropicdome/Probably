@@ -151,6 +151,102 @@ ProbablyEngine.interface.config = function()
 
   engine:AddChild(cycleGroup)
 
+
+
+  -- -- -- -- -- -- -- -- -- -- -- --
+  -- -- -- -- -- -- -- -- -- -- -- --
+  -- -- -- -- -- -- -- -- -- -- -- --
+  -- -- -- -- -- -- -- -- -- -- -- --
+
+
+  -- Engine Settings
+  style = AceGUI:Create("InlineGroup")
+  style:SetFullWidth(true)
+  style:SetTitle("Style Settings")
+  scroll:AddChild(style)
+
+  sizeGroup = AceGUI:Create("SimpleGroup")
+  size = AceGUI:Create("Slider")
+  size:SetLabel("Icon Size")
+  size:SetSliderValues(10, 64, 1)
+  size:SetValue(ProbablyEngine_Data.style.size)
+  size:SetCallback('OnValueChanged', function(value)
+    size = tonumber(value:GetValue())
+    ProbablyEngine_Data.style.size = size
+    ProbablyEngine.buttons.updateSize()
+  end)
+  sizeGroup:AddChild(size)
+  sizeDesc = AceGUI:Create("Label")
+  sizeDesc:SetText("Change the size of the icons.")
+  sizeDesc:SetFullWidth(true)
+  sizeGroup:AddChild(sizeDesc)
+  style:AddChild(sizeGroup)
+
+  spacerC = AceGUI:Create("Heading")
+  sizeGroup:AddChild(spacerC)
+
+  paddingGroup = AceGUI:Create("SimpleGroup")
+  padding = AceGUI:Create("Slider")
+  padding:SetLabel("Icon padding")
+  padding:SetSliderValues(1, 30, 1)
+  padding:SetValue(ProbablyEngine_Data.style.padding)
+  padding:SetCallback('OnValueChanged', function(value)
+    padding = tonumber(value:GetValue())
+    ProbablyEngine_Data.style.padding = padding
+    ProbablyEngine.buttons.updateSize()
+  end)
+  paddingGroup:AddChild(padding)
+  paddingDesc = AceGUI:Create("Label")
+  paddingDesc:SetText("Change the padding of the icons.")
+  paddingDesc:SetFullWidth(true)
+  paddingGroup:AddChild(paddingDesc)
+  style:AddChild(paddingGroup)
+
+  spacerD = AceGUI:Create("Heading")
+  paddingGroup:AddChild(spacerD)
+
+  colorActiveGroup = AceGUI:Create("SimpleGroup")
+  colorActive = AceGUI:Create("ColorPicker")
+  colorActive:SetLabel("Active Toggle Color")
+  colorActive:SetColor(ProbablyEngine_Data.style.active[1], ProbablyEngine_Data.style.active[2], ProbablyEngine_Data.style.active[3], ProbablyEngine_Data.style.active[4])
+  colorActive:SetHasAlpha(true)
+  colorActive:SetCallback('OnValueChanged', function(this, action, r, g, b, a)
+    ProbablyEngine_Data.style.active[1] = r
+    ProbablyEngine_Data.style.active[2] = g
+    ProbablyEngine_Data.style.active[3] = b
+    ProbablyEngine_Data.style.active[4] = a
+    ProbablyEngine.buttons.updateColors()
+  end)
+  colorActiveGroup:AddChild(colorActive)
+  colorActiveDesc = AceGUI:Create("Label")
+  colorActiveDesc:SetText("Change the color of actively toggled icons.")
+  colorActiveDesc:SetFullWidth(true)
+  colorActiveGroup:AddChild(colorActiveDesc)
+  style:AddChild(colorActiveGroup)
+
+  spacerD = AceGUI:Create("Heading")
+  colorActiveGroup:AddChild(spacerD)
+
+  colorInctiveGroup = AceGUI:Create("SimpleGroup")
+  colorInctive = AceGUI:Create("ColorPicker")
+  colorInctive:SetLabel("inactive Toggle Color")
+  colorInctive:SetColor(ProbablyEngine_Data.style.inactive[1], ProbablyEngine_Data.style.inactive[2], ProbablyEngine_Data.style.inactive[3], ProbablyEngine_Data.style.inactive[4])
+  colorInctive:SetHasAlpha(true)
+  colorInctive:SetCallback('OnValueChanged', function(this, action, r, g, b, a)
+    ProbablyEngine_Data.style.inactive[1] = r
+    ProbablyEngine_Data.style.inactive[2] = g
+    ProbablyEngine_Data.style.inactive[3] = b
+    ProbablyEngine_Data.style.inactive[4] = a
+    ProbablyEngine.buttons.updateColors()
+  end)
+  colorInctiveGroup:AddChild(colorInctive)
+  colorInctiveDesc = AceGUI:Create("Label")
+  colorInctiveDesc:SetText("Change the color of inactively toggled icons.")
+  colorInctiveDesc:SetFullWidth(true)
+  colorInctiveGroup:AddChild(colorInctiveDesc)
+  style:AddChild(colorInctiveGroup)
+
+  scroll:DoLayout()
 end
 
 function ProbablyEngine_Minimap_Reposition()

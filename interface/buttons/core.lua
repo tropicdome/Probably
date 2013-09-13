@@ -4,7 +4,11 @@
 ProbablyEngine.buttons.create('MasterToggle', nil, function(self)
   ProbablyEngine.active = not ProbablyEngine.active
   self.checked = not self.checked
-  self:SetChecked(self.checked)
+  if self.checked then
+    ProbablyEngine.buttons.setActive('MasterToggle')
+  else
+    ProbablyEngine.buttons.setInactive('MasterToggle')
+  end
   ProbablyEngine_Data.button_states['MasterToggle'] = self.checked
 end, 'Toggle', 'Temporarily enable or disable the addon.')
 

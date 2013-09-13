@@ -5,15 +5,50 @@ ProbablyEngine.buttons = {
   frame = CreateFrame("Frame", "PE_Buttons", UIParent),
   buttonFrame = CreateFrame("Frame", "PE_Buttons_Container", UIParent),
   buttons = { },
-  size = 36,
-  scale = 1,
-  padding = 6,
   count = 0
 }
 
+local BACKDROP = {
+  bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
+  insets = {top = -1, bottom = -1, left = -1, right = -1},
+}
+
+
+ProbablyEngine.buttons.updateSize = function()
+
+  ProbablyEngine.buttons.frame:SetHeight(ProbablyEngine_Data.style.size+5)
+  ProbablyEngine.buttons.count = 0
+  for name, button in pairs(ProbablyEngine.buttons.buttons) do
+    button:SetPoint("TOPLEFT", ProbablyEngine.buttons.frame, "TOPLEFT",
+      (
+        (ProbablyEngine_Data.style.size*ProbablyEngine.buttons.count)
+        +
+        (ProbablyEngine.buttons.count*ProbablyEngine_Data.style.padding)
+        + 4
+      )
+    , -3)
+    button:SetWidth(ProbablyEngine_Data.style.size)
+    button:SetHeight(ProbablyEngine_Data.style.size)
+    ProbablyEngine.buttons.count = ProbablyEngine.buttons.count + 1
+  end
+
+end
+
+ProbablyEngine.buttons.updateColors = function()
+
+  for button, state in pairs(ProbablyEngine_Data.button_states) do
+    if state == true then
+      ProbablyEngine.buttons.setActive(button)
+    else
+      ProbablyEngine.buttons.setInactive(button)
+    end
+  end
+
+end
+
 ProbablyEngine.buttons.frame:SetPoint("CENTER", UIParent)
 ProbablyEngine.buttons.frame:SetWidth(170)
-ProbablyEngine.buttons.frame:SetHeight(ProbablyEngine.buttons.size+5)
+ProbablyEngine.buttons.frame:SetHeight(ProbablyEngine_Data.style.size+5)
 ProbablyEngine.buttons.frame:SetMovable(true)
 ProbablyEngine.buttons.frame:SetFrameStrata('HIGH')
 
@@ -50,26 +85,39 @@ ProbablyEngine.buttons.frame:SetScript("OnHide", function(self)
   end
 end)
 
-ProbablyEngine.buttons.create = function(name, icon, callback, tooltipl1, tooltipl2)
+ProbablyEngine.buttons.create = function(name, texture, callback, tooltipl1, tooltipl2)
 
-  ProbablyEngine.buttons.buttons[name] = CreateFrame("CheckButton", "PE_Buttons_"..name, ProbablyEngine.buttons.buttonFrame, "ActionButtonTemplate")
+  ProbablyEngine.buttons.buttons[name] = CreateFrame("CheckButton", "PE_Buttons_"..name, ProbablyEngine.buttons.buttonFrame)
 
   local button = ProbablyEngine.buttons.buttons[name]
   button:SetPoint("TOPLEFT", ProbablyEngine.buttons.frame, "TOPLEFT",
     (
-      (ProbablyEngine.buttons.size*ProbablyEngine.buttons.count)
+      (ProbablyEngine_Data.style.size*ProbablyEngine.buttons.count)
       +
-      (ProbablyEngine.buttons.count*ProbablyEngine.buttons.padding)
+      (ProbablyEngine.buttons.count*ProbablyEngine_Data.style.padding)
       + 4
     )
   , -3)
-  button:SetWidth(ProbablyEngine.buttons.size)
-  button:SetHeight(ProbablyEngine.buttons.size)
+  button:SetWidth(ProbablyEngine_Data.style.size)
+  button:SetHeight(ProbablyEngine_Data.style.size)
 
-  if icon == nil then
-    _G[button:GetName().."Icon"]:SetTexture('Interface\\ICONS\\INV_Misc_QuestionMark')
+  button:SetBackdrop(BACKDROP)
+  button:SetBackdropColor(0, 0, 0)
+
+  local count = button:CreateFontString(nil, 'OVERLAY', 'NumberFontNormal') -- XXX: replace font
+  count:SetPoint('BOTTOMRIGHT')
+  button.count = count
+
+
+  local icon = button:CreateTexture(nil, 'BORDER')
+  icon:SetAllPoints()
+  icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+  button.icon = icon
+
+  if texture == nil then
+    button.icon:SetTexture('Interface\\ICONS\\INV_Misc_QuestionMark')
   else
-    _G[button:GetName().."Icon"]:SetTexture(icon)
+    button.icon:SetTexture(texture)
   end
 
   button:SetScript("OnClick", callback)
@@ -97,29 +145,32 @@ ProbablyEngine.buttons.create = function(name, icon, callback, tooltipl1, toolti
 end
 
 ProbablyEngine.buttons.text = function(name, text)
-  local hotkey = _G['PE_Buttons_'.. name .."HotKey"]
-  hotkey:SetText(text);
-  hotkey:Show();
+  local count = ProbablyEngine.buttons.buttons[name].count
+  count:SetText(text);
+  count:Show();
 end
 
 ProbablyEngine.buttons.setActive = function(name)
   if name == 'MasterToggle' then ProbablyEngine.active = true end
-  if _G['PE_Buttons_'.. name] then
-    _G['PE_Buttons_'.. name].checked = true
-    _G['PE_Buttons_'.. name]:SetChecked(1)
+  local button = ProbablyEngine.buttons.buttons[name]
+  if button then
+    button.checked = true
+    button:SetBackdropColor(ProbablyEngine_Data.style.active[1], ProbablyEngine_Data.style.active[2], ProbablyEngine_Data.style.active[3], ProbablyEngine_Data.style.active[4])
     ProbablyEngine_Data.button_states[name] = true
   end
 end
 
 ProbablyEngine.buttons.setInactive = function(name)
   if name == 'MasterToggle' then ProbablyEngine.active = false end
-  if _G['PE_Buttons_'.. name] then
-    _G['PE_Buttons_'.. name].checked = false
-    _G['PE_Buttons_'.. name]:SetChecked(0)
+  local button = ProbablyEngine.buttons.buttons[name]
+  if button then
+    button.checked = false
+    button:SetBackdrop(BACKDROP)
+    button:SetBackdropColor(ProbablyEngine_Data.style.inactive[1], ProbablyEngine_Data.style.inactive[2], ProbablyEngine_Data.style.inactive[3], ProbablyEngine_Data.style.inactive[4])
     ProbablyEngine_Data.button_states[name] = false
   end
 end
 
 ProbablyEngine.buttons.icon = function(name, icon)
-  _G['PE_Buttons_'.. name ..'Icon']:SetTexture(icon)
+  _G['PE_Buttons_'.. name].icon:SetTexture(icon)
 end
