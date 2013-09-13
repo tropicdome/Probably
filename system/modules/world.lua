@@ -6,8 +6,25 @@ ProbablyEngine.module.register("world", {
   expire = 15,
   friendly = { },
   enemy = { },
-  dead = { }
+  dead = { },
+  named = { }
 })
+
+
+
+ProbablyEngine.module.world.print = function()
+  ProbablyEngine.module.world.named =  { }
+  for i,v in pairs(ProbablyEngine.module.world.enemy) do
+      if ProbablyEngine.module.world.named[v] then
+        ProbablyEngine.module.world.named[v] = ProbablyEngine.module.world.named[v] + 1
+      else
+        ProbablyEngine.module.world.named[v] = 1
+      end
+  end
+  for i,v in pairs(ProbablyEngine.module.world.named) do
+    print(i, v)
+  end
+end
 
 ProbablyEngine.module.world.build_friendly = function()
   if GetNumGroupMembers() ~= 0 then
@@ -32,11 +49,20 @@ ProbablyEngine.module.world.rebuild_friendly = function()
   end
 end
 
+
+
+ProbablyEngine.module.world.update_ui = function()
+  if PE_Buttons_multitargetCount then
+    PE_Buttons_multitargetCount:SetText(ProbablyEngine.module.world.current)
+  end
+end
+
 ProbablyEngine.module.world.add_enemy = function(guid, name)
   if not ProbablyEngine.module.world.enemy[guid] and not ProbablyEngine.module.world.dead[guid] then
     --ProbablyEngine.debug("Added " .. guid .. " ( "..name.." ) to combat table.", 3)
-    ProbablyEngine.module.world.enemy[guid] = name
+    ProbablyEngine.module.world.enemy[guid] = name or 'Unknown'
     ProbablyEngine.module.world.current = ProbablyEngine.module.world.current + 1
+    ProbablyEngine.module.world.update_ui()
   end
 end
 
@@ -46,13 +72,14 @@ ProbablyEngine.module.world.remove_enemy = function(guid, death)
     ProbablyEngine.module.world.dead[guid] = death
     ProbablyEngine.module.world.current = ProbablyEngine.module.world.current - 1
     ProbablyEngine.module.world.enemy[guid] = nil
+    ProbablyEngine.module.world.update_ui()
   end
 end
 
 ProbablyEngine.module.world.add_friendly = function(guid, name)
   if not ProbablyEngine.module.world.friendly[guid] and not ProbablyEngine.module.world.friendly[guid] then
     --ProbablyEngine.debug("Added " .. guid .. " ( "..name.." ) to party table.", 3)
-    ProbablyEngine.module.world.friendly[guid] = name
+    ProbablyEngine.module.world.friendly[guid] = name or 'Unknown'
   end
 end
 
@@ -76,6 +103,7 @@ ProbablyEngine.module.world.clean_tables = function(source, dest)
     if now >= (death + ProbablyEngine.module.world.expire) then
       --ProbablyEngine.debug("Removed " .. guid .. " from death table.", 3)
       ProbablyEngine.module.world.dead[guid] = nil
+      ProbablyEngine.module.world.update_ui()
     end
   end
 end
@@ -83,4 +111,5 @@ end
 ProbablyEngine.module.world.flush_table = function()
   ProbablyEngine.module.world.enemy = { }
   ProbablyEngine.module.world.current = 0
+  ProbablyEngine.module.world.update_ui()
 end
