@@ -26,11 +26,15 @@ ProbablyEngine.timer.handle = function (self, elapsed)
   for timer, struct in pairs(ProbablyEngine.timer.timers) do
     struct.last = struct.last + elapsed
     if (struct.last > struct.period) then
-      ProbablyEngine.debug("Timer Fire: " .. timer , 5)
+      ProbablyEngine.debug("Timer Fire: " .. timer , 7)
       struct.event()
       struct.last = 0
     end
   end
+end
+
+ProbablyEngine.timer.updatePeriod = function(module, peroid)
+  ProbablyEngine.timer.timers[module]['period'] = (peroid / 1000)
 end
 
 -- register our handler

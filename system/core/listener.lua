@@ -24,7 +24,7 @@ end
 
 -- listen and fire events
 ProbablyEngine.listener.handle = function (self, event, ...)
-  ProbablyEngine.debug("Event Fire: " .. event, 4)
+  ProbablyEngine.debug("Event Fire: " .. event, 9)
   if ProbablyEngine.listener.eventActions[event] ~= nil then
     local action = ProbablyEngine.listener.eventActions[event]
     action(...)

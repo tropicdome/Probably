@@ -1,29 +1,61 @@
+-- SPEC ID 71
 ProbablyEngine.rotation.register(71, {
-  { "Battle Shout" },
-  { "Recklessness", {
-      "cooldowns",
-      "target.health:20",
-      "target.debuff.duration(5):Colossus Smash"
+
+  -- Buffs
+  { "Berserker Rage" },
+
+  -- Survival
+  { "Rallying Cry", {
+    "player.health < 20",
+    "modifier.cooldowns"
   }},
-  { "Berserker Rage", "cooldowns" },
-  { "Deadly Calm", {
-      "cooldowns",
-      "player.rage:40"
+
+  { "Shield Wall", {
+    "player.health < 10",
+    "modifier.cooldowns"
   }},
-  { "Lifeblood", "cooldowns" },
-  { "Impending Victory", "player.health:90" },
-  { "Heroic Strike", {
-      "target.debuff:Colossus Smash",
-      "player.rage:70"
+
+  { "Die by the Sword", {
+    "player.health < 40",
+    "modifier.cooldowns"
   }},
-  { "Dragon Roar" },
-  { "Mortal Strike" },
-  { "Sweeping Strikes", "multitarget"},
-  { "Colossus Smash", "target.debuff.duration(1.5):Colossus Smash" },
-  { "Execute" },
+
+  { "Hamstring", {
+    "!target.debuff(Hamstring)",
+    "modifier.player"
+  }},
+
+  { "Impending Victory" },
+  { "Victory Rush" },
+
+  -- Kicks
+  { "Pummel", "modifier.interrupts" },
+  { "Disrupting Shout", "modifier.interrupts" },
+
+  -- Cooldowns
+  { "Bloodbath", "modifier.cooldowns" },
+  { "Avatar", "modifier.cooldowns" },
+  { "Recklessness", "modifier.cooldowns" },
+  { "Skull Banner", "modifier.cooldowns" },
+  { "Bladestorm", "modifier.cooldowns" },
+
+  -- AoE
+  { "Sweeping Strikes", "modifier.multitarget" },
+  { "Thunder Clap", "modifier.multitarget" },
+  { "Whirlwind", "modifier.multitarget" },
+  { "Dragon Roar", "modifier.multitarget" },
+  { "Dragon Roar", "modifier.cooldowns" },
+
+  -- Rotation
   { "Overpower" },
-  { "Slam", {
-      "player.rage:40",
-      "target.health:20"
-  }}
+  { "Mortal Strike" },
+  { "Colossus Smash" },
+  { "Heroic Throw" },
+  { "Heroic Strike", {
+    "player.rage > 70",
+    "target.debuff(Colossus Smash)"
+  }},
+  { "Slam", "player.rage > 40" },
+  { "Execute" },
+
 })

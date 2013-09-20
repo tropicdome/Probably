@@ -1,0 +1,66 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+  <Button name="ProbablyEngine_Minimap" parent="Minimap" enableMouse="true" movable="true" hidden="false">
+    <Size>
+      <AbsDimension x="33" y="33"/>
+    </Size>
+    <Anchors>
+      <Anchor point="TOPLEFT"/>
+    </Anchors>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="ProbablyEngine_Minimap_Icon" file="Interface\Icons\achievement_Goblinhead">
+          <Size>
+            <AbsDimension x="21" y="21"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="7" y="-6"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY">
+        <Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+          <Size>
+            <AbsDimension x="56" y="56"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame name="ProbablyEngine_Minimap_DraggingFrame" hidden="true">
+        <Scripts>
+          <OnUpdate>
+            ProbablyEngine_Minimap_DraggingFrame_OnUpdate()
+          </OnUpdate>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+    <Scripts>
+      <OnLoad>
+        self:RegisterForClicks("LeftButtonUp","RightButtonUp")
+        self:RegisterForDrag("LeftButton","RightButton")
+      </OnLoad>
+      <OnDragStart>
+        self:LockHighlight()
+        ProbablyEngine_Minimap_DraggingFrame:Show()
+      </OnDragStart>
+      <OnDragStop>
+        self:UnlockHighlight()
+        ProbablyEngine_Minimap_DraggingFrame:Hide()
+      </OnDragStop>
+      <OnEnter> ProbablyEngine_Minimap_OnEnter(self) </OnEnter>
+      <OnLeave> ProbablyEngine_Minimap_OnLeave(self) </OnLeave>
+      <OnClick>
+        ProbablyEngine_Minimap_OnClick(button) -- do your thing in here, arg1 is mouse button clicked
+      </OnClick>
+    </Scripts>
+  </Button>
+</Ui>

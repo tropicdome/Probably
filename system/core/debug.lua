@@ -9,13 +9,7 @@ ProbablyEngine.debug = function(message, level)
 end
 
 ProbablyEngine.print = function(message)
-  local icon = "swords.tga"
-  if IsMacClient() then
-    icon = "pg.tga"
-  else
-    icon = "sb.tga"
-  end
-  print("|TInterface\\Addons\\Probably\\system\\media\\"..icon..":16:16|t|cFF"..ProbablyEngine.addonColor.."["..ProbablyEngine.addonName.."] " .. message .. "|r")
+  print("|cFF"..ProbablyEngine.addonColor.."["..ProbablyEngine.addonName.."] " .. message .. "|r")
 end
 
 ProbablyEngine.dump = function(object) -- protected
@@ -25,7 +19,7 @@ end
 
 ProbablyEngine.full_check = function() -- protected
   if ProbablyEngine.full == true then return end
-  RunMacroText("/run ProbablyEngine_full_check_bool = true")
+  --RunMacroText("/run ProbablyEngine_full_check_bool = true")
   if ProbablyEngine_full_check_bool == true then
     ProbablyEngine.full = true
     ProbablyEngine_full_check_bool = nil
