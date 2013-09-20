@@ -10,5 +10,3 @@ end
 ProbablyEngine.module.unregister = function (module)
   ProbablyEngine.module[module] = nil
 end
-
-pem = ProbablyEngine.module

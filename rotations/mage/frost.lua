@@ -1,9 +1,10 @@
+-- SPEC ID 64
 ProbablyEngine.rotation.register(64, {
-    { "Flamestrike", "modifier.shiftkey", "ground" },
+    { "Flamestrike", "modifier.shift", "ground" },
     { "Nether Tempest",  "target.debuff" },
-    { "Frozen Orb", "player.buff.count.lt(2):Fingers of Frost" },
-    { "Ice Lance", "player.buff:Fingers of Frost" },
-    { "Frostfire Bolt", "player.buff:Brain Freeze" },
+    { "Frozen Orb", "player.buff(Fingers of Frost).count < 2" },
+    { "Ice Lance", "player.buff(Fingers of Frost)" },
+    { "Frostfire Bolt", "player.buff(Brain Freeze)" },
     { "Ice Lance", "player.moving" },
     { "Frostbolt" }
   }

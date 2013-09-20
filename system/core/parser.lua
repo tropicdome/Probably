@@ -24,9 +24,18 @@ ProbablyEngine.parser.can_cast =  function(spell, unit)
   if SpellHasRange(spell) == 1 and IsSpellInRange(spell, unit) == 0 then return false end
   if select(2, GetSpellCooldown(spell)) ~= 0 then return false end
   if ProbablyEngine.module.player.casting == true then return false end
-  if select(1, UnitChannelInfo("player")) == ProbablyEngine.parser.lastCast then return false end
+  if UnitChannelInfo("player") == nil then return true else return false end
   return true
 end
+
+ProbablyEngine.parser.can_cast_queue =  function(spell)
+  local isUsable, notEnoughMana = IsUsableSpell(spell)
+  if not isUsable then return false end
+  if notEnoughMana then return false end
+  if select(2, GetSpellCooldown(spell)) ~= 0 then return false end
+  return true
+end
+
 
 ProbablyEngine.parser.nested = function(evaluationTable, event)
   for _, evaluation in pairs(evaluationTable) do
@@ -48,42 +57,52 @@ ProbablyEngine.parser.table = function(spellTable)
     local evaluation = arguments[2]
     local target = arguments[3]
 
-    if eventType == "table" then
-      ProbablyEngine.parser.table(event)
+    if eventType == "string" then
+      if string.sub(event, 1, 1) == '!' then
+        eventType = "macro"
+      end
     end
 
-    if evaluationType == "string" then
-      evaluation = ProbablyEngine.dsl.parse(evaluation, event)
-    elseif evaluationType == "table" then
-      evaluation = ProbablyEngine.parser.nested(evaluation, event)
-    elseif evaluationType == "function" then
-      evaluation = evaluation()
-    elseif evaluationType == "nil" then
-      evaluation = true
-    else
-      -- evaluation was probably not passed via a deferred function.
-      -- not really sure how to handle this tbh
+    if eventType == "string" then
+      if evaluationType == "string"  then
+        evaluation = ProbablyEngine.dsl.parse(evaluation, event)
+      elseif evaluationType == "table" then
+        evaluation = ProbablyEngine.parser.nested(evaluation, event)
+      elseif evaluationType == "function" then
+        evaluation = evaluation()
+      elseif evaluationType == "nil" then
+        evaluation = true
+      end
+    elseif eventType == "table" or eventType == "macro" then
+      if evaluationType == "string"  then
+        evaluation = ProbablyEngine.dsl.parse(evaluation, '')
+      elseif evaluationType == "table" then
+        evaluation = ProbablyEngine.parser.nested(evaluation, '')
+      elseif evaluationType == "function" then
+        evaluation = evaluation()
+      elseif evaluationType == "nil" then
+        evaluation = true
+      end
     end
 
     if target == nil then
       target = "target"
     end
 
-    if ProbablyEngine.parser.can_cast(event, target) and evaluation then
-      local name, _, icon, _, _, _, _, _, _ = GetSpellInfo(event)
-
-      if target ~= "ground" then
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName(target) .. " )", 2)
+    if evaluation then
+      if eventType == "table" then
+        return ProbablyEngine.parser.table(event)
+      elseif eventType == "macro" then
+        RunMacroText(string.sub(event, 2))
+        return false
       else
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
+        if ProbablyEngine.parser.can_cast(event, target) then
+          ProbablyEngine.parser.lastCast = event
+          return event, target
+        end
       end
-
-      ProbablyEngine.parser.lastCast = event
-      return event, target
     end
 
   end
-
   spellTable = nil
-
 end
