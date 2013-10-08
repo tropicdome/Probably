@@ -329,6 +329,7 @@ end)
 
 ProbablyEngine.condition.register("spell.cooldown", function(target, spell)
   local start, duration, enabled = GetSpellCooldown(spell)
+  if not start then return false end
   if start ~= 0 then
     return (start + duration - GetTime())
   end
