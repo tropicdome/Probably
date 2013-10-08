@@ -1,21 +1,22 @@
 -- ProbablyEngine v0.0.1
 -- Ben Phelps (c) 2013
 
-ProbablyEngine.spellcache = {
-  tmp = { }
+local GetSpellInfo = GetSpellInfo
+
+ProbablyEngine.gsi = {
+
 }
 
-ProbablyEngine.spellcache.cache = setmetatable( {},
-{
-  __index = function (table, value)
-    local tmp = {GetSpellInfo(value)}
-    if GetSpellInfo(value) then
-      table[value] = tmp
+ProbablyEngine.gsi.cache = setmetatable(
+  { },
+  {__index = function(t, v)
+      local a = { GetSpellInfo(v) }
+      if GetSpellInfo(v)
+        then t[v] = a
+      end
+      return a
     end
-    return tmp
-  end
-})
+  }
+)
 
-ProbablyEngine.spellcache.gsi = function(spell)
-    return unpack(ProbablyEngine.spellcache.cache[spell])
-end
+ProbablyEngine.gsi.call = function(a) return unpack(ProbablyEngine.gsi.cache[a]) end

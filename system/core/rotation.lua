@@ -6,6 +6,7 @@ ProbablyEngine.rotation = {
   buttons = { },
   specId = { },
   classSpecId = { }
+  activeRotation = false
 }
 
 ProbablyEngine.rotation.specId[62] = 'Arcane Mage'
