@@ -46,8 +46,14 @@ ProbablyEngine.rotation.register(250, {
   -- Rotation
   { "Heart Strike", "player.runes(blood).count >= 1" },
   { "Death Strike" },
-  { "Blood Boil", "player.buff(Crimson Scourge)" },
-  { "Blood Boil", "modifier.multitarget" },
+  { "Blood Boil", {
+    "player.buff(Crimson Scourge)",
+    "target.range <= 8"
+  }},
+  { "Blood Boil", {
+    "modifier.multitarget",
+    "target.range <= 8"
+  }},
   { "Soul Reaper", "target.health < 35" },
   { "Rune Strike" },
   { "Horn of Winter" },

@@ -8,7 +8,14 @@ ProbablyEngine.rotation.register(252, {
   -- Survival
   { "Death Pact", "player.health < 20" },
   { "Icebound Fortitude", "player.health < 50" },
-
+  { "Blood Boil", {
+    "player.buff(Crimson Scourge)",
+    "target.range <= 8"
+  }},
+  { "Blood Boil", {
+    "modifier.multitarget",
+    "target.range <= 8"
+  }},
   -- Rotation
   { "Outbreak", "!target.debuff(Frost Fever)" },
   { "Icy Touch", "target.debuff(Frost Fever).duration < 4" },

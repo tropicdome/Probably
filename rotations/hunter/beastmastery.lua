@@ -37,7 +37,10 @@ ProbablyEngine.rotation.register(253, {
     } },
     { "Kill Command", {
         "pet.exists",
-        "player.spell.rage(Bite)"
+        function()
+            return (IsSpellInRange('Growl', 'target') == 1)
+        end
+        --"spell.range(Growl)" -- All pets have Growl?
     }},
     { "Glaive Toss" },
     { "Powershot" },
