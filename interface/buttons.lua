@@ -53,7 +53,7 @@ end)
 ProbablyEngine.buttons.create = function(name, icon, callback, tooltipl1, tooltipl2)
 
   ProbablyEngine.buttons.buttons[name] = CreateFrame("CheckButton", "PE_Buttons_"..name, ProbablyEngine.buttons.buttonFrame, "ActionButtonTemplate")
-
+  ProbablyEngine.buttons.buttons[name]:RegisterForClicks("LeftButtonUp", "RightButtonUp")
   local button = ProbablyEngine.buttons.buttons[name]
   button:SetPoint("TOPLEFT", ProbablyEngine.buttons.frame, "TOPLEFT",
     (
@@ -72,6 +72,7 @@ ProbablyEngine.buttons.create = function(name, icon, callback, tooltipl1, toolti
     _G[button:GetName().."Icon"]:SetTexture(icon)
   end
 
+  button:SetScript("OnClick", callback)
   button:SetScript("OnClick", callback)
 
   if tooltipl1 ~= nil then
