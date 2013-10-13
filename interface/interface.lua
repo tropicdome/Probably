@@ -2,8 +2,99 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 ProbablyEngine.interface = {
   shown = false,
-  moving = false
+  moving = false,
+  indent = IndentationLib,
+  syntaxcolors = { },
 }
+
+local T = ProbablyEngine.interface.indent.Tokens
+local ProbablyEngine.interface.syntaxcolors = { }
+
+local function color ( color, ... )
+  for i = 1, select( "#", ... ) do
+    ProbablyEngine.interface.syntaxcolors[ select( i, ... ) ] = color;
+  end
+end
+
+color( "|cffad91b8", T.KEYWORD )
+color( "|cffc5c8c6", T.UNKNOWN )
+color( "|cffc5c8c6", T.CONCAT, T.VARARG, T.ASSIGNMENT, T.PERIOD, T.COMMA, T.SEMICOLON, T.COLON, T.SIZE )
+color( "|cffde935f", T.NUMBER )
+color( "|cffb5bd68", T.STRING, T.STRING_LONG )
+color( "|cff969896", T.COMMENT_SHORT, T.COMMENT_LONG )
+color( "|cffc5c8c6", T.LEFTCURLY, T.RIGHTCURLY, T.LEFTBRACKET, T.RIGHTBRACKET)
+color( "|cffc5c8c6", T.LEFTPAREN, T.RIGHTPAREN)
+color( "|cff8abeb7", T.ADD, T.SUBTRACT, T.MULTIPLY, T.DIVIDE, T.POWER, T.MODULUS )
+color( "|cff8abeb7", T.EQUALITY, T.NOTEQUAL, T.LT, T.LTE, T.GT, T.GTE )
+
+color( "|cff81a2be",
+  "assert", "error", "ipairs", "next", "pairs",
+  "pcall", "print", "select", "tonumber", "tostring",
+  "type", "unpack", "bit", "coroutine", "math", "string", "table" )
+
+color( "|cff81a2be",
+  "abs", "ceil", "floor", "max", "min", "format", "gsub", "strbyte",
+  "strchar", "strconcat", "strfind", "strjoin", "strlower", "strmatch",
+  "strrep", "strrev", "strsplit", "strsub", "strtrim", "strupper", "tostringall",
+  "sort", "tinsert", "tremove", "wipe" )
+
+ProbablyEngine.interface.manager = function()
+
+  local frame = AceGUI:Create("Window")
+  frame:SetLayout("Flow")
+  frame:SetWidth(800)
+  frame:SetHeight(350)
+
+  local list = AceGUI:Create("TreeGroup")
+
+  list:SetCallback('OnGroupSelected', function(widget, action, value)
+
+    if value == "import" then
+
+      widget:SetFullHeight(true)
+      widget:SetFullWidth(true)
+      widget:SetLayout("Fill")
+
+      local scroll = AceGUI:Create("ScrollFrame")
+      scroll:SetLayout("Flow")
+      widget:AddChild(scroll)
+
+      local input = AceGUI:Create("MultiLineEditBox")
+      input:SetLabel('')
+      input:SetNumLines(10)
+      input:SetFullWidth(true)
+      input:DisableButton(true)
+      input.editBox:SetFont("Interface\\AddOns\\Probably\\external\\DejaVuSansMono.ttf", 10)
+      ProbablyEngine.interface.indent.Enable(input.editBox, 2, ProbablyEngine.interface.syntaxcolors)
+
+      scroll:AddChild(input)
+
+    else
+
+    end
+
+  end)
+
+  local tree = {
+    {
+      value = "import",
+      text = "|cff2c9800Import|r",
+      icon = "Interface\\PaperDollInfoFrame\\Character-Plus"
+    },
+    {
+      value = "Phelps Bear",
+      text = "Phelps Bear"
+    }
+  }
+
+  list:SetFullHeight(true)
+  list:SetFullWidth(true)
+  list:SetTree(tree)
+
+  frame:AddChild(list)
+
+
+end
 
 ProbablyEngine.interface.config = function()
 

@@ -9,6 +9,7 @@ external\LibStub\LibStub.lua
 external\CallbackHandler-1.0\CallbackHandler-1.0.xml
 external\LibRangeCheck-2.0\LibRangeCheck-2.0.lua
 external\AceGUI-3.0\AceGUI-3.0.xml
+external\ForAllIndentsAndPurposes\indent.lua
 
 # shebang
 probably.lua

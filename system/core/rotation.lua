@@ -3,9 +3,13 @@
 
 ProbablyEngine.rotation = {
   rotations = { },
+  custom = { },
+  cdesc = { },
   buttons = { },
   specId = { },
-  classSpecId = { }
+  classSpecId = { },
+  currentStringComp = "",
+  activeRotation = false
 }
 
 ProbablyEngine.rotation.specId[62] = 'Arcane Mage'
@@ -86,6 +90,75 @@ ProbablyEngine.rotation.register = function(specId, spellTable, buttons)
   ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
 end
 
+ProbablyEngine.rotation.list_custom = function()
+  local classId = select(3, UnitClass("player"))
+  local mySpecId, _, _, _, _, _ = GetSpecializationInfo(GetSpecialization())
+
+
+  info = { }
+  info.isTitle = false
+  info.notCheckable = true
+  info.text = '|cff2c9800Rotation Manager|r'
+  info.func = function()
+    ProbablyEngine.interface.manager()
+  end
+  UIDropDownMenu_AddButton(info)
+
+
+  info = { }
+  info.isTitle = true
+  info.notCheckable = true
+  info.text = 'Default Rotations'
+  UIDropDownMenu_AddButton(info)
+
+  for specId,_ in pairs(ProbablyEngine.rotation.rotations) do
+    if specId == mySpecId then
+      info = { }
+      info.text = ProbablyEngine.rotation.specId[specId]
+      info.value = info.text
+      info.checked = (ProbablyEngine.rotation.currentStringComp == info.text or ProbablyEngine.rotation.currentStringComp == "")
+      info.func = function()
+        local text = ProbablyEngine.rotation.specId[specId]
+        ProbablyEngine.rotation.currentStringComp = text
+        ProbablyEngine.rotation.activeRotation = ProbablyEngine.rotation.rotations[specId]
+        ProbablyEngine.print('Switched active rotation to: ' .. text)
+      end
+      UIDropDownMenu_AddButton(info)
+    end
+  end
+
+  info = { }
+  info.isTitle = true
+  info.notCheckable = true
+  info.text = 'Custom Rotations'
+  UIDropDownMenu_AddButton(info)
+
+  for specId,_ in pairs(ProbablyEngine.rotation.custom) do
+    if specId == mySpecId then
+      info = { }
+      info.text = ProbablyEngine.rotation.cdesc[specId]
+      info.value = info.text
+      info.checked = (ProbablyEngine.rotation.currentStringComp == info.text)
+      info.func = function()
+        local text = ProbablyEngine.rotation.cdesc[specId]
+        ProbablyEngine.rotation.currentStringComp = text
+        ProbablyEngine.rotation.activeRotation = ProbablyEngine.rotation.custom[specId]
+        ProbablyEngine.print('Switched active rotation to: ' .. text)
+      end
+      UIDropDownMenu_AddButton(info)
+    end
+  end
+end
+
+ProbablyEngine.rotation.register_custom = function(specId, desc, spellTable, buttons)
+  ProbablyEngine.rotation.custom[specId] = spellTable
+  ProbablyEngine.rotation.cdesc[specId] = desc
+  if buttons and type(buttons) == 'function' then
+    ProbablyEngine.rotation.buttons[specId] = buttons
+  end
+  ProbablyEngine.debug('Loaded Custom Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
+end
+
 -- Lower memory used, no need in storing rotations for other classes
 ProbablyEngine.rotation.auto_unregister = function()
   local classId = select(3, UnitClass("player"))
@@ -98,7 +171,6 @@ ProbablyEngine.rotation.auto_unregister = function()
       ProbablyEngine.rotation.buttons[specId] = nil
     end
   end
-  ProbablyEngine.rotation.classSpecId = nil
   collectgarbage('collect')
 end
 

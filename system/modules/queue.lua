@@ -29,7 +29,7 @@ hooksecurefunc("UseAction", function(...)
     if select(3, ...) ~= nil then
       local type, id, subType, spellID = GetActionInfo(select(1,...))
       if type == "spell" then
-        local name,_,_,_,_,_,_,_,_ = GetSpellInfo(id)
+        local name,_,_,_,_,_,_,_,_ = ProbablyEngine.gsi.call(id)
         if ProbablyEngine.parser.can_cast_queue(name) then
           ProbablyEngine.module.queue.add_spell(name)
         end

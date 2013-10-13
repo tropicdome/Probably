@@ -10,19 +10,28 @@ ProbablyEngine.parser = {
 
 ProbablyEngine.parser.can_cast =  function(spell, unit)
   -- Credits to iLulz (JPS) for this function
+
   if spell == nil then return false end
-  if unit == "ground" then unit = nil end
   if unit == nil then unit = "target" end
+  if unit == "ground" then unit = nil end
+
+  local name, rank, icon, cost, isFunnel, powerType, castTime, minRange, maxRange = ProbablyEngine.gsi.call(spellId)
   local skillType, spellId = GetSpellBookItemInfo(spell)
   local isUsable, notEnoughMana = IsUsableSpell(spell)
-  local name, rank, icon, cost, isFunnel, powerType, castTime, minRange, maxRange = GetSpellInfo(spellId)
+
+  if powerType == 3 then
+
+  else
+
+  end
+
   if not isUsable then return false end
   if notEnoughMana then return false end
   if not UnitExists(unit) then return false end
   if not UnitIsVisible(unit) then return false end
   if UnitIsDeadOrGhost(unit) then return false end
   if SpellHasRange(spell) == 1 and IsSpellInRange(spell, unit) == 0 then return false end
-  if select(2, GetSpellCooldown(spell)) ~= 0 then return false end
+  if select(2, GetSpellCooldown(spell)) > 1 then return false end
   if ProbablyEngine.module.player.casting == true then return false end
   if UnitChannelInfo("player") == nil then return true else return false end
   return true

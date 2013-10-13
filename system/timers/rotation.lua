@@ -24,13 +24,12 @@ ProbablyEngine.timer.register("rotation", function()
       ProbablyEngine.module.queue.macro_queue = nil
       return
     else
-      local rotation = ProbablyEngine.rotation.rotations[ProbablyEngine.module.player.specId]
-      spell, target = ProbablyEngine.parser.table(rotation)
+      spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation.activeRotation)
     end
 
     if spell then
 
-      local name, _, icon, _, _, _, _, _, _ = GetSpellInfo(spell)
+      local name, _, icon, _, _, _, _, _, _ = ProbablyEngine.gsi.call(spell)
       if target ~= "ground" then
         ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 2)
       else

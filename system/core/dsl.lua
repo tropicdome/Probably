@@ -95,6 +95,15 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
 
   -- same as above, saving ram
   for i,_ in ipairs(parse_table) do parse_table[i] = nil end
+
+  -- Just how fucking dynamic can we get?
+  -- You have no idea!!!
+  if type(dsl) == 'function' then
+    return dsl()
+  elseif type(dsl) == 'table' then
+    return ProbablyEngine.parser.table(dsl)
+  end
+
   local arg1, arg2, arg3 = strsplit('.', dsl, 3)
   if arg1 then table.insert(parse_table, arg1) end
   if arg2 then table.insert(parse_table, arg2) end
