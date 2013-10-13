@@ -2,6 +2,11 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.listener.register("ADDON_LOADED", function(...)
+
+  local addon = ...
+
+  if addon ~= ProbablyEngine.addonName then return end
+
   for button, state in pairs(ProbablyEngine_Data.button_states) do
     if state == true then
       ProbablyEngine.buttons.setActive(button)
