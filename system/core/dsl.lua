@@ -18,11 +18,14 @@ ProbablyEngine.dsl.getConditionalSpell = function(dsl, spell)
 end
 
 ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
+
   local modify_not = false
+
   if string.sub(target, 1, 1) == '!' then
     target = string.sub(target, 2)
     modify_not = true
   end
+
   if string.sub(condition, 1, 1) == '!' then
     condition = string.sub(condition, 2)
     modify_not = true
