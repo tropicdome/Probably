@@ -10,7 +10,7 @@ ProbablyEngine.rotation.register(263, {
     { "Wind Shear", "modifier.interrupts" },
 
     -- totemic projection
-    { "Totemic Projection", "modifier.control" },
+    { "Totemic Projection", "modifier.shift", "ground" },
 
     -- Healing
     { "Healing Surge", {
