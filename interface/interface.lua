@@ -8,7 +8,7 @@ ProbablyEngine.interface = {
 }
 
 local T = ProbablyEngine.interface.indent.Tokens
-local ProbablyEngine.interface.syntaxcolors = { }
+ProbablyEngine.interface.syntaxcolors = { }
 
 local function color ( color, ... )
   for i = 1, select( "#", ... ) do
@@ -36,7 +36,7 @@ color( "|cff81a2be",
   "abs", "ceil", "floor", "max", "min", "format", "gsub", "strbyte",
   "strchar", "strconcat", "strfind", "strjoin", "strlower", "strmatch",
   "strrep", "strrev", "strsplit", "strsub", "strtrim", "strupper", "tostringall",
-  "sort", "tinsert", "tremove", "wipe" )
+  "sort", "tinsert", "tremove", "wipe", "ProbablyEngine" )
 
 ProbablyEngine.interface.manager = function()
 
