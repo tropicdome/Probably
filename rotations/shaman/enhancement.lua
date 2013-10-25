@@ -18,6 +18,8 @@ ProbablyEngine.rotation.register(263, {
       "player.health < 80"
     }},
 
+    { "Healing Stream Totem", "player.health < 60" },
+
     -- Cooldowns
     { "Fire Elemental Totem", "modifier.cooldowns" },
     { "Earth Elemental Totem", "modifier.cooldowns" },
