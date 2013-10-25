@@ -2,12 +2,41 @@
 -- Ben Phelps (c) 2013
 
 ProbablyEngine.parser = {
-  lastCast = ''
+  lastCast = '',
+  items = {
+    head     = "HeadSlot",
+    helm     = "HeadSlot",
+    neck     = "NeckSlot",
+    shoulder = "ShoulderSlot",
+    shirt    = "ShirtSlot",
+    chest    = "ChestSlot",
+    belt     = "WaistSlot",
+    waist    = "WaistSlot",
+    legs     = "LegsSlot",
+    pants    = "LegsSlot",
+    feet     = "FeetSlot",
+    boots    = "FeetSlot",
+    wrist    = "WristSlot",
+    bracers  = "WristSlot",
+    gloves   = "HandsSlot",
+    hands    = "HandsSlot",
+    finger1  = "Finger0Slot",
+    finger2  = "Finger1Slot",
+    trinket1 = "Trinket0Slot",
+    trinket2 = "Trinket1Slot",
+    back     = "BackSlot",
+    cloak    = "BackSlot",
+    mainhand = "MainHandSlot",
+    offhand  = "SecondaryHandSlot",
+    weapon   = "MainHandSlot",
+    weapon1  = "MainHandSlot",
+    weapon2  = "SecondaryHandSlot",
+    ranged   = "RangedSlot"
+  }
 }
 
 ProbablyEngine.parser.can_cast =  function(spell, unit)
   -- Credits to iLulz (JPS) for this function
-
   if spell == nil then return false end
   if unit == "ground" then unit = nil end
   if unit == nil then unit = "target" end
@@ -54,10 +83,13 @@ ProbablyEngine.parser.table = function(spellTable)
     local evaluationType = type(arguments[2])
     local evaluation = arguments[2]
     local target = arguments[3]
+    local slotId = 0
 
     if eventType == "string" then
       if string.sub(event, 1, 1) == '!' then
         eventType = "macro"
+      elseif string.sub(event, 1, 1) == '#' then
+        eventType = "item"
       end
     end
 
@@ -71,7 +103,7 @@ ProbablyEngine.parser.table = function(spellTable)
       elseif evaluationType == "nil" then
         evaluation = true
       end
-    elseif eventType == "table" or eventType == "macro" then
+    elseif eventType == "table" or eventType == "macro" or eventType == "item" then
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, '')
       elseif evaluationType == "table" then
@@ -87,11 +119,28 @@ ProbablyEngine.parser.table = function(spellTable)
       target = "target"
     end
 
+    if eventType == "item" then
+      local slot = string.sub(event, 2)
+      slotId = GetInventorySlotInfo(ProbablyEngine.parser.items[slot])
+      if slotId then
+        local itemStart, itemDuration, itemEnable = GetInventoryItemCooldown("player", slotId)
+        if evaluation == true and itemEnable == 1 and itemStart > 0 then
+          evaluation = false
+        end
+      else
+        -- soon my child
+        return false
+      end
+    end
+
     if evaluation then
       if eventType == "table" then
         return ProbablyEngine.parser.table(event)
       elseif eventType == "macro" then
         RunMacroText(string.sub(event, 2))
+        return false
+      elseif eventType == "item" then
+        UseInventoryItem(slotId)
         return false
       else
         if ProbablyEngine.parser.can_cast(event, target) then
