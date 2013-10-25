@@ -1,9 +1,6 @@
 -- ProbablyEngine v0.0.1
 -- Ben Phelps (c) 2013
 
--- Credits to iLulz (JPS) for the idea
--- of a spell table.  It works great.
-
 ProbablyEngine.parser = {
   lastCast = ''
 }
