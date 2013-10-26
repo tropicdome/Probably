@@ -37,6 +37,7 @@ system\modules\target.lua
 system\modules\world.lua
 system\modules\queue.lua
 system\modules\config.lua
+system\modules\tooltip.lua
 
 # Timers
 system\timers\profile.lua
