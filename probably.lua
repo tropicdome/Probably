@@ -1,9 +1,5 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
-
--- Huge thanks to the people who run
--- http://wowprogramming.com/
--- The site is amazingly helpful.
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 -- Lets fire this bitch up
 ProbablyEngine = {

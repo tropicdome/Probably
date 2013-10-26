@@ -1,9 +1,5 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
-
--- This is useful when debugging hard to find problems.
--- This will increase memory usage by a factor of at least 10.
--- Use with caution.
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 if ProbablyEngine.hardcore_debug == true then
   SetCVar('scriptProfile', 0) -- enable profiling

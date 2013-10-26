@@ -1,5 +1,5 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 -- lower table lookups since this happens A LOT
 local flags = COMBATLOG_OBJECT_REACTION_HOSTILE

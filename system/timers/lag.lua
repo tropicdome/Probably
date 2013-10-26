@@ -1,5 +1,6 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
+
 local warningSent = false
 
 ProbablyEngine.timer.register("lag", function()

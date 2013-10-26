@@ -1,5 +1,5 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 -- This shit fires all the time... wtf blizz, don't be stupid.
 ProbablyEngine.listener.register("PLAYER_SPECIALIZATION_CHANGED", function(...)
