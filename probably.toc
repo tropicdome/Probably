@@ -50,6 +50,7 @@ interface\interface.lua
 interface\buttons.lua
 interface\buttons\core.lua
 interface\toggle.lua
+interface\commands\core.lua
 
 # Listeners
 system\listeners\addon_loaded.lua
