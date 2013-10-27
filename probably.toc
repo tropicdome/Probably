@@ -19,7 +19,6 @@ system\core\debug.lua
 system\core\module.lua
 system\core\listener.lua
 system\core\buttons.lua
-system\core\toggle.lua
 system\core\slash.lua
 system\core\timer.lua
 system\core\spellcache.lua
@@ -50,6 +49,7 @@ interface\interface.xml
 interface\interface.lua
 interface\buttons.lua
 interface\buttons\core.lua
+interface\toggle.lua
 
 # Listeners
 system\listeners\addon_loaded.lua
