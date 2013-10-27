@@ -48,8 +48,8 @@ system\timers\combatable.lua
 interface\interface.xml
 interface\interface.lua
 interface\buttons.lua
-interface\buttons\core.lua
 interface\toggle.lua
+interface\buttons\core.lua
 interface\commands\core.lua
 
 # Listeners
