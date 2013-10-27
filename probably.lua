@@ -4,8 +4,8 @@
 -- Lets fire this bitch up
 ProbablyEngine = {
   addonName = "Probably",
-  version = "0.1",
-  addonColor = "e6cc80",
+  addonColor = "2277dd",
+  version = "r1000",
   active = false,
   full = false,
   debug = false,
