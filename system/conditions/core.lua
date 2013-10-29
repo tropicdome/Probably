@@ -355,10 +355,11 @@ ProbablyEngine.condition.register("spell.range", function(target, spell)
   return IsSpellInRange(spell) == 1
 end)
 
-
-
 ProbablyEngine.condition.register("range", function(target, range)
   local minRange, maxRange = rangeCheck:GetRange(target)
   return maxRange
 end)
 
+ProbablyEngine.condition.register("level", function(target, range)
+  return UnitLevel(target)
+end)
