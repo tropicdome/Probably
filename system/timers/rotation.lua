@@ -50,3 +50,32 @@ ProbablyEngine.timer.register("rotation", function()
     end
   end
 end, ProbablyEngine.cycleTime)
+
+
+ProbablyEngine.timer.register("oocrotation", function()
+  local cycle =
+    IsMounted() ~= 1
+    and ProbablyEngine.module.player.combat ~= true
+    and ProbablyEngine.active == true
+    and ProbablyEngine.module.player.specId ~= 0
+    and ProbablyEngine.rotation.activeOOCRotation ~= false
+
+  if cycle then
+    local spell, target = ''
+    spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation.activeOOCRotation, 'player')
+    if spell then
+      local name, _, icon, _, _, _, _, _, _ = ProbablyEngine.gsi.call(spell)
+      if target ~= "ground" then
+        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 2)
+      else
+        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
+      end
+      ProbablyEngine.buttons.icon('MasterToggle', icon)
+      if target == "ground" then
+        ProbablEngine.print('Ground targeted spells are unsupported in OOC rotations.')
+      else
+        CastSpellByName(name, target)
+      end
+    end
+  end
+end, 500)

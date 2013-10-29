@@ -3,13 +3,15 @@
 
 ProbablyEngine.rotation = {
   rotations = { },
+  oocrotations =  { },
   custom = { },
   cdesc = { },
   buttons = { },
   specId = { },
   classSpecId = { },
   currentStringComp = "",
-  activeRotation = false
+  activeRotation = false,
+  activeOOCRotation = false,
 }
 
 ProbablyEngine.rotation.specId[62] = 'Arcane Mage'
@@ -82,11 +84,36 @@ ProbablyEngine.rotation.classSpecId[268] = 10
 ProbablyEngine.rotation.classSpecId[269] = 10
 ProbablyEngine.rotation.classSpecId[270] = 10
 
-ProbablyEngine.rotation.register = function(specId, spellTable, buttons)
+ProbablyEngine.rotation.register = function(specId, spellTable, arg1, arg2)
+
+  local buttons, oocrotation = nil, nil
+
+  if type(arg1) == "table" then
+    oocrotation = arg1
+  end
+
+  if type(arg1) == "function" then
+    buttons = arg1
+  end
+
+  if type(arg2) == "table" then
+    oocrotation = arg2
+  end
+
+  if type(arg2) == "function" then
+    buttons = arg2
+  end
+
   ProbablyEngine.rotation.rotations[specId] = spellTable
+
+  if oocrotation then
+    ProbablyEngine.rotation.oocrotations[specId] = oocrotation
+  end
+
   if buttons and type(buttons) == 'function' then
     ProbablyEngine.rotation.buttons[specId] = buttons
   end
+
   ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
 end
 
@@ -121,6 +148,11 @@ ProbablyEngine.rotation.list_custom = function()
         local text = ProbablyEngine.rotation.specId[specId]
         ProbablyEngine.rotation.currentStringComp = text
         ProbablyEngine.rotation.activeRotation = ProbablyEngine.rotation.rotations[specId]
+        if ProbablyEngine.rotation.oocrotations[ProbablyEngine.module.player.specId] then
+          ProbablyEngine.rotation.activeOOCRotation = ProbablyEngine.rotation.oocrotations[ProbablyEngine.module.player.specId]
+        else
+          ProbablyEngine.rotation.activeOOCRotation = false
+        end
         ProbablyEngine.print('Switched active rotation to: ' .. text)
       end
       UIDropDownMenu_AddButton(info)

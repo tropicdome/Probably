@@ -74,7 +74,7 @@ ProbablyEngine.parser.nested = function(evaluationTable, event)
   return true
 end
 
-ProbablyEngine.parser.table = function(spellTable)
+ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
 
   for _, arguments in pairs(spellTable) do
 
@@ -82,7 +82,7 @@ ProbablyEngine.parser.table = function(spellTable)
     local event = arguments[1]
     local evaluationType = type(arguments[2])
     local evaluation = arguments[2]
-    local target = arguments[3]
+    local target = arguments[3] or fallBackTarget
     local slotId = 0
 
     if eventType == "string" then

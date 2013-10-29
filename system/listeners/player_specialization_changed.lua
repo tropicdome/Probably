@@ -12,6 +12,11 @@ ProbablyEngine.listener.register("PLAYER_SPECIALIZATION_CHANGED", function(...)
         ProbablyEngine.module.player.specId = id
         ProbablyEngine.module.player.specName = name
         ProbablyEngine.rotation.activeRotation = ProbablyEngine.rotation.rotations[ProbablyEngine.module.player.specId]
+        if ProbablyEngine.rotation.oocrotations[ProbablyEngine.module.player.specId] then
+          ProbablyEngine.rotation.activeOOCRotation = ProbablyEngine.rotation.oocrotations[ProbablyEngine.module.player.specId]
+        else
+          ProbablyEngine.rotation.activeOOCRotation = false
+        end
         ProbablyEngine.print(ProbablyEngine.rotation.specId[id] .. " rotation loaded!")
       end
     else
