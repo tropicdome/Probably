@@ -363,3 +363,9 @@ end)
 ProbablyEngine.condition.register("level", function(target, range)
   return UnitLevel(target)
 end)
+
+ProbablyEngine.condition.register("combat", function(target, range)
+  return UnitAffectingCombat(target)
+end)
+
+
