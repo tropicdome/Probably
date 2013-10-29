@@ -73,6 +73,16 @@ ProbablyEngine.rotation.register(263, {
     { "Earth Shock" },
 
 
+}, {
+
+  -- Buffs
+  { "Windfury Weapon", "!player.enchant.mainhand" },
+  { "Flametongue Weapon", "!player.enchant.offhand" },
+  { "Lightning Shield", "!player.buff(Lightning Shield)" },
+
+  -- Heal
+  { "Healing Stream Totem", "player.health < 60" },
+
 }, function()
   ProbablyEngine.toggle.create('totems', 'Interface\\ICONS\\ability_shaman_totemrelocation', 'Totems', 'Toggle the placement of totems.')
 end)

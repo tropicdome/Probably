@@ -41,5 +41,11 @@ ProbablyEngine.rotation.register(262, {
 
     -- Filler
     { "Lightning Bolt" }
-  }
-)
+}, {
+  -- Buffs
+  { "Flametongue Weapon", "!player.enchant.mainhand" },
+  { "Lightning Shield", "!player.buff(Lightning Shield)" },
+
+  -- Heal
+  { "Healing Stream Totem", "player.health < 60" },
+})
