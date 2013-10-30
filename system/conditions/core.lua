@@ -343,12 +343,10 @@ ProbablyEngine.condition.register("totem.duration", function(target, totem)
   return 0
 end)
 
-
-
 ProbablyEngine.condition.register("casting", function(target, spell)
   local castName,_,_,_,_,endTime,_,_,notInterruptibleCast = UnitCastingInfo(target)
   local channelName,_,_,_,_,endTime,_,notInterruptibleChannel = UnitChannelInfo(target)
-  if (castName == spel or channelName == spell) and spell ~= nil and spell ~= false then
+  if (castName == spell or channelName == spell) and spell ~= nil and spell ~= false then
     return true
   elseif notInterruptibleCast == false or notInterruptibleChannel == false then
     return true
