@@ -119,6 +119,30 @@ ProbablyEngine.condition.register("modifier.alt", function()
   return IsAltKeyDown() == 1
 end)
 
+ProbablyEngine.condition.register("modifier.lshift", function()
+  return IsLeftShiftKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.lcontrol", function()
+  return IsLeftControlKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.lalt", function()
+  return IsLeftAltKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.rshift", function()
+  return IsRightShiftKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.rcontrol", function()
+  return IsRightControlKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.ralt", function()
+  return IsRightAltKeyDown() == 1
+end)
+
 ProbablyEngine.condition.register("modifier.player", function()
   return UnitIsPlayer("target") == 1
 end)
@@ -324,7 +348,9 @@ end)
 ProbablyEngine.condition.register("casting", function(target, spell)
   local castName,_,_,_,_,endTime,_,_,notInterruptibleCast = UnitCastingInfo(target)
   local channelName,_,_,_,_,endTime,_,notInterruptibleChannel = UnitChannelInfo(target)
-  if notInterruptibleCast == false or notInterruptibleChannel == false then
+  if (castName == spel or channelName == spell) and spell ~= nil and spell ~= false then
+    return true
+  elseif notInterruptibleCast == false or notInterruptibleChannel == false then
     return true
   end
   return false
