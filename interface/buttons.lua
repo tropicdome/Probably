@@ -8,7 +8,7 @@ ProbablyEngine.buttons = {
   size = 36,
   scale = 1,
   padding = 6,
-  count = 0
+  count = 0,
 }
 
 ProbablyEngine.buttons.frame:SetPoint("CENTER", UIParent)
@@ -108,7 +108,7 @@ ProbablyEngine.buttons.setActive = function(name)
   if _G['PE_Buttons_'.. name] then
     _G['PE_Buttons_'.. name].checked = true
     _G['PE_Buttons_'.. name]:SetChecked(1)
-    ProbablyEngine_Data.button_states[name] = true
+    ProbablyEngine.config.data['button_states'][name] = true
   end
 end
 
@@ -117,10 +117,35 @@ ProbablyEngine.buttons.setInactive = function(name)
   if _G['PE_Buttons_'.. name] then
     _G['PE_Buttons_'.. name].checked = false
     _G['PE_Buttons_'.. name]:SetChecked(0)
-    ProbablyEngine_Data.button_states[name] = false
+    ProbablyEngine.config.data['button_states'][name] = false
   end
 end
 
 ProbablyEngine.buttons.icon = function(name, icon)
   _G['PE_Buttons_'.. name ..'Icon']:SetTexture(icon)
+end
+
+ProbablyEngine.buttons.loadStates = function()
+
+  if ProbablyEngine.config.read('uishown') then
+    if ProbablyEngine.config.read('uishown') then
+      ProbablyEngine.buttons.buttonFrame:Show()
+    else
+      ProbablyEngine.buttons.buttonFrame:Hide()
+    end
+  else
+    ProbablyEngine.buttons.buttonFrame:Show()
+    ProbablyEngine.config.write('uishown', true)
+  end
+
+  local states = ProbablyEngine.config.read('button_states', { })
+  for button, state in pairs(states) do
+    if state == true then
+      ProbablyEngine.buttons.setActive(button)
+      ProbablyEngine.toggle.states[button] = true
+    else
+      ProbablyEngine.buttons.setInactive(button)
+      ProbablyEngine.toggle.states[button] = false
+    end
+  end
 end

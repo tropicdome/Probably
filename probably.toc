@@ -16,6 +16,7 @@ probably.lua
 
 # Core System
 system\core\debug.lua
+system\core\config.lua
 system\core\module.lua
 system\core\listener.lua
 system\core\buttons.lua

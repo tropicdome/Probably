@@ -14,16 +14,6 @@ ProbablyEngine.timer.register("lag", function()
       ProbablyEngine.debug("Dynamic Cycle Update: " .. ProbablyEngine.cycleTime .. "ms" , 4)
     end
   else
-    ProbablyEngine.cycleTime = ProbablyEngine_Data.cycle_time
+    ProbablyEngine.cycleTime = ProbablyEngine.config.read('dyncycletime', 100)
   end
 end, 2000)
-
-ProbablyEngine.timer.register("garbage", function()
-  local addonUsage = GetAddOnMemoryUsage(ProbablyEngine.addonName)
-  if addonUsage > 1000 then
-    collectgarbage('collect')
-    ProbablyEngine.debug("Garbage Collection Ran: " .. addonUsage .. "kb" , 4)
-  end
-end, 10000)
-
-

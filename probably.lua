@@ -17,17 +17,4 @@ ProbablyEngine = {
   lag = 0
 }
 
-ProbablyEngine_Data = {
-  minimapPos = 45,
-  button_shown = true,
-  dynamic_cycle = false,
-  cycle_time = 100,
-  button_states = { },
-  config = { },
-  style = {
-    size = 26,
-    padding = 7,
-    active = {0.2, 0.7, 0.1, 1},
-    inactive = {0, 0, 0, 1}
-  }
-}
+ProbablyEngine_ConfigData = { }
