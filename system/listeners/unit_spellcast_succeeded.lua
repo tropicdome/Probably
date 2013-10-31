@@ -6,5 +6,6 @@ local ignoreSpells = { 75 }
 ProbablyEngine.listener.register("UNIT_SPELLCAST_SUCCEEDED", function(...)
   local unitID, spell, rank, lineID, spellID = ...
   if unitID == "player" then
+    ProbablyEngine.module.player.cast(spell)
   end
 end)

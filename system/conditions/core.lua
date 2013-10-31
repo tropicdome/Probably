@@ -367,6 +367,10 @@ ProbablyEngine.condition.register("spell.usable", function(target, spell)
   return IsUsableSpell(spell) ~= nil
 end)
 
+ProbablyEngine.condition.register("spell.casted", function(target, spell)
+  return ProbablyEngine.module.player.casted(spell)
+end)
+
 ProbablyEngine.condition.register("spell.charges", function(target, spell)
   return select(1, GetSpellCharges(spell))
 end)
