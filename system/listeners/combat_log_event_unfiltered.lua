@@ -24,41 +24,6 @@ ProbablyEngine.listener.register("COMBAT_LOG_EVENT_UNFILTERED", function(...)
       if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_OUTSIDER) == 0 and band(sourceFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0 then
 
         ProbablyEngine.module.combatTracker.tagUnit(sourceGUID, sourceName, timeStamp)
-        local damage, _ = select(15, ...)
-        print(damage .. " damage from " .. destName)
-        --ProbablyEngine.module.combatTracker.damageUnit(destGUID, damage)
-
-      elseif band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_OUTSIDER) == 0 and band(destFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0 then
-
-        ProbablyEngine.module.combatTracker.tagUnit(destGUID, destName, timeStamp)
-        local damage, _ = select(15, ...)
-        print(damage .. " damage from " .. destName)
-        ProbablyEngine.module.combatTracker.damageUnit(destGUID, damage)
-
-      end
-
-    end
-
-  elseif (event == 'UNIT_DIED' or event == 'UNIT_DESTROYED' or event == 'UNIT_DISSIPATES') then
-
-    ProbablyEngine.module.combatTracker.killUnit(destGUID)
-
-  end
-
-
-end)
-
-ProbablyEngine.listener.register("COMBAT_LOG_EVENT_UNFILTERED", function(...)
-
-  local timeStamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _ = ...
-
-  if sourceName and destName and sourceName ~= '' and destName ~= '' then
-
-    if HostileEvents[event] then
-
-      if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_OUTSIDER) == 0 and band(sourceFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0 then
-
-        ProbablyEngine.module.combatTracker.tagUnit(sourceGUID, sourceName, timeStamp)
         local damage = select(15, ...)
         --ProbablyEngine.module.combatTracker.damageUnit(destGUID, damage)
 
@@ -78,8 +43,8 @@ ProbablyEngine.listener.register("COMBAT_LOG_EVENT_UNFILTERED", function(...)
 
   end
 
-
 end)
+
 ProbablyEngine.listener.register("UPDATE_MOUSEOVER_UNIT", function(...)
   local guid = UnitGUID('mouseover')
   if ProbablyEngine.module.combatTracker.enemy[guid] then
@@ -87,4 +52,3 @@ ProbablyEngine.listener.register("UPDATE_MOUSEOVER_UNIT", function(...)
     ProbablyEngine.module.combatTracker.aquireHealth(guid)
   end
 end)
-
