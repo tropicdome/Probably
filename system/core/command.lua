@@ -50,6 +50,11 @@ ProbablyEngine.command.register_handler({'init', 'initmacro', 'initmacros'}, fun
   CreateMacro("PE_Interrupts", "Ability_Kick", "/pe interrupts");
   CreateMacro("PE_AoE", "Ability_Druid_Starfall", "/pe aoe");
 end)
+
+ProbablyEngine.command.register_handler({'cycle', 'pew', 'run'}, function()
+  ProbablyEngine.cycle(true)
+end)
+
 ProbablyEngine.command.register_handler({'toggle', 'enable', 'disable'}, function()
   ProbablyEngine.buttons.toggle('MasterToggle')
 end)
