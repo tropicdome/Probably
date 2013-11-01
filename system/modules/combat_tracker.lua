@@ -8,6 +8,7 @@ ProbablyEngine.module.register("combatTracker", {
   enemy = { },
   dead = { },
   named = { },
+  blacklist = { },
   healthCache = { },
   healthCacheCount = { },
 })
@@ -85,9 +86,7 @@ ProbablyEngine.timer.register("updateCTHealth", function()
       end
     end
   else
-    if #ProbablyEngine.module.combatTracker.enemy >= 1 then
-      ProbablyEngine.module.combatTracker.enemy = { }
-    end
+    ProbablyEngine.module.combatTracker.cleanCT()
   end
 end, 100)
 
@@ -142,7 +141,13 @@ ProbablyEngine.module.combatTracker.insert = function(guid, unitname, timestamp)
 end
 
 ProbablyEngine.module.combatTracker.cleanCT = function()
-  ProbablyEngine.module.combatTracker.enemy = { }
+  -- clear tables but save the memory
+  for k,_ in pairs(ProbablyEngine.module.combatTracker.enemy) do
+    ProbablyEngine.module.combatTracker.enemy[k] = nil
+  end
+  for k,_ in pairs(ProbablyEngine.module.combatTracker.blacklist) do
+    ProbablyEngine.module.combatTracker.blacklist[k] = nil
+  end
 end
 
 ProbablyEngine.module.combatTracker.remove = function(guid)
@@ -150,9 +155,12 @@ ProbablyEngine.module.combatTracker.remove = function(guid)
 end
 
 ProbablyEngine.module.combatTracker.tagUnit = function(guid, name)
-  ProbablyEngine.module.combatTracker.insert(guid, name)
+  if not ProbablyEngine.module.combatTracker.blacklist[guid] then
+    ProbablyEngine.module.combatTracker.insert(guid, name)
+  end
 end
 
 ProbablyEngine.module.combatTracker.killUnit = function(guid)
   ProbablyEngine.module.combatTracker.remove(guid, name)
+  ProbablyEngine.module.combatTracker.blacklist[guid] = true
 end
