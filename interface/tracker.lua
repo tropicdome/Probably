@@ -19,6 +19,14 @@ UnitTracker:SetPoint("CENTER", UIParent)
 UnitTracker:SetResizable(true)
 UnitTracker:SetMovable(true)
 
+UnitTracker.toggle = function()
+  if UnitTracker:IsShown() then
+    UnitTracker:Hide()
+  else
+    UnitTracker:Show()
+  end
+end
+
 UnitTrackerSizer = CreateFrame("Frame", nil, PE_Tracker)
 UnitTrackerSizer:SetWidth(10)
 UnitTrackerSizer:SetHeight(10)
