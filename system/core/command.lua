@@ -16,15 +16,6 @@ ProbablyEngine.command.register = function (command, handler)
   SlashCmdList[name] = function(message, editbox) handler(message, editbox) end
 end
 
-ProbablyEngine.command.register('pe', function(msg, box)
-  local command, text = msg:match("^(%S*)%s*(.-)$")
-  if ProbablyEngine.command.handlers[command] then
-    ProbablyEngine.command.handlers[command](text)
-  else
-    ProbablyEngine.command.print('Unknown command: ' .. command);
-  end
-end)
-
 ProbablyEngine.command.register_handler = function(command, handler)
   local command_type = type(command)
   if command_type == "string" then
@@ -38,3 +29,11 @@ ProbablyEngine.command.register_handler = function(command, handler)
   end
 end
 
+ProbablyEngine.command.register('pe', function(msg, box)
+  local command, text = msg:match("^(%S*)%s*(.-)$")
+  if ProbablyEngine.command.handlers[command] then
+    ProbablyEngine.command.handlers[command](text)
+  else
+    ProbablyEngine.command.print('Unknown command: ' .. command);
+  end
+end)
