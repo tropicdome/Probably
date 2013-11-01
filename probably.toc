@@ -2,13 +2,15 @@
 ## Title: Probably
 ## Notes: Probably
 ## Author: Ben Phelps
-## SavedVariablesPerCharacter: ProbablyEngine_Data
+## SavedVariablesPerCharacter: ProbablyEngine_ConfigData
 
 # external libs
 external\LibStub\LibStub.lua
 external\CallbackHandler-1.0\CallbackHandler-1.0.xml
 external\LibRangeCheck-2.0\LibRangeCheck-2.0.lua
+external\AceConsole-3.0\AceConsole-3.0.xml
 external\AceGUI-3.0\AceGUI-3.0.xml
+external\AceConfig-3.0\AceConfig-3.0.xml
 external\ForAllIndentsAndPurposes\indent.lua
 
 # shebang
@@ -34,7 +36,7 @@ system\conditions\core.lua
 # Modules
 system\modules\player.lua
 system\modules\target.lua
-system\modules\world.lua
+system\modules\combat_tracker.lua
 system\modules\queue.lua
 system\modules\config.lua
 system\modules\tooltip.lua
@@ -48,6 +50,8 @@ system\timers\combatable.lua
 # Interface
 interface\interface.xml
 interface\interface.lua
+interface\config.lua
+interface\tracker.lua
 interface\buttons.lua
 interface\toggle.lua
 interface\buttons\core.lua

@@ -14,11 +14,12 @@ end
 
 ProbablyEngine.module.player.casted = function(query)
   local count = 0
-  for _,spell in ipairs(ProbablyEngine.module.player.cast_cache) do
+  for _, spell in ipairs(ProbablyEngine.module.player.cast_cache) do
     if spell == query then
         count = count + 1
     else
       return count
     end
   end
+  return 0
 end

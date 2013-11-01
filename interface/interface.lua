@@ -33,6 +33,7 @@ function ProbablyEngine_Minimap_OnClick(button)
     end
   else
     InterfaceOptionsFrame_OpenToCategory('ProbablyEngine')
+    InterfaceOptionsFrame_OpenToCategory('ProbablyEngine')
   end
 end
 
