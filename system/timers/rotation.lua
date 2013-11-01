@@ -1,7 +1,7 @@
 -- ProbablyEngine Rotations - https://probablyengine.com/
 -- Released under modified BSD, see attached LICENSE.
 
-ProbablyEngine.timer.register("rotation", function()
+ProbablyEngine.cycle = function(skip_verify)
 
   local cycle =
     IsMounted() ~= 1
@@ -9,10 +9,11 @@ ProbablyEngine.timer.register("rotation", function()
     and ProbablyEngine.active
     and ProbablyEngine.module.player.specId
 
-  if cycle then
+  if cycle or skip_verify then
 
     local spell, target = ''
 
+    --[[ Disabled for now...
     local queue = ProbablyEngine.module.queue.queue
     local macro_queue = ProbablyEngine.module.queue.macro_queue
     if queue ~= nil and ProbablyEngine.parser.can_cast(queue) then
@@ -25,7 +26,9 @@ ProbablyEngine.timer.register("rotation", function()
       return
     else
       spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation.activeRotation)
-    end
+    end]]--
+
+    spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation.activeRotation)
 
     if spell then
 
@@ -49,8 +52,12 @@ ProbablyEngine.timer.register("rotation", function()
       end
     end
   end
-end, ProbablyEngine.cycleTime)
 
+end
+
+ProbablyEngine.timer.register("rotation", function()
+    ProbablyEngine.cycle()
+end, ProbablyEngine.cycleTime)
 
 ProbablyEngine.timer.register("oocrotation", function()
   local cycle =
