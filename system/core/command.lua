@@ -37,3 +37,22 @@ ProbablyEngine.command.register('pe', function(msg, box)
     ProbablyEngine.command.print('Unknown command: ' .. command);
   end
 end)
+ProbablyEngine.command.register_handler({'toggle', 'enable', 'disable'}, function()
+  ProbablyEngine.buttons.toggle('MasterToggle')
+end)
+
+ProbablyEngine.command.register_handler({'cd', 'cooldown', 'cooldowns'}, function()
+  ProbablyEngine.buttons.toggle('cooldown')
+end)
+
+ProbablyEngine.command.register_handler({'kick', 'interrupts', 'interrupt', 'silence'}, function()
+  ProbablyEngine.buttons.toggle('interrupt')
+end)
+
+ProbablyEngine.command.register_handler({'aoe', 'multitarget'}, function()
+  ProbablyEngine.buttons.toggle('multitarget')
+end)
+
+ProbablyEngine.command.register_handler({'ut', 'unittracker', 'tracker'}, function()
+  UnitTracker.toggle()
+end)
