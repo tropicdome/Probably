@@ -17,7 +17,7 @@ ProbablyEngine.config.read = function(key, default)
 end
 
 ProbablyEngine.config.write = function(key, value)
-  ProbablyEngine.print("Writing Config Key: " .. key)
+  ProbablyEngine.debug("Writing Config Key: " .. key, 5)
   ProbablyEngine.config.data[tostring(key)] = value
 end
 
@@ -26,6 +26,11 @@ ProbablyEngine.config.load = function(data)
   ProbablyEngine.config.data = data
 end
 
-ProbablyEngine.config.interfaceSet = function(a, b)
-  print(a,b)
+ProbablyEngine.config.toggle = function(key)
+  if ProbablyEngine.config.data[tostring(key)] then
+    ProbablyEngine.config.data[tostring(key)] = not ProbablyEngine.config.data[tostring(key)]
+    return ProbablyEngine.config.data[tostring(key)]
+  else
+    ProbablyEngine.config.data[tostring(key)] = true
+  end
 end
