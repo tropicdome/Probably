@@ -5,6 +5,7 @@ ProbablyEngine.rotation = {
   rotations = { },
   oocrotations =  { },
   custom = { },
+  ooccustom = { },
   cdesc = { },
   buttons = { },
   specId = { },
@@ -91,15 +92,12 @@ ProbablyEngine.rotation.register = function(specId, spellTable, arg1, arg2)
   if type(arg1) == "table" then
     oocrotation = arg1
   end
-
   if type(arg1) == "function" then
     buttons = arg1
   end
-
   if type(arg2) == "table" then
     oocrotation = arg2
   end
-
   if type(arg2) == "function" then
     buttons = arg2
   end
@@ -175,6 +173,11 @@ ProbablyEngine.rotation.list_custom = function()
         local text = ProbablyEngine.rotation.cdesc[specId]
         ProbablyEngine.rotation.currentStringComp = text
         ProbablyEngine.rotation.activeRotation = ProbablyEngine.rotation.custom[specId]
+        if ProbablyEngine.rotation.ooccustom[ProbablyEngine.module.player.specId] then
+          ProbablyEngine.rotation.activeOOCRotation = ProbablyEngine.rotation.ooccustom[ProbablyEngine.module.player.specId]
+        else
+          ProbablyEngine.rotation.activeOOCRotation = false
+        end
         ProbablyEngine.print('Switched active rotation to: ' .. text)
       end
       UIDropDownMenu_AddButton(info)
@@ -182,7 +185,26 @@ ProbablyEngine.rotation.list_custom = function()
   end
 end
 
-ProbablyEngine.rotation.register_custom = function(specId, desc, spellTable, buttons)
+ProbablyEngine.rotation.register_custom = function(specId, desc, spellTable, arg1, arg2)
+
+
+  if type(arg1) == "table" then
+    oocrotation = arg1
+  end
+  if type(arg1) == "function" then
+    buttons = arg1
+  end
+  if type(arg2) == "table" then
+    oocrotation = arg2
+  end
+  if type(arg2) == "function" then
+    buttons = arg2
+  end
+
+  if oocrotation then
+    ProbablyEngine.rotation.ooccustom[specId] = oocrotation
+  end
+
   ProbablyEngine.rotation.custom[specId] = spellTable
   ProbablyEngine.rotation.cdesc[specId] = desc
   if buttons and type(buttons) == 'function' then
