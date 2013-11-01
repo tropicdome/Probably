@@ -31,7 +31,7 @@ UnitTrackerSizer = CreateFrame("Frame", nil, PE_Tracker)
 UnitTrackerSizer:SetWidth(10)
 UnitTrackerSizer:SetHeight(10)
 UnitTrackerSizer:SetPoint("BOTTOMRIGHT", PE_Tracker)
-UnitTrackerSizer:SetFrameStrata("HIGH")
+UnitTrackerSizer:SetFrameStrata("MEDIUM")
 
 local UnitTrackerSizer_texture = UnitTrackerSizer:CreateTexture(nil, "BACKGROUND")
 UnitTrackerSizer_texture:SetTexture(1,1,1,0.5)
