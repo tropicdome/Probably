@@ -43,7 +43,7 @@ ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
   local evaluation = false
   if #comparator_table == 3 then
     local condition_call = ProbablyEngine.dsl.get(comparator_table[1])(target, condition_spell)
-
+    if condition_call == false then condition_call = 0 end
     local value = tonumber(condition_call)
     local compare_value = tonumber(comparator_table[3])
     if compare_value == nil then
