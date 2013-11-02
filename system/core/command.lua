@@ -50,27 +50,3 @@ ProbablyEngine.command.register_handler({'init', 'initmacro', 'initmacros'}, fun
   CreateMacro("PE_Interrupts", "Ability_Kick", "/pe interrupts");
   CreateMacro("PE_AoE", "Ability_Druid_Starfall", "/pe aoe");
 end)
-
-ProbablyEngine.command.register_handler({'cycle', 'pew', 'run'}, function()
-  ProbablyEngine.cycle(true)
-end)
-
-ProbablyEngine.command.register_handler({'toggle', 'enable', 'disable'}, function()
-  ProbablyEngine.buttons.toggle('MasterToggle')
-end)
-
-ProbablyEngine.command.register_handler({'cd', 'cooldown', 'cooldowns'}, function()
-  ProbablyEngine.buttons.toggle('cooldown')
-end)
-
-ProbablyEngine.command.register_handler({'kick', 'interrupts', 'interrupt', 'silence'}, function()
-  ProbablyEngine.buttons.toggle('interrupt')
-end)
-
-ProbablyEngine.command.register_handler({'aoe', 'multitarget'}, function()
-  ProbablyEngine.buttons.toggle('multitarget')
-end)
-
-ProbablyEngine.command.register_handler({'ut', 'unittracker', 'tracker'}, function()
-  UnitTracker.toggle()
-end)
