@@ -17,4 +17,6 @@ ProbablyEngine = {
   lag = 0
 }
 
+-- SavedVariables
 ProbablyEngine_ConfigData = { }
+ProbablyEngine_RotationData = { }

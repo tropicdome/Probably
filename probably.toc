@@ -3,6 +3,7 @@
 ## Notes: Probably
 ## Author: Ben Phelps
 ## SavedVariablesPerCharacter: ProbablyEngine_ConfigData
+## SavedVariables: ProbablyEngine_RotationData
 
 # external libs
 external\LibStub\LibStub.lua
@@ -54,6 +55,8 @@ interface\config.lua
 interface\tracker.lua
 interface\buttons.lua
 interface\toggle.lua
+interface\custom.lua
+interface\manager.lua
 interface\buttons\core.lua
 interface\commands\core.lua
 
