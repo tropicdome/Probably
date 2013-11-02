@@ -6,18 +6,22 @@ ProbablyEngine.listener = {
   listeners = { },
 }
 
-ProbablyEngine.listener.register = function(event, arg1, arg2)
-  ProbablyEngine.debug("Event Registered: " .. event, 4)
+ProbablyEngine.listener.register = function(...)
+
   local name = false
   local callback = false
 
-  if type(arg1) == "string" then
-    name = arg1
-    callback = arg2
+  if select('#', ...) == 3 then
+    name, _ = select(1, ...)
+    event, _ = select(2, ...)
+    callback = select(3, ...)
   else
     name = 'defualt'
-    callback = arg1
+    event, _ = select(1, ...)
+    callback = select(2, ...)
   end
+
+  ProbablyEngine.debug("Event Registered: " .. event, 4)
 
   -- is this our first handler ?
   if not ProbablyEngine.listener.handlers[name] then
