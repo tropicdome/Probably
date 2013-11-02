@@ -264,6 +264,10 @@ ProbablyEngine.condition.register("runes.count", function(target, rune)
   return 0
 end)
 
+ProbablyEngine.condition.register("runes", function(target, rune)
+  return ProbablyEngine.condition["runes.count"](target, rune)
+end)
+
 ProbablyEngine.condition.register("health", function(target, spell)
   if UnitExists(target) then
     return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
