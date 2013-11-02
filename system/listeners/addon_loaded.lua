@@ -16,4 +16,7 @@ ProbablyEngine.listener.register("ADDON_LOADED", function(...)
   -- position the minimap icon
   ProbablyEngine_Minimap_Reposition()
 
+  -- update tracker state
+  UnitTracker.toggle(true)
+
 end)

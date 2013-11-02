@@ -18,12 +18,22 @@ UnitTracker:SetHeight(max_tracking*tracking_height+(max_tracking*2))
 UnitTracker:SetPoint("CENTER", UIParent)
 UnitTracker:SetResizable(true)
 UnitTracker:SetMovable(true)
+UnitTracker:Hide()
 
-UnitTracker.toggle = function()
-  if UnitTracker:IsShown() then
-    UnitTracker:Hide()
+UnitTracker.toggle = function(load)
+  if load then
+    local toggleState = ProbablyEngine.config.read('ut_toggle')
+    if toggleState then
+      UnitTracker:Show()
+    end
   else
-    UnitTracker:Show()
+    if UnitTracker:IsShown() then
+      UnitTracker:Hide()
+      ProbablyEngine.config.write('ut_toggle', false)
+    else
+      UnitTracker:Show()
+      ProbablyEngine.config.write('ut_toggle', true)
+    end
   end
 end
 
@@ -301,8 +311,6 @@ ProbablyEngine.timer.register("updateCTHealthUI", function()
     CombatTableUnit[i].unitHealth:SetText('')
   end
 end, 100)
-
-
 
 ProbablyEngine.interface.cleanCT = function()
   for i = 1, max_tracking do
