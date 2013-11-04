@@ -47,23 +47,33 @@ ProbablyEngine.rotation.list_custom = (function()
   info.text = 'Custom Rotations'
   UIDropDownMenu_AddButton(info)
 
-  for _,rotation in pairs(ProbablyEngine.rotation.custom[mySpecId]) do
-    info = { }
-    info.text = rotation.desc
-    info.value = info.text
-    info.checked = (ProbablyEngine.rotation.currentStringComp == info.text)
-    info.func = function()
-      local text = rotation.desc
-      ProbablyEngine.rotation.currentStringComp = text
-      ProbablyEngine.rotation.activeRotation = rotation.spellTable
-      if rotation.oocrotation then
-        ProbablyEngine.rotation.activeOOCRotation = rotation.oocrotation
-      else
-        ProbablyEngine.rotation.activeOOCRotation = false
+  if ProbablyEngine.rotation.custom[mySpecId] then
+    for _,rotation in pairs(ProbablyEngine.rotation.custom[mySpecId]) do
+      info = { }
+      info.text = rotation.desc
+      info.value = info.text
+      info.checked = (ProbablyEngine.rotation.currentStringComp == info.text)
+      info.func = function()
+        local text = rotation.desc
+        ProbablyEngine.rotation.currentStringComp = text
+        ProbablyEngine.rotation.activeRotation = rotation.spellTable
+        if rotation.oocrotation then
+          ProbablyEngine.rotation.activeOOCRotation = rotation.oocrotation
+        else
+          ProbablyEngine.rotation.activeOOCRotation = false
+        end
+        ProbablyEngine.print('Switched active rotation to: ' .. text)
       end
-      ProbablyEngine.print('Switched active rotation to: ' .. text)
+      UIDropDownMenu_AddButton(info)
     end
+  else
+    info = { }
+    info.isTitle = false
+    info.notCheckable = true
+    info.text = 'No Custom Rotations Loaded'
     UIDropDownMenu_AddButton(info)
   end
+
+
 
 end)
