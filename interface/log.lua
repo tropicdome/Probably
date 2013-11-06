@@ -41,7 +41,8 @@ ActionLog:SetScript("OnHide", function(self)
   end
 end)
 ActionLog:SetScript("OnMouseWheel", function(self, mouse)
-  if IsShiftKeyDown() then
+  -- borked
+  --[[if IsShiftKeyDown() then
     if delta == 1 then
       delta = 0
     else
@@ -49,15 +50,15 @@ ActionLog:SetScript("OnMouseWheel", function(self, mouse)
     end
   else
     delta = delta + mouse
-  end
+  end]]--
 end)
 
 
-local ActionLogDivA = CreateFrame("Frame", nil , ActionLog)
+local ActionLogDivA = CreateFrame("Frame", nil , PE_ActionLog)
 ActionLogDivA:SetFrameLevel(99)
 ActionLogDivA:SetWidth(1)
 ActionLogDivA:SetHeight(abs_height)
-ActionLogDivA:SetPoint("LEFT", ActionLog, 125, 0)
+ActionLogDivA:SetPoint("LEFT", PE_ActionLog, 125, 0)
 ActionLogDivA:SetMovable(true)
 
 local ActionLogDivA_texture = ActionLogDivA:CreateTexture(nil, "BACKGROUND")
@@ -65,11 +66,11 @@ ActionLogDivA_texture:SetTexture(0,0,0,0.5)
 ActionLogDivA_texture:SetAllPoints(ActionLogDivA)
 ActionLogDivA.texture = ActionLogDivA_texture
 
-local ActionLogDivB = CreateFrame("Frame", nil , ActionLog)
+local ActionLogDivB = CreateFrame("Frame", nil , PE_ActionLog)
 ActionLogDivB:SetFrameLevel(99)
 ActionLogDivB:SetWidth(1)
 ActionLogDivB:SetHeight(abs_height)
-ActionLogDivB:SetPoint("LEFT", ActionLog, 375, 0)
+ActionLogDivB:SetPoint("LEFT", PE_ActionLog, 375, 0)
 ActionLogDivB:SetMovable(true)
 
 local ActionLogDivB_texture = ActionLogDivB:CreateTexture(nil, "BACKGROUND")
@@ -78,7 +79,7 @@ ActionLogDivB_texture:SetAllPoints(ActionLogDivB)
 ActionLogDivB.texture = ActionLogDivB_texture
 
 
---ActionLog:Hide()
+PE_ActionLog:Hide()
 
 local ActionLogHeader = CreateFrame("Frame", nil, PE_ActionLog)
 ActionLogHeader:SetFrameLevel(92)
@@ -117,11 +118,15 @@ ActionLogClose.statusText = ActionLogHeader:CreateFontString('PE_ActionLogCloseX
 ActionLogClose.statusText:SetFont("Fonts\\ARIALN.TTF", 20)ActionLogClose.statusText:SetPoint("CENTER", ActionLogClose)
 ActionLogClose.statusText:SetText("×")
 
+ActionLogClose:SetScript("OnMouseUp", function(self, button)
+  PE_ActionLog:Hide()
+end)
+
 local ActionLogItem = { }
 
 for i = 1, (log_items) do
 
-  ActionLogItem[i] = CreateFrame("Frame", nil, UnitTracker)
+  ActionLogItem[i] = CreateFrame("Frame", nil, PE_ActionLog)
   ActionLogItem[i]:SetFrameLevel(94)
   local texture = ActionLogItem[i]:CreateTexture(nil, "BACKGROUND")
   texture:SetAllPoints(ActionLogItem[i])
@@ -168,7 +173,7 @@ ProbablyEngine.actionLog = { }
 ProbablyEngine.actionLog.log = { }
 
 ProbablyEngine.timer.register("updateActionLog", function()
-
+  if not PE_ActionLog:IsShown() then return end
 
   local offset = 0
   local entries = select('#', ProbablyEngine.actionLog.log)

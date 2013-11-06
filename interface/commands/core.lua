@@ -28,3 +28,7 @@ end)
 ProbablyEngine.command.register_handler({'ct', 'combattracker', 'ut', 'unittracker', 'tracker'}, function()
   UnitTracker.toggle()
 end)
+
+ProbablyEngine.command.register_handler({'al', 'log', 'actionlog'}, function()
+  ActionLog:Show()
+end)
