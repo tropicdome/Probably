@@ -93,6 +93,13 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
       end
     end
 
+    -- is our eval a lib call ?
+    if evaluationType == "string" then
+      if string.sub(evaluation, 1, 1) == '@' then
+        evaluationType = "library"
+      end
+    end
+
     if eventType == "string" then
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, event)
@@ -100,6 +107,8 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
         evaluation = ProbablyEngine.parser.nested(evaluation, event)
       elseif evaluationType == "function" then
         evaluation = evaluation()
+      elseif evaluationType == "library" then
+        evaluation = ProbablyEngine.library.parse(event, evaluation, target)
       elseif evaluationType == "nil" then
         evaluation = true
       end

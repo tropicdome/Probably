@@ -30,6 +30,7 @@ system\core\parser.lua
 system\core\rotation.lua
 system\core\condition.lua
 system\core\dsl.lua
+system\core\library.lua
 
 # Conditions
 system\conditions\core.lua
