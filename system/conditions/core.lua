@@ -92,6 +92,11 @@ ProbablyEngine.condition.register("demonicfury", function(target, spell)
   return UnitPower(target, SPELL_POWER_DEMONIC_FURY)
 end)
 
+ProbablyEngine.condition.register("embers", function(target, spell)
+  return UnitPower(target, SPELL_POWER_BURNING_EMBERS, true)
+end)
+
+
 ProbablyEngine.condition.register("combopoints", function()
   return GetComboPoints('player', 'target')
 end)
