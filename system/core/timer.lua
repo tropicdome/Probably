@@ -26,7 +26,7 @@ ProbablyEngine.timer.handle = function (self, elapsed)
   for timer, struct in pairs(ProbablyEngine.timer.timers) do
     struct.last = struct.last + elapsed
     if (struct.last > struct.period) then
-      ProbablyEngine.debug("Timer Fire: " .. timer , 7)
+      ProbablyEngine.debug.print("Timer Fire: " .. timer , 'timer')
       struct.event()
       struct.last = 0
     end

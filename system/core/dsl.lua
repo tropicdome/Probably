@@ -62,7 +62,7 @@ ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
       elseif comparator_table[2] == '!=' or comparator_table[2] == '!' then
         evaluation = value ~= compare_value
       else
-        ProbablyEngine.debug("Calling non-existant comparator: [" .. comparator_table .. "]", 1)
+        ProbablyEngine.debug.print("Calling non-existant comparator: [" .. comparator_table .. "]", 'dsl_no_exist')
         evaluation = false
       end
     end
@@ -72,7 +72,7 @@ ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
   if modify_not then
     return not evaluation
   end
-  ProbablyEngine.debug(condition ..'-'.. target ..'-'.. condition_spell ..'-'.. tostring(evaluation), 6)
+  ProbablyEngine.debug.print(condition ..'-'.. target ..'-'.. condition_spell ..'-'.. tostring(evaluation), 'dsl_debug')
   return evaluation
 end
 
@@ -130,6 +130,7 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
     condition = ProbablyEngine.dsl.conditionize(target, condition)
     return ProbablyEngine.dsl.comparator(condition..'.'..parse_table[3], target, condition_spell)
   end
+  ProbablyEngine.debug.print("Calling DSL: " .. dsl, 'dsl_call')
   return ProbablyEngine.dsl.get(dsl)('target', spell)
 end
 
@@ -137,7 +138,7 @@ ProbablyEngine.dsl.get = function(condition)
   if ProbablyEngine.condition[condition] ~= nil then
     return ProbablyEngine.condition[condition]
   else
-    ProbablyEngine.debug("Calling non-existant dsl condition: [" .. condition .. "]", 1)
+    ProbablyEngine.debug.print("Calling non-existant dsl condition: [" .. condition .. "]", 'dsl_no_exist')
     return (function() return false end)
   end
 end

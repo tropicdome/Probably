@@ -9,7 +9,7 @@ ProbablyEngine.library = {
 
 ProbablyEngine.library.register = function(name, lib)
   if ProbablyEngine.library.libs[name] then
-    ProbablyEngine.debug("Cannot overwrite library:" .. name, 3)
+    ProbablyEngine.debug.print("Cannot overwrite library:" .. name, 'library')
     return false
   end
   ProbablyEngine.library.libs[name] = lib

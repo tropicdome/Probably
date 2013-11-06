@@ -112,7 +112,7 @@ ProbablyEngine.rotation.register = function(specId, spellTable, arg1, arg2)
     ProbablyEngine.rotation.buttons[specId] = buttons
   end
 
-  ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
+  ProbablyEngine.debug.print('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 'rotation')
 end
 
 
@@ -148,7 +148,7 @@ ProbablyEngine.rotation.register_custom = function(specId, _desc, _spellTable, a
     buttons = _buttons,
   })
 
-  ProbablyEngine.debug('Loaded Custom Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
+  ProbablyEngine.debug.print('Loaded Custom Rotation for ' .. ProbablyEngine.rotation.specId[specId], 'rotation')
 end
 
 -- Lower memory used, no need in storing rotations for other classes
@@ -156,7 +156,7 @@ ProbablyEngine.rotation.auto_unregister = function()
   local classId = select(3, UnitClass("player"))
   for specId,_ in pairs(ProbablyEngine.rotation.rotations) do
     if ProbablyEngine.rotation.classSpecId[specId] ~= classId then
-      ProbablyEngine.debug('AutoUnloaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
+      ProbablyEngine.debug.print('AutoUnloaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 'rotation')
       ProbablyEngine.rotation.classSpecId[specId] = nil
       ProbablyEngine.rotation.specId[specId] = nil
       ProbablyEngine.rotation.rotations[specId] = nil

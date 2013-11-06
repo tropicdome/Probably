@@ -6,7 +6,7 @@ ProbablyEngine.config = {
 }
 
 ProbablyEngine.config.read = function(key, default)
-  ProbablyEngine.debug("Reading Config Key: " .. tostring(key), 5)
+  ProbablyEngine.debug.print("Reading Config Key: " .. tostring(key), 'config')
   if ProbablyEngine.config.data[tostring(key)] then
     return ProbablyEngine.config.data[tostring(key)]
   elseif default then
@@ -17,12 +17,12 @@ ProbablyEngine.config.read = function(key, default)
 end
 
 ProbablyEngine.config.write = function(key, value)
-  ProbablyEngine.debug("Writing Config Key: " .. key, 5)
+  ProbablyEngine.debug.print("Writing Config Key: " .. key, 'config')
   ProbablyEngine.config.data[tostring(key)] = value
 end
 
 ProbablyEngine.config.load = function(data)
-  ProbablyEngine.debug("Config Data Loaded", 5)
+  ProbablyEngine.debug.print("Config Data Loaded", 'config')
   ProbablyEngine.config.data = data
 end
 

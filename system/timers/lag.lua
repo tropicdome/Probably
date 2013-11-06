@@ -11,7 +11,7 @@ ProbablyEngine.timer.register("lag", function()
     if ProbablyEngine.lag < 500 then
       ProbablyEngine.cycleTime = ProbablyEngine.lag
       ProbablyEngine.timer.updatePeriod("rotation", ProbablyEngine.cycleTime)
-      ProbablyEngine.debug("Dynamic Cycle Update: " .. ProbablyEngine.cycleTime .. "ms" , 4)
+      ProbablyEngine.debug.print.print("Dynamic Cycle Update: " .. ProbablyEngine.cycleTime .. "ms" , 'dynamic')
     end
   else
     ProbablyEngine.cycleTime = ProbablyEngine.config.read('dyncycletime', 100)

@@ -9,14 +9,14 @@ ProbablyEngine.module.register("queue", {
 ProbablyEngine.module.queue.add_spell = function(spell_name)
   if ProbablyEngine.module.queue.queue ~= spell_name then
     ProbablyEngine.module.queue.queue = spell_name
-    ProbablyEngine.debug(spell_name .. " was queued for casting.", 2)
+    ProbablyEngine.debug.print(spell_name .. " was queued for casting.", 'queue')
   end
 end
 
 ProbablyEngine.module.queue.add_macro = function(macro_id)
   if ProbablyEngine.module.queue.macro_queue ~= macro_id then
     ProbablyEngine.module.queue.macro_queue = macro_id
-    ProbablyEngine.debug("Macro ID " .. macro_id .. " was queued for casting.", 2)
+    ProbablyEngine.debug.print("Macro ID " .. macro_id .. " was queued for casting.", 'queue')
   end
 end
 

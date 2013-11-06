@@ -21,7 +21,7 @@ ProbablyEngine.listener.register = function(...)
     callback = select(2, ...)
   end
 
-  ProbablyEngine.debug("Event Registered: " .. event, 4)
+  ProbablyEngine.debug.print("Event Registered: " .. event, 'listener')
 
   -- is this our first handler ?
   if not ProbablyEngine.listener.handlers[name] then
@@ -49,7 +49,7 @@ ProbablyEngine.listener.register = function(...)
 end
 
 ProbablyEngine.listener.unregister = function(event, arg1, arg2)
-  ProbablyEngine.debug("Event Unregistered: " .. event, 4)
+  ProbablyEngine.debug.print("Event Unregistered: " .. event, 'listener')
 
   local name = false
   local callback = false

@@ -35,9 +35,9 @@ ProbablyEngine.cycle = function(skip_verify)
       local name, _, icon, _, _, _, _, _, _ = ProbablyEngine.gsi.call(spell)
 
       if target ~= "ground" then
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 2)
+        ProbablyEngine.debug.print("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 'spell_cast')
       else
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
+        ProbablyEngine.debug.print("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 'spell_cast')
       end
 
       ProbablyEngine.buttons.icon('MasterToggle', icon)
@@ -89,9 +89,9 @@ ProbablyEngine.timer.register("oocrotation", function()
     if spell then
       local name, _, icon, _, _, _, _, _, _ = ProbablyEngine.gsi.call(spell)
       if target ~= "ground" then
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 2)
+        ProbablyEngine.debug.print("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 'spell_cast')
       else
-        ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 2)
+        ProbablyEngine.debug.print("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 'spell_cast')
       end
       ProbablyEngine.buttons.icon('MasterToggle', icon)
       if target == "ground" then
