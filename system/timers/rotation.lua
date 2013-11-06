@@ -33,6 +33,7 @@ ProbablyEngine.cycle = function(skip_verify)
     if spell then
 
       local name, _, icon, _, _, _, _, _, _ = ProbablyEngine.gsi.call(spell)
+
       if target ~= "ground" then
         ProbablyEngine.debug("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 2)
       else
@@ -47,9 +48,24 @@ ProbablyEngine.cycle = function(skip_verify)
         CameraOrSelectOrMoveStop(1) -- this isn't unlocked
         SetCVar("deselectOnClick", "1")
         CastSpellByName(name)
+        if icon then
+          table.insert(ProbablyEngine.actionLog.log, 1, {
+            event = 'Ground Cast',
+            description = '|T' .. icon .. ':-1:-1:0:0|t '..spell..'',
+            time = date("%H:%M:%S")
+          })
+        end
       else
         CastSpellByName(name, target)
+        if icon then
+          table.insert(ProbablyEngine.actionLog.log, 1, {
+            event = 'Spell Cast',
+            description = '|T' .. icon .. ':-1:-1:0:0|t ' .. spell..'',
+            time = date("%H:%M:%S")
+          })
+        end
       end
+
     end
   end
 
@@ -82,6 +98,13 @@ ProbablyEngine.timer.register("oocrotation", function()
         ProbablEngine.print('Ground targeted spells are unsupported in OOC rotations.')
       else
         CastSpellByName(name, target)
+      end
+      if icon then
+        table.insert(ProbablyEngine.actionLog.log, 1, {
+          event = 'Spell Cast Succeed',
+          description = '|T' .. icon .. ':-1:-1:0:0|t '..spell..'',
+          time = date("%H:%M:%S")
+        })
       end
     end
   end

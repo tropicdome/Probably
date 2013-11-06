@@ -57,6 +57,7 @@ interface\buttons.lua
 interface\toggle.lua
 interface\custom.lua
 interface\manager.lua
+interface\log.lua
 interface\buttons\core.lua
 interface\commands\core.lua
 
