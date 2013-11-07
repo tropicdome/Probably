@@ -119,6 +119,8 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
         evaluation = ProbablyEngine.parser.nested(evaluation, '')
       elseif evaluationType == "function" then
         evaluation = evaluation()
+      elseif evaluationType == "library" then
+        evaluation = ProbablyEngine.library.parse(event, evaluation, target)      
       elseif evaluationType == "nil" then
         evaluation = true
       end
