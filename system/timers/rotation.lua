@@ -86,12 +86,11 @@ ProbablyEngine.timer.register("oocrotation", function()
   if cycle then
     local spell, target = ''
     spell, target = ProbablyEngine.parser.table(ProbablyEngine.rotation.activeOOCRotation, 'player')
+    if target == nil then target = 'player' end
     if spell then
       local name, _, icon, _, _, _, _, _, _ = ProbablyEngine.gsi.call(spell)
       if target ~= "ground" then
         ProbablyEngine.debug.print("Casting |T"..icon..":10:10|t ".. name .. " on ( " .. UnitName((target or 'target')) .. " )", 'spell_cast')
-      else
-        ProbablyEngine.debug.print("Casting |T"..icon..":10:10|t ".. name .. " on the ground!", 'spell_cast')
       end
       ProbablyEngine.buttons.icon('MasterToggle', icon)
       if target == "ground" then
