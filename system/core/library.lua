@@ -26,10 +26,10 @@ ProbablyEngine.library.parse = function(event, evaluation, target)
   -- this will work most of the time... I hope :)
   if string.sub(evaluation, -1) == ')' then
     -- the user calls the function for us
-    func = loadstring('return ProbablyEngine.library.libs.' .. call .. '')
+    func = loadstring('local target = "'..target..'";return ProbablyEngine.library.libs.' .. call .. '')
   else
     -- we need to call the function
-    func = loadstring('return ProbablyEngine.library.libs.' .. call .. '()')
+    func = loadstring('local target = "'..target..'";return ProbablyEngine.library.libs.' .. call .. '(target)')
   end
   local eval = func(target, event)
   return eval
