@@ -409,4 +409,7 @@ ProbablyEngine.condition.register("combat", function(target, range)
   return UnitAffectingCombat(target)
 end)
 
-
+ProbablyEngine.condition.register("needsHealing", function(target, threshold)
+  if not threshold then threshold = 80 end
+  return ProbablyEngine.raid.needsHealing(threshold)
+end)

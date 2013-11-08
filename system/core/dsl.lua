@@ -13,7 +13,7 @@ ProbablyEngine.dsl.getConditionalSpell = function(dsl, spell)
   if string.match(dsl, '(.+)%((.+)%)') then
     return string.match(dsl, '(.+)%((.+)%)')
   else
-    return dsl, spell
+    return dsl, (tonumber(spell) or spell)
   end
 end
 
@@ -42,7 +42,7 @@ ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
 
   local evaluation = false
   if #comparator_table == 3 then
-    local condition_call = ProbablyEngine.dsl.get(comparator_table[1])(target, condition_spell)
+    local condition_call = ProbablyEngine.dsl.get(comparator_table[1])(target, (tonumber(condition_spell) or condition_spell))
     if condition_call == false then condition_call = 0 end
     local value = tonumber(condition_call)
     local compare_value = tonumber(comparator_table[3])
@@ -67,12 +67,14 @@ ProbablyEngine.dsl.comparator = function(condition, target, condition_spell)
       end
     end
   else
-    evaluation = ProbablyEngine.dsl.get(condition)(target, condition_spell)
+    ProbablyEngine.dsl.parsedTarget = target
+    evaluation = ProbablyEngine.dsl.get(condition)(target, (tonumber(condition_spell) or condition_spell))
   end
   if modify_not then
     return not evaluation
   end
-  ProbablyEngine.debug.print(condition ..'-'.. target ..'-'.. condition_spell ..'-'.. tostring(evaluation), 'dsl_debug')
+  ProbablyEngine.debug.print(condition ..'-'.. tostring(target)..'-'.. condition_spell ..'-'.. tostring(evaluation), 'dsl_debug')
+  ProbablyEngine.dsl.parsedTarget = target
   return evaluation
 end
 
@@ -107,8 +109,35 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
     return ProbablyEngine.parser.table(dsl)
   end
 
-  local arg1, arg2, arg3 = strsplit('.', dsl, 3)
-  if arg1 then table.insert(parse_table, arg1) end
+  local unitId, arg2, arg3 = strsplit('.', dsl, 3)
+
+  -- healing?
+  if unitId == "lowest" then
+    unitId = ProbablyEngine.raid.lowestHP()
+    if unitId == false then return false end
+  elseif unitId == "!lowest" then
+    unitId = "!" .. ProbablyEngine.raid.lowestHP()
+  elseif unitId == "tank" then
+    if UnitExists("focus") then
+      unitId = "focus"
+    else
+      local possibleTank = ProbablyEngine.raid.tank()
+      if possibleTank then
+        unitId = possibleTank
+      end
+    end
+  elseif unitId == "!tank" then
+    if UnitExists("focus") then
+      unitId = "!focus"
+    else
+      local possibleTank = ProbablyEngine.raid.tank()
+      if possibleTank then
+        unitId =  "!" .. possibleTank
+      end
+    end
+  end
+
+  if unitId then table.insert(parse_table, unitId) end
   if arg2 then table.insert(parse_table, arg2) end
   if arg3 then table.insert(parse_table, arg3) end
 
@@ -123,15 +152,18 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
     if ProbablyEngine.dsl.conditionizers_single[target] then
       return ProbablyEngine.dsl.comparator(condition, parse_table[2], condition_spell)
     end
+    ProbablyEngine.dsl.parsedTarget = target
     return ProbablyEngine.dsl.comparator(condition, target, condition_spell)
   elseif size == 3 then
     local target = parse_table[1]
     local condition, condition_spell, subcondition = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
     condition = ProbablyEngine.dsl.conditionize(target, condition)
+    ProbablyEngine.dsl.parsedTarget = target
     return ProbablyEngine.dsl.comparator(condition..'.'..parse_table[3], target, condition_spell)
   end
   ProbablyEngine.debug.print("Calling DSL: " .. dsl, 'dsl_call')
-  return ProbablyEngine.dsl.get(dsl)('target', spell)
+  ProbablyEngine.dsl.parsedTarget = 'target'
+  return ProbablyEngine.dsl.get(dsl)('target', (tonumber(spell) or spell))
 end
 
 ProbablyEngine.dsl.get = function(condition)

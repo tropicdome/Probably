@@ -36,10 +36,12 @@ ProbablyEngine.parser = {
 }
 
 ProbablyEngine.parser.can_cast =  function(spell, unit)
+
   -- Credits to iLulz (JPS) for this function
   if spell == nil then return false end
   if unit == "ground" then unit = nil end
   if unit == nil then unit = "target" end
+
   local name, rank, icon, cost, isFunnel, powerType, castTime, minRange, maxRange = ProbablyEngine.gsi.call(spellId)
   local skillType, spellId = GetSpellBookItemInfo(spell)
   local isUsable, notEnoughMana = IsUsableSpell(spell)
@@ -83,11 +85,13 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
   for _, arguments in pairs(spellTable) do
 
     local eventType = type(arguments[1])
-    local event = arguments[1]
+    local event = (tonumber(arguments[1]) or arguments[1])
     local evaluationType = type(arguments[2])
     local evaluation = arguments[2]
     local target = arguments[3] or fallBackTarget
     local slotId = 0
+
+
 
     if eventType == "string" then
       if string.sub(event, 1, 1) == '!' then
@@ -104,7 +108,19 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
       end
     end
 
-    if eventType == "string" then
+    -- healing?
+    if target == "lowest" then
+      target = ProbablyEngine.raid.lowestHP()
+      if target == false then return end
+    elseif target == "tank" then
+      if UnitExists("focus") then
+        target = "focus"
+      else
+        target = ProbablyEngine.raid.tank()
+      end
+    end
+
+    if eventType == "string" or eventType == "number" then
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, event)
       elseif evaluationType == "table" then
@@ -124,14 +140,14 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
       elseif evaluationType == "function" then
         evaluation = evaluation()
       elseif evaluationType == "library" then
-        evaluation = ProbablyEngine.library.parse(event, evaluation, target)      
+        evaluation = ProbablyEngine.library.parse(event, evaluation, target)
       elseif evaluationType == "nil" then
         evaluation = true
       end
     end
 
     if target == nil then
-      target = "target"
+      target = ProbablyEngine.dsl.parsedTarget or "target"
     end
 
     if eventType == "item" then
