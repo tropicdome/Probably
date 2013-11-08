@@ -64,11 +64,15 @@ ProbablyEngine.parser.can_cast_queue =  function(spell)
 end
 
 
-ProbablyEngine.parser.nested = function(evaluationTable, event)
+ProbablyEngine.parser.nested = function(evaluationTable, event, target)
+  local eval
   for _, evaluation in pairs(evaluationTable) do
-    local eval = ProbablyEngine.dsl.parse(evaluation, event)
-    if not eval then
-      return false
+    if string.sub(evaluation, 1, 1) == '@' then
+      eval = ProbablyEngine.library.parse(event, evaluation, target)
+      if not eval then return false end
+    else
+      eval = ProbablyEngine.dsl.parse(evaluation, event)
+      if not eval then return false end
     end
   end
   return true
@@ -104,7 +108,7 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, event)
       elseif evaluationType == "table" then
-        evaluation = ProbablyEngine.parser.nested(evaluation, event)
+        evaluation = ProbablyEngine.parser.nested(evaluation, event, target)
       elseif evaluationType == "function" then
         evaluation = evaluation()
       elseif evaluationType == "library" then
@@ -116,7 +120,7 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
       if evaluationType == "string"  then
         evaluation = ProbablyEngine.dsl.parse(evaluation, '')
       elseif evaluationType == "table" then
-        evaluation = ProbablyEngine.parser.nested(evaluation, '')
+        evaluation = ProbablyEngine.parser.nested(evaluation, '', target)
       elseif evaluationType == "function" then
         evaluation = evaluation()
       elseif evaluationType == "library" then
@@ -146,7 +150,7 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
 
     if evaluation then
       if eventType == "table" then
-        local testNest = ProbablyEngine.parser.table(event)
+        local testNest = ProbablyEngine.parser.table(event, target)
         if testNest then return testNest end
       elseif eventType == "macro" then
         RunMacroText(string.sub(event, 2))
