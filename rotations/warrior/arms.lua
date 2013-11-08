@@ -7,17 +7,14 @@ ProbablyEngine.rotation.register(71, {
   -- Survival
   { "Rallying Cry", {
     "player.health < 20",
-    "modifier.cooldowns"
   }},
 
   { "Shield Wall", {
-    "player.health < 10",
-    "modifier.cooldowns"
+    "player.health < 10"
   }},
 
   { "Die by the Sword", {
     "player.health < 40",
-    "modifier.cooldowns"
   }},
 
   { "Hamstring", {

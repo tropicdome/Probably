@@ -9,22 +9,22 @@ ProbablyEngine.rotation.register(263, {
     -- Kick
     { "Wind Shear", "modifier.interrupts" },
 
+    -- totemic projection
+    { "Totemic Projection", "modifier.shift", "ground" },
+
     -- Healing
-    { "Chain Heal", {
-      "modifier.multitarget",
-      "player.buff(Maelstrom Weapon).count = 5",
-      "player.health < 80"
-    }},
     { "Healing Surge", {
       "player.buff(Maelstrom Weapon).count = 5",
       "player.health < 80"
     }},
 
+    { "Healing Stream Totem", "player.health < 60" },
+
     -- Cooldowns
     { "Fire Elemental Totem", "modifier.cooldowns" },
     { "Earth Elemental Totem", "modifier.cooldowns" },
     { "Feral Spirit", "modifier.cooldowns" },
-    { "Stormlash Totem", "modifier.cooldowns" },
+    --{ "Stormlash Totem", "modifier.cooldowns" },
     { "Ascendance", {
       "modifier.cooldowns",
       "!player.buff(Ascendance)"
@@ -46,6 +46,11 @@ ProbablyEngine.rotation.register(263, {
     }},
 
     -- AoE
+    { "Flame Shock", "modifier.multitarget" },
+    { "Lava Lash",{
+      "modifier.multitarget",
+      "target.debuff(Flame Shock)"
+    }},
     { "Chain Lightning", {
       "player.buff(Maelstrom Weapon).count = 5",
       "modifier.multitarget"
@@ -57,6 +62,8 @@ ProbablyEngine.rotation.register(263, {
 
     -- Rotation
     { "Unleash Elements" },
+    --{ "Ancestral Swiftness", "spell.cooldown(Elemental Blast) <= 1" },
+    { "Elemental Blast" },
     { "Lightning Bolt", "player.buff(Maelstrom Weapon).count = 5" },
     { "Stormstrike" },
     { "Stormblast" },
@@ -64,6 +71,17 @@ ProbablyEngine.rotation.register(263, {
     { "Flame Shock", "target.debuff(Flame Shock).duration <= 3" },
     { "Lava Lash" },
     { "Earth Shock" },
+
+
+}, {
+
+  -- Buffs
+  { "Windfury Weapon", "!player.enchant.mainhand" },
+  { "Flametongue Weapon", "!player.enchant.offhand" },
+  { "Lightning Shield", "!player.buff(Lightning Shield)" },
+
+  -- Heal
+  { "Healing Stream Totem", "player.health < 60" },
 
 }, function()
   ProbablyEngine.toggle.create('totems', 'Interface\\ICONS\\ability_shaman_totemrelocation', 'Totems', 'Toggle the placement of totems.')

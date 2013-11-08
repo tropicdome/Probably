@@ -1,6 +1,6 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 ProbablyEngine.timer.register("combatable", function()
-  ProbablyEngine.module.world.clean_tables()
+  --ProbablyEngine.module.world.clean_tables()
 end, 1000)

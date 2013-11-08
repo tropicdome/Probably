@@ -1,7 +1,11 @@
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
+
 local ProbablyEngineTempTable1 = { }
 local rangeCheck = LibStub("LibRangeCheck-2.0")
 
 ProbablyEngine.condition.register("buff", function(target, spell)
+  spell = GetSpellInfo(spell)
   local buff,_,_,_,_,_,_,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return true
@@ -10,6 +14,7 @@ ProbablyEngine.condition.register("buff", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("buff.count", function(target, spell)
+  spell = GetSpellInfo(spell)
   local buff,_,_,count,_,_,_,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return count
@@ -18,6 +23,7 @@ ProbablyEngine.condition.register("buff.count", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("debuff", function(target, spell)
+  spell = GetSpellInfo(spell)
   local debuff,_,_,_,_,_,_,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
     return true
@@ -26,6 +32,7 @@ ProbablyEngine.condition.register("debuff", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("debuff.count", function(target, spell)
+  spell = GetSpellInfo(spell)
   local debuff,_,_,count,_,_,_,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
     return count
@@ -34,6 +41,7 @@ ProbablyEngine.condition.register("debuff.count", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("debuff.duration", function(target, spell)
+  spell = GetSpellInfo(spell)
   local debuff,_,_,_,_,_,expires,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
     return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
@@ -42,6 +50,7 @@ ProbablyEngine.condition.register("debuff.duration", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("buff.duration", function(target, spell)
+  spell = GetSpellInfo(spell)
   local buff,_,_,_,_,_,expires,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
@@ -89,6 +98,11 @@ ProbablyEngine.condition.register("demonicfury", function(target, spell)
   return UnitPower(target, SPELL_POWER_DEMONIC_FURY)
 end)
 
+ProbablyEngine.condition.register("embers", function(target, spell)
+  return UnitPower(target, SPELL_POWER_BURNING_EMBERS, true)
+end)
+
+
 ProbablyEngine.condition.register("combopoints", function()
   return GetComboPoints('player', 'target')
 end)
@@ -101,7 +115,7 @@ ProbablyEngine.condition.register("alive", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("exists", function(target)
-  return UnitExists(target)
+  return (UnitExists(target) ~= nil)
 end)
 
 ProbablyEngine.condition.register("modifier.shift", function()
@@ -114,6 +128,30 @@ end)
 
 ProbablyEngine.condition.register("modifier.alt", function()
   return IsAltKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.lshift", function()
+  return IsLeftShiftKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.lcontrol", function()
+  return IsLeftControlKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.lalt", function()
+  return IsLeftAltKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.rshift", function()
+  return IsRightShiftKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.rcontrol", function()
+  return IsRightControlKeyDown() == 1
+end)
+
+ProbablyEngine.condition.register("modifier.ralt", function()
+  return IsRightAltKeyDown() == 1
 end)
 
 ProbablyEngine.condition.register("modifier.player", function()
@@ -237,6 +275,10 @@ ProbablyEngine.condition.register("runes.count", function(target, rune)
   return 0
 end)
 
+ProbablyEngine.condition.register("runes", function(target, rune)
+  return ProbablyEngine.condition["runes.count"](target, rune)
+end)
+
 ProbablyEngine.condition.register("health", function(target, spell)
   if UnitExists(target) then
     return math.floor((UnitHealth(target) / UnitHealthMax(target)) * 100)
@@ -316,12 +358,12 @@ ProbablyEngine.condition.register("totem.duration", function(target, totem)
   return 0
 end)
 
-
-
 ProbablyEngine.condition.register("casting", function(target, spell)
   local castName,_,_,_,_,endTime,_,_,notInterruptibleCast = UnitCastingInfo(target)
   local channelName,_,_,_,_,endTime,_,notInterruptibleChannel = UnitChannelInfo(target)
-  if notInterruptibleCast == false or notInterruptibleChannel == false then
+  if (castName == spell or channelName == spell) and spell ~= nil and spell ~= false then
+    return true
+  elseif notInterruptibleCast == false or notInterruptibleChannel == false then
     return true
   end
   return false
@@ -329,6 +371,7 @@ end)
 
 ProbablyEngine.condition.register("spell.cooldown", function(target, spell)
   local start, duration, enabled = GetSpellCooldown(spell)
+  if not start then return false end
   if start ~= 0 then
     return (start + duration - GetTime())
   end
@@ -337,6 +380,14 @@ end)
 
 ProbablyEngine.condition.register("spell.usable", function(target, spell)
   return IsUsableSpell(spell) ~= nil
+end)
+
+ProbablyEngine.condition.register("spell.exists", function(target, spell)
+  return IsPlayerSpell(spell) ~= nil
+end)
+
+ProbablyEngine.condition.register("spell.casted", function(target, spell)
+  return ProbablyEngine.module.player.casted(spell)
 end)
 
 ProbablyEngine.condition.register("spell.charges", function(target, spell)
@@ -351,10 +402,20 @@ ProbablyEngine.condition.register("spell.range", function(target, spell)
   return IsSpellInRange(spell) == 1
 end)
 
-
-
 ProbablyEngine.condition.register("range", function(target, range)
   local minRange, maxRange = rangeCheck:GetRange(target)
   return maxRange
 end)
 
+ProbablyEngine.condition.register("level", function(target, range)
+  return UnitLevel(target)
+end)
+
+ProbablyEngine.condition.register("combat", function(target, range)
+  return UnitAffectingCombat(target)
+end)
+
+ProbablyEngine.condition.register("needsHealing", function(target, threshold)
+  if not threshold then threshold = 80 end
+  return ProbablyEngine.raid.needsHealing(threshold)
+end)

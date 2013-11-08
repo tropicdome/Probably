@@ -1,11 +1,18 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 ProbablyEngine.rotation = {
   rotations = { },
+  oocrotations =  { },
+  custom = { },
+  ooccustom = { },
+  cdesc = { },
   buttons = { },
   specId = { },
-  classSpecId = { }
+  classSpecId = { },
+  currentStringComp = "",
+  activeRotation = false,
+  activeOOCRotation = false,
 }
 
 ProbablyEngine.rotation.specId[62] = 'Arcane Mage'
@@ -78,12 +85,70 @@ ProbablyEngine.rotation.classSpecId[268] = 10
 ProbablyEngine.rotation.classSpecId[269] = 10
 ProbablyEngine.rotation.classSpecId[270] = 10
 
-ProbablyEngine.rotation.register = function(specId, spellTable, buttons)
+ProbablyEngine.rotation.register = function(specId, spellTable, arg1, arg2)
+
+  local buttons, oocrotation = nil, nil
+
+  if type(arg1) == "table" then
+    oocrotation = arg1
+  end
+  if type(arg1) == "function" then
+    buttons = arg1
+  end
+  if type(arg2) == "table" then
+    oocrotation = arg2
+  end
+  if type(arg2) == "function" then
+    buttons = arg2
+  end
+
   ProbablyEngine.rotation.rotations[specId] = spellTable
+
+  if oocrotation then
+    ProbablyEngine.rotation.oocrotations[specId] = oocrotation
+  end
+
   if buttons and type(buttons) == 'function' then
     ProbablyEngine.rotation.buttons[specId] = buttons
   end
-  ProbablyEngine.debug('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
+
+  ProbablyEngine.debug.print('Loaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 'rotation')
+end
+
+
+ProbablyEngine.rotation.register_custom = function(specId, _desc, _spellTable, arg1, arg2)
+
+  local _oocrotation, _buttons = false
+
+  if type(arg1) == "table" then
+    _oocrotation = arg1
+  end
+  if type(arg1) == "function" then
+    _buttons = arg1
+  end
+  if type(arg2) == "table" then
+    _oocrotation = arg2
+  end
+  if type(arg2) == "function" then
+    _buttons = arg2
+  end
+
+  if _oocrotation then
+    ProbablyEngine.rotation.ooccustom[specId] = _oocrotation
+  end
+
+  if not ProbablyEngine.rotation.custom[specId] then
+    ProbablyEngine.rotation.custom[specId] = { }
+  end
+
+  table.insert(ProbablyEngine.rotation.custom[specId], {
+    desc = _desc,
+    spellTable = _spellTable,
+    oocrotation = _oocrotation,
+    buttons = _buttons,
+  })
+
+  ProbablyEngine.debug.print('Loaded Custom Rotation for ' .. ProbablyEngine.rotation.specId[specId], 'rotation')
 end
 
 -- Lower memory used, no need in storing rotations for other classes
@@ -91,14 +156,13 @@ ProbablyEngine.rotation.auto_unregister = function()
   local classId = select(3, UnitClass("player"))
   for specId,_ in pairs(ProbablyEngine.rotation.rotations) do
     if ProbablyEngine.rotation.classSpecId[specId] ~= classId then
-      ProbablyEngine.debug('AutoUnloaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 3)
+      ProbablyEngine.debug.print('AutoUnloaded Rotation for ' .. ProbablyEngine.rotation.specId[specId], 'rotation')
       ProbablyEngine.rotation.classSpecId[specId] = nil
       ProbablyEngine.rotation.specId[specId] = nil
       ProbablyEngine.rotation.rotations[specId] = nil
       ProbablyEngine.rotation.buttons[specId] = nil
     end
   end
-  ProbablyEngine.rotation.classSpecId = nil
   collectgarbage('collect')
 end
 

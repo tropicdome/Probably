@@ -1,7 +1,6 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 ProbablyEngine.listener.register("GROUP_ROSTER_UPDATE", function(...)
-  ProbablyEngine.module.world.rebuild_friendly()
-  ProbablyEngine.module.world.add_friendly(UnitGUID("player"), UnitName("player"))
+  ProbablyEngine.raid.build()
 end)

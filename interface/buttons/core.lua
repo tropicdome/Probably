@@ -1,16 +1,23 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
-ProbablyEngine.buttons.create('MasterToggle', nil, function(self)
-  ProbablyEngine.active = not ProbablyEngine.active
-  self.checked = not self.checked
-  if self.checked then
-    ProbablyEngine.buttons.setActive('MasterToggle')
+local AceGUI = LibStub("AceGUI-3.0")
+
+ProbablyEngine.buttons.create('MasterToggle', nil, function(self, button)
+  if button == "LeftButton" then
+    ProbablyEngine.active = not ProbablyEngine.active
+    self.checked = not self.checked
+    self:SetChecked(self.checked)
+    ProbablyEngine.config.data['button_states']['MasterToggle'] = self.checked
   else
-    ProbablyEngine.buttons.setInactive('MasterToggle')
+    local dropdown = CreateFrame("Frame", "Test_DropDown", self, "UIDropDownMenuTemplate");
+    UIDropDownMenu_Initialize(dropdown, ProbablyEngine.rotation.list_custom, "MENU");
+    ToggleDropDownMenu(1, nil, dropdown, self, 0, 0);
+    -- Don't toggle the state, I'm not sure why a return value can't handle this
+    self.checked = self.checked
+    self:SetChecked(self.checked)
   end
-  ProbablyEngine_Data.button_states['MasterToggle'] = self.checked
-end, 'Toggle', 'Temporarily enable or disable the addon.')
+end, 'Toggle', 'Temporarily enable or disable the rotation.')
 
 ProbablyEngine.toggle.create('cooldowns', 'Interface\\ICONS\\Achievement_BG_winAB_underXminutes', 'Cooldowns', 'Toggle the usage of long duration cooldowns.')
 ProbablyEngine.toggle.create('multitarget', 'Interface\\ICONS\\Ability_Druid_Starfall', 'Multi-Target', 'Toggle the usage of multi-target abilities.')

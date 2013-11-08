@@ -1,5 +1,5 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
 ProbablyEngine.module.register("queue", {
   queue = nil,
@@ -9,14 +9,14 @@ ProbablyEngine.module.register("queue", {
 ProbablyEngine.module.queue.add_spell = function(spell_name)
   if ProbablyEngine.module.queue.queue ~= spell_name then
     ProbablyEngine.module.queue.queue = spell_name
-    ProbablyEngine.debug(spell_name .. " was queued for casting.", 2)
+    ProbablyEngine.debug.print(spell_name .. " was queued for casting.", 'queue')
   end
 end
 
 ProbablyEngine.module.queue.add_macro = function(macro_id)
   if ProbablyEngine.module.queue.macro_queue ~= macro_id then
     ProbablyEngine.module.queue.macro_queue = macro_id
-    ProbablyEngine.debug("Macro ID " .. macro_id .. " was queued for casting.", 2)
+    ProbablyEngine.debug.print("Macro ID " .. macro_id .. " was queued for casting.", 'queue')
   end
 end
 
@@ -29,7 +29,7 @@ hooksecurefunc("UseAction", function(...)
     if select(3, ...) ~= nil then
       local type, id, subType, spellID = GetActionInfo(select(1,...))
       if type == "spell" then
-        local name,_,_,_,_,_,_,_,_ = GetSpellInfo(id)
+        local name,_,_,_,_,_,_,_,_ = ProbablyEngine.gsi.call(id)
         if ProbablyEngine.parser.can_cast_queue(name) then
           ProbablyEngine.module.queue.add_spell(name)
         end

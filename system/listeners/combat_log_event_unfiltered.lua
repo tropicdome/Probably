@@ -1,36 +1,54 @@
--- ProbablyEngine v0.0.1
--- Ben Phelps (c) 2013
+-- ProbablyEngine Rotations - https://probablyengine.com/
+-- Released under modified BSD, see attached LICENSE.
 
--- lower table lookups since this happens A LOT
-local flags = COMBATLOG_OBJECT_REACTION_HOSTILE
-local pemw = ProbablyEngine.module.world
 local band = bit.band
+
+local HostileEvents = {
+        ['SWING_DAMAGE'] = true,
+        ['SWING_MISSED'] = true,
+        ['RANGE_DAMAGE'] = true,
+        ['RANGE_MISSED'] = true,
+        ['SPELL_DAMAGE'] = true,
+        ['SPELL_PERIODIC_DAMAGE'] = true,
+        ['SPELL_MISSED'] = true
+}
 
 ProbablyEngine.listener.register("COMBAT_LOG_EVENT_UNFILTERED", function(...)
 
-  local death, eventType, _, sourceGUID, sourceName, sourceFlags, _, destGUID, destName, destFlags, _ = ...
+  local timeStamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _ = ...
 
-  -- Build a combat table
-  if pemw.is_friendly(sourceGUID, destGUID) then
+  if sourceName and destName and sourceName ~= '' and destName ~= '' then
 
-    -- Source was hostile, or we got attacked first
-    if band(sourceFlags, flags) > 0 then
-      if eventType == 'PARTY_KILL' or eventType == 'UNIT_DIED' then
-        pemw.remove_enemy(sourceGUID, death)
-      else
-        pemw.add_enemy(sourceGUID, sourceName)
+    if HostileEvents[event] then
+
+      if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_OUTSIDER) == 0 and band(sourceFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0 then
+
+        ProbablyEngine.module.combatTracker.tagUnit(sourceGUID, sourceName, timeStamp)
+        local damage = select(15, ...)
+        --ProbablyEngine.module.combatTracker.damageUnit(destGUID, damage)
+
+      elseif band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_OUTSIDER) == 0 and band(destFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0 then
+
+        ProbablyEngine.module.combatTracker.tagUnit(destGUID, destName, timeStamp)
+        local damage = select(15, ...)
+        ProbablyEngine.module.combatTracker.damageUnit(destGUID, damage)
+
       end
+
     end
 
-    -- Destination was hostile, or we attacked first
-    if band(destFlags, flags) > 0 then
-      if eventType == 'PARTY_KILL' or eventType == 'UNIT_DIED' then
-        pemw.remove_enemy(destGUID, death)
-      else
-        pemw.add_enemy(destGUID, destName)
-      end
-    end
+  elseif (event == 'UNIT_DIED' or event == 'UNIT_DESTROYED' or event == 'UNIT_DISSIPATES') then
+
+    ProbablyEngine.module.combatTracker.killUnit(destGUID)
 
   end
 
+end)
+
+ProbablyEngine.listener.register("UPDATE_MOUSEOVER_UNIT", function(...)
+  local guid = UnitGUID('mouseover')
+  if ProbablyEngine.module.combatTracker.enemy[guid] then
+    ProbablyEngine.module.combatTracker.aquireHealth(guid, true)
+    ProbablyEngine.module.combatTracker.aquireHealth(guid)
+  end
 end)

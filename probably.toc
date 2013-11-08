@@ -2,30 +2,36 @@
 ## Title: Probably
 ## Notes: Probably
 ## Author: Ben Phelps
-## SavedVariablesPerCharacter: ProbablyEngine_Data
+## SavedVariablesPerCharacter: ProbablyEngine_ConfigData
+## SavedVariables: ProbablyEngine_RotationData
 
 # external libs
 external\LibStub\LibStub.lua
 external\CallbackHandler-1.0\CallbackHandler-1.0.xml
 external\LibRangeCheck-2.0\LibRangeCheck-2.0.lua
+external\AceConsole-3.0\AceConsole-3.0.xml
 external\AceGUI-3.0\AceGUI-3.0.xml
+external\AceConfig-3.0\AceConfig-3.0.xml
+external\ForAllIndentsAndPurposes\indent.lua
 
 # shebang
 probably.lua
 
 # Core System
 system\core\debug.lua
+system\core\config.lua
 system\core\module.lua
 system\core\listener.lua
 system\core\buttons.lua
-system\core\toggle.lua
-system\core\slash.lua
+system\core\command.lua
 system\core\timer.lua
 system\core\spellcache.lua
 system\core\parser.lua
 system\core\rotation.lua
 system\core\condition.lua
 system\core\dsl.lua
+system\core\library.lua
+system\core\raid.lua
 
 # Conditions
 system\conditions\core.lua
@@ -33,9 +39,10 @@ system\conditions\core.lua
 # Modules
 system\modules\player.lua
 system\modules\target.lua
-system\modules\world.lua
+system\modules\combat_tracker.lua
 system\modules\queue.lua
 system\modules\config.lua
+system\modules\tooltip.lua
 
 # Timers
 system\timers\profile.lua
@@ -46,8 +53,15 @@ system\timers\combatable.lua
 # Interface
 interface\interface.xml
 interface\interface.lua
+interface\config.lua
+interface\tracker.lua
 interface\buttons.lua
+interface\toggle.lua
+interface\custom.lua
+interface\manager.lua
+interface\log.lua
 interface\buttons\core.lua
+interface\commands\core.lua
 
 # Listeners
 system\listeners\addon_loaded.lua
@@ -89,6 +103,7 @@ rotations\rogue\combat.lua
 rotations\rogue\subtlety.lua
 rotations\shaman\elemental.lua
 rotations\shaman\enhancement.lua
+rotations\shaman\restoration.lua
 rotations\warlock\affliction.lua
 rotations\warlock\demonology.lua
 rotations\warlock\destruction.lua
