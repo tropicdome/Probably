@@ -30,5 +30,5 @@ ProbablyEngine.command.register_handler({'ct', 'combattracker', 'ut', 'unittrack
 end)
 
 ProbablyEngine.command.register_handler({'al', 'log', 'actionlog'}, function()
-  ActionLog:Show()
+  PE_ActionLog:Show()
 end)
