@@ -144,22 +144,22 @@ ProbablyEngine.dsl.parse = function(dsl, spell)
   local size = #parse_table
   if size == 1 then
     local condition, spell = string.match(dsl, '(.+)%((.+)%)')
-    return ProbablyEngine.dsl.comparator(condition, spell, spell)
+    return ProbablyEngine.dsl.comparator(condition, (tonumber(spell) or spell), (tonumber(spell) or spell))
   elseif size == 2 then
     local target = parse_table[1]
     local condition, condition_spell = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
     condition = ProbablyEngine.dsl.conditionize(target, condition)
     if ProbablyEngine.dsl.conditionizers_single[target] then
-      return ProbablyEngine.dsl.comparator(condition, parse_table[2], condition_spell)
+      return ProbablyEngine.dsl.comparator(condition, parse_table[2], (tonumber(condition_spell) or condition_spell))
     end
     ProbablyEngine.dsl.parsedTarget = target
-    return ProbablyEngine.dsl.comparator(condition, target, condition_spell)
+    return ProbablyEngine.dsl.comparator(condition, target, (tonumber(condition_spell) or condition_spell))
   elseif size == 3 then
     local target = parse_table[1]
     local condition, condition_spell, subcondition = ProbablyEngine.dsl.getConditionalSpell(parse_table[2], spell)
     condition = ProbablyEngine.dsl.conditionize(target, condition)
     ProbablyEngine.dsl.parsedTarget = target
-    return ProbablyEngine.dsl.comparator(condition..'.'..parse_table[3], target, condition_spell)
+    return ProbablyEngine.dsl.comparator(condition..'.'..parse_table[3], target, (tonumber(condition_spell) or condition_spell))
   end
   ProbablyEngine.debug.print("Calling DSL: " .. dsl, 'dsl_call')
   ProbablyEngine.dsl.parsedTarget = 'target'

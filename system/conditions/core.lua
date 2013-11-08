@@ -5,6 +5,7 @@ local ProbablyEngineTempTable1 = { }
 local rangeCheck = LibStub("LibRangeCheck-2.0")
 
 ProbablyEngine.condition.register("buff", function(target, spell)
+  spell = GetSpellInfo(spell)
   local buff,_,_,_,_,_,_,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return true
@@ -13,6 +14,7 @@ ProbablyEngine.condition.register("buff", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("buff.count", function(target, spell)
+  spell = GetSpellInfo(spell)
   local buff,_,_,count,_,_,_,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return count
@@ -21,6 +23,7 @@ ProbablyEngine.condition.register("buff.count", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("debuff", function(target, spell)
+  spell = GetSpellInfo(spell)
   local debuff,_,_,_,_,_,_,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
     return true
@@ -29,6 +32,7 @@ ProbablyEngine.condition.register("debuff", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("debuff.count", function(target, spell)
+  spell = GetSpellInfo(spell)
   local debuff,_,_,count,_,_,_,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
     return count
@@ -37,6 +41,7 @@ ProbablyEngine.condition.register("debuff.count", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("debuff.duration", function(target, spell)
+  spell = GetSpellInfo(spell)
   local debuff,_,_,_,_,_,expires,caster = UnitDebuff(target, spell)
   if debuff ~= nil and (caster == 'player' or caster == 'pet') then
     return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
@@ -45,6 +50,7 @@ ProbablyEngine.condition.register("debuff.duration", function(target, spell)
 end)
 
 ProbablyEngine.condition.register("buff.duration", function(target, spell)
+  spell = GetSpellInfo(spell)
   local buff,_,_,_,_,_,expires,caster = UnitBuff(target, spell)
   if buff ~= nil and (caster == 'player' or caster == 'pet') then
     return (expires - (GetTime()-(ProbablyEngine.lag/1000)))

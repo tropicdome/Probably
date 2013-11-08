@@ -42,6 +42,9 @@ ProbablyEngine.cycle = function(skip_verify)
 
       ProbablyEngine.buttons.icon('MasterToggle', icon)
 
+      name = GetSpellInfo(name)
+      CastSpellByName(name)
+
       if target == "ground" then
         SetCVar("deselectOnClick", "0")
         CameraOrSelectOrMoveStart(1) -- this is unlocked
